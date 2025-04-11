@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { getProfileImageUrl, handleImageError } from '../utils/imageUtils';
+import collegeLogo from '../assets/images/college-logo.png';
 
 const Navbar = () => {
   const { user, isAuthenticated, logout, isAdmin, isTeacher, isStudent } = useAuth();
@@ -35,7 +36,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center space-x-3 hover:opacity-95 transition-all duration-300 group">
               <div className="relative overflow-hidden rounded-full p-0.5 bg-white/10 group-hover:bg-white/20 transition-all duration-300 group-hover:scale-105 transform">
-                <img src="/images/college-logo.png" alt="College Logo" className="h-10 w-10 rounded-full object-cover" />
+                <img src={collegeLogo} alt="College Logo" className="h-10 w-10 rounded-full object-cover" />
               </div>
               <span className="text-xl font-bold tracking-tight truncate group-hover:text-white/95 transition-all duration-300">GPC Itarsi</span>
             </Link>

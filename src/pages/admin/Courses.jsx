@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 import { API_URL } from '../../config/api';
+import placeholderImg from '../../assets/images/placeholder.svg';
 
 const Courses = () => {
   const { user } = useAuth();
@@ -319,11 +320,11 @@ const Courses = () => {
                         <div className="flex-shrink-0 h-10 w-10">
                           <img
                             className="h-10 w-10 rounded-full object-cover"
-                            src={course.image ? `${API_URL}/uploads/${course.image}` : '/images/placeholder.svg'}
+                            src={course.image ? `${API_URL}/uploads/${course.image}` : placeholderImg}
                             alt={course.title}
                             onError={(e) => {
                               console.error('Image failed to load:', e.target.src);
-                              e.target.src = '/images/placeholder.svg';
+                              e.target.src = placeholderImg;
                             }}
                           />
                         </div>
@@ -474,7 +475,7 @@ const Courses = () => {
                         className="h-32 w-32 object-cover rounded-md"
                         onError={(e) => {
                           console.error('Image preview failed to load:', e.target.src);
-                          e.target.src = '/images/placeholder.svg';
+                          e.target.src = placeholderImg;
                         }}
                       />
                     </div>
@@ -604,7 +605,7 @@ const Courses = () => {
                         className="h-32 w-32 object-cover rounded-md"
                         onError={(e) => {
                           console.error('Image preview failed to load:', e.target.src);
-                          e.target.src = '/images/placeholder.svg';
+                          e.target.src = placeholderImg;
                         }}
                       />
                     </div>

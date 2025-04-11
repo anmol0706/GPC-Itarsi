@@ -7,6 +7,11 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { AnimatedBackground, TextReveal, CanvasWave, AnimatedCard } from '../components/animations';
 
+// Import images
+import backgroundImg from '../assets/images/background.jpg';
+import campusImg from '../assets/images/campus.jpg';
+import libraryImg from '../assets/images/library1.jpg';
+
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
@@ -146,7 +151,7 @@ const Home = () => {
         <div className="absolute inset-0">
           <img
             className="w-full h-full object-cover"
-            src="/images/background.jpg"
+            src={backgroundImg}
             alt="College campus building"
           />
           <div className="absolute inset-0 bg-secondary-900 opacity-80"></div>
@@ -218,7 +223,7 @@ const Home = () => {
             <AnimatedCard className="group relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-secondary-200" delay={0.1}>
               <div className="relative w-full h-48 overflow-hidden">
                 <img
-                  src="/images/campus.jpg"
+                  src={campusImg}
                   alt="Modern campus building"
                   className="w-full h-full object-center object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -235,7 +240,7 @@ const Home = () => {
             <AnimatedCard className="group relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-secondary-200" delay={0.3}>
               <div className="relative w-full h-48 overflow-hidden">
                 <img
-                  src="/images/library1.jpg"
+                  src={libraryImg}
                   alt="College library"
                   className="w-full h-full object-center object-cover transition-transform duration-500 group-hover:scale-110"
                 />

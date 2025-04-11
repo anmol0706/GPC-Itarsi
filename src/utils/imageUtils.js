@@ -3,6 +3,7 @@
  */
 
 import { API_URL } from '../config/api';
+import placeholderImg from '../assets/images/placeholder.svg';
 
 /**
  * Get the full URL for a profile image
@@ -11,7 +12,7 @@ import { API_URL } from '../config/api';
  */
 export const getProfileImageUrl = (profilePicture) => {
   if (!profilePicture) {
-    return '/images/placeholder.svg';
+    return placeholderImg;
   }
 
   // Check if the profilePicture already includes the full path
@@ -29,5 +30,5 @@ export const getProfileImageUrl = (profilePicture) => {
 export const handleImageError = (event) => {
   console.log('Error loading image, using fallback');
   event.target.onerror = null;
-  event.target.src = '/images/placeholder.svg';
+  event.target.src = placeholderImg;
 };
