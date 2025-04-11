@@ -3,6 +3,7 @@ import axios from 'axios';
 import { TextReveal } from '../components/animations';
 import './about.css';
 import { API_URL } from '../config/api';
+import campusImg from '../assets/images/campus.jpg';
 
 const About = () => {
   const [loading, setLoading] = useState(true);
@@ -134,7 +135,7 @@ const About = () => {
                 <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-accent-100 rounded-full z-0"></div>
                 <div className="relative z-10 rounded-lg overflow-hidden shadow-2xl border-4 border-white image-hover">
                   <img
-                    src="https://via.placeholder.com/600x400?text=GPC+Itarsi+Campus"
+                    src={campusImg}
                     alt="GPC Itarsi Campus"
                     className="w-full h-full object-cover"
                   />
