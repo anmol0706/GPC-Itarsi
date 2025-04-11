@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import collegeLogo from '../assets/images/college-logo.png';
+import DeveloperPopup from './DeveloperPopup';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [showTeamPopup, setShowTeamPopup] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -128,7 +130,21 @@ const Footer = () => {
         </div>
         <div className="mt-10 pt-8 border-t border-gray-700 text-center">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 mb-4 md:mb-0">&copy; {currentYear} <span className="text-primary-400 font-medium">Government Polytechnic College, Itarsi</span>. All rights reserved.</p>
+            <div className="flex flex-col">
+              <p className="text-gray-400 mb-2">&copy; {currentYear} <span className="text-primary-400 font-medium">Government Polytechnic College, Itarsi</span>. All rights reserved.</p>
+              <div className="flex items-center text-gray-500 text-sm mb-4 md:mb-0">
+                <span>Developed by</span>
+                <button
+                  onClick={() => setShowTeamPopup(true)}
+                  className="ml-2 px-3 py-1 bg-primary-500 hover:bg-primary-600 text-white rounded-md transition-colors duration-300 text-xs font-medium flex items-center"
+                >
+                  <span>Anmol Malviya</span>
+                  <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
             <div className="text-gray-400 text-sm">
               <a href="#" className="hover:text-primary-400 transition-colors duration-300 mx-2">Privacy Policy</a>
               <span className="text-gray-600">|</span>
@@ -151,6 +167,9 @@ const Footer = () => {
           </svg>
         </button>
       )}
+
+      {/* Developer Popup */}
+      <DeveloperPopup isOpen={showTeamPopup} onClose={() => setShowTeamPopup(false)} />
     </footer>
   );
 };
