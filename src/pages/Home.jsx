@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import sanitizeHtml from '../utils/sanitizeHtml';
+import { API_URL } from '../config/api';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { AnimatedBackground, TextReveal, CanvasWave, AnimatedCard } from '../components/animations';
@@ -18,7 +19,7 @@ const Home = () => {
   useEffect(() => {
     const fetchNotices = async () => {
       try {
-        const response = await axios.get('http://localhost:5001/api/notices');
+        const response = await axios.get(`${API_URL}/api/notices`);
 
         if (response.data && Array.isArray(response.data)) {
           // Sort notices by date (newest first) and get only the latest 5

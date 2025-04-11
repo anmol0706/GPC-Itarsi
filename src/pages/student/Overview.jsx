@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import sanitizeHtml from '../../utils/sanitizeHtml';
+import { API_URL } from '../../config/api';
 
 const Overview = () => {
   const { user } = useAuth();
@@ -25,7 +26,7 @@ const Overview = () => {
         }
 
         // Fetch student profile
-        const profileRes = await axios.get('http://localhost:5001/api/students/profile', {
+        const profileRes = await axios.get(`${API_URL}/api/students/profile`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -34,11 +35,11 @@ const Overview = () => {
         setStudentData(profileRes.data);
 
         // Fetch notices
-        const noticesRes = await axios.get('http://localhost:5001/api/notices');
+        const noticesRes = await axios.get(`${API_URL}/api/notices`);
         setNotices(noticesRes.data.slice(0, 5)); // Get only the latest 5 notices
 
         // Fetch study materials for student's class
-        const materialsRes = await axios.get('http://localhost:5001/api/study-materials', {
+        const materialsRes = await axios.get(`${API_URL}/api/study-materials`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

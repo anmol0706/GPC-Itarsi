@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import sanitizeHtml from '../../utils/sanitizeHtml';
+import { API_URL } from '../../config/api';
 
 const Overview = () => {
   const { user } = useAuth();
@@ -31,25 +32,25 @@ const Overview = () => {
         setLoading(true);
 
         // Fetch students
-        const studentsRes = await axios.get('http://localhost:5001/api/students');
+        const studentsRes = await axios.get(`${API_URL}/api/students`);
 
         // Fetch teachers
-        const teachersRes = await axios.get('http://localhost:5001/api/teachers');
+        const teachersRes = await axios.get(`${API_URL}/api/teachers`);
 
         // Fetch notices
-        const noticesRes = await axios.get('http://localhost:5001/api/notices');
+        const noticesRes = await axios.get(`${API_URL}/api/notices`);
 
         // Fetch gallery
-        const galleryRes = await axios.get('http://localhost:5001/api/gallery');
+        const galleryRes = await axios.get(`${API_URL}/api/gallery`);
 
         // Fetch courses
-        const coursesRes = await axios.get('http://localhost:5001/api/courses');
+        const coursesRes = await axios.get(`${API_URL}/api/courses`);
 
         // Fetch study materials
-        const materialsRes = await axios.get('http://localhost:5001/api/study-materials');
+        const materialsRes = await axios.get(`${API_URL}/api/study-materials`);
 
         // Fetch overview data
-        const overviewRes = await axios.get('http://localhost:5001/api/overview');
+        const overviewRes = await axios.get(`${API_URL}/api/overview`);
 
         setStats({
           students: studentsRes.data.length,

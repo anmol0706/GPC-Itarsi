@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -28,7 +29,7 @@ const Login = () => {
       console.log('Attempting login with:', { username, password });
 
       // Make the API call
-      const response = await axios.post('http://localhost:5001/api/auth/login', {
+      const response = await axios.post(`${API_URL}/api/auth/login`, {
         username,
         password
       });
@@ -173,13 +174,13 @@ const Login = () => {
 
           {userType === 'student' && (
             <div className="mt-4 text-center text-sm text-secondary-600">
-             
+
             </div>
           )}
 
           {userType === 'teacher' && (
             <div className="mt-4 text-center text-sm text-secondary-600">
-  
+
             </div>
           )}
         </div>

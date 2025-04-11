@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
+import { API_URL } from '../../config/api';
 
 const StudyMaterials = () => {
   const { user } = useAuth();
@@ -62,7 +63,7 @@ const StudyMaterials = () => {
 
       // Try to get study materials from the fallback endpoint first
       try {
-        const response = await axios.get('http://localhost:5001/api/all-study-materials', {
+        const response = await axios.get(`${API_URL}/api/all-study-materials`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -75,7 +76,7 @@ const StudyMaterials = () => {
             response.data.map(async (material) => {
               try {
                 if (material.fileUrl) {
-                  await axios.head(`http://localhost:5001/uploads/study-materials/${material.fileUrl}`);
+                  await axios.head(`${API_URL}/uploads/study-materials/${material.fileUrl}`);
                   return { ...material, fileExists: true };
                 }
                 return { ...material, fileExists: false };
@@ -96,7 +97,7 @@ const StudyMaterials = () => {
       }
 
       // If general endpoint fails, try the teacher-specific endpoint
-      const response = await axios.get('http://localhost:5001/api/teachers/study-materials', {
+      const response = await axios.get(`${API_URL}/api/teachers/study-materials`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -109,7 +110,7 @@ const StudyMaterials = () => {
           response.data.map(async (material) => {
             try {
               if (material.fileUrl) {
-                await axios.head(`http://localhost:5001/uploads/study-materials/${material.fileUrl}`);
+                await axios.head(`${API_URL}/uploads/study-materials/${material.fileUrl}`);
                 return { ...material, fileExists: true };
               }
               return { ...material, fileExists: false };
@@ -149,7 +150,7 @@ const StudyMaterials = () => {
         return;
       }
 
-      const response = await axios.get('http://localhost:5001/api/students', {
+      const response = await axios.get(`${API_URL}/api/students`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -200,7 +201,7 @@ const StudyMaterials = () => {
       formDataToSend.append('file', formData.file);
 
       await axios.post(
-        'http://localhost:5001/api/teachers/upload-study-material',
+        `${API_URL}/api/teachers/upload-study-material`,
         formDataToSend,
         {
           headers: {
@@ -242,7 +243,7 @@ const StudyMaterials = () => {
 
       const token = localStorage.getItem('token');
 
-      await axios.delete(`http://localhost:5001/api/teachers/study-materials/${materialId}`, {
+      await axios.delete(`${API_URL}/api/teachers/study-materials/${materialId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

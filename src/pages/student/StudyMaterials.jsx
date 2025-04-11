@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
+import { API_URL } from '../../config/api';
 
 const StudyMaterials = () => {
   const { user } = useAuth();
@@ -53,7 +54,7 @@ const StudyMaterials = () => {
       }
 
       // Fetch student profile
-      const profileRes = await axios.get('http://localhost:5001/api/students/profile', {
+      const profileRes = await axios.get(`${API_URL}/api/students/profile`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -62,7 +63,7 @@ const StudyMaterials = () => {
       setStudentData(profileRes.data);
 
       // Fetch study materials directly
-      const materialsRes = await axios.get('http://localhost:5001/api/study-materials', {
+      const materialsRes = await axios.get(`${API_URL}/api/study-materials`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -86,7 +87,7 @@ const StudyMaterials = () => {
         allMaterials.map(async (material) => {
           try {
             if (material.fileUrl) {
-              await axios.head(`http://localhost:5001/uploads/study-materials/${material.fileUrl}`);
+              await axios.head(`${API_URL}/uploads/study-materials/${material.fileUrl}`);
               return { ...material, fileExists: true };
             }
             return { ...material, fileExists: false };

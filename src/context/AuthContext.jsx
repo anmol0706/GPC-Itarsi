@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 const AuthContext = createContext();
 
@@ -21,7 +22,7 @@ export const AuthProvider = ({ children }) => {
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
           // Get user data
-          const response = await axios.get('http://localhost:5001/api/auth/me');
+          const response = await axios.get(`${API_URL}/api/auth/me`);
           console.log('User data from /me endpoint:', response.data);
           setUser(response.data.user);
 
@@ -48,7 +49,7 @@ export const AuthProvider = ({ children }) => {
       setError(null);
 
       console.log('Attempting login with:', { username, password });
-      const response = await axios.post('https://gpc-itarsi-backend.onrender.com/api/auth/login', {
+      const response = await axios.post(`${API_URL}/api/auth/login`, {
         username,
         password
       });
