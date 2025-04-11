@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { API_URL } from '../../config/api';
 
 const Overview = () => {
   const { user } = useAuth();
@@ -41,7 +42,7 @@ const Overview = () => {
         // Skip teacher profile fetch since we're using the user data directly
 
         // Fetch students
-        const studentsRes = await axios.get('http://localhost:5001/api/students', {
+        const studentsRes = await axios.get(`${API_URL}/api/students`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -51,7 +52,7 @@ const Overview = () => {
 
         // Fetch study materials
         try {
-          const materialsRes = await axios.get('http://localhost:5001/api/teachers/study-materials', {
+          const materialsRes = await axios.get(`${API_URL}/api/teachers/study-materials`, {
             headers: {
               Authorization: `Bearer ${token}`
             }

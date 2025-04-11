@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { TextReveal } from '../components/animations';
 import './about.css';
+import { API_URL } from '../config/api';
 
 const About = () => {
   const [loading, setLoading] = useState(true);
@@ -11,7 +12,7 @@ const About = () => {
   useEffect(() => {
     const fetchOverviewData = async () => {
       try {
-        const response = await axios.get('http://localhost:5001/api/overview');
+        const response = await axios.get(`${API_URL}/api/overview`);
         setOverviewData(response.data);
         setLoading(false);
       } catch (err) {

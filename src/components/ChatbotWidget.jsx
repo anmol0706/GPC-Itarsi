@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 const ChatbotWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,7 +51,7 @@ const ChatbotWidget = () => {
 
     try {
       // Send query to backend
-      const response = await axios.post('http://localhost:5001/api/chatbot/query', {
+      const response = await axios.post(`${API_URL}/api/chatbot/query`, {
         query: userMessage.text
       });
 

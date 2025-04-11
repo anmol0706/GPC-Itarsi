@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
+import { API_URL } from '../../config/api';
 
 const Documents = () => {
   const { token } = useAuth();
@@ -41,7 +42,7 @@ const Documents = () => {
   const fetchDocuments = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5001/api/documents');
+      const response = await axios.get(`${API_URL}/api/documents`);
       setDocuments(response.data);
       setLoading(false);
     } catch (error) {
@@ -108,7 +109,7 @@ const Documents = () => {
         data.append('file', formData.file);
       }
 
-      await axios.post('http://localhost:5001/api/admin/documents', data, {
+      await axios.post(`${API_URL}/api/admin/documents`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`
@@ -160,7 +161,7 @@ const Documents = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:5001/api/admin/documents/${id}`, {
+      await axios.delete(`${API_URL}/api/admin/documents/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -576,7 +577,7 @@ const Documents = () => {
                         </a>
                       ) : (
                         <a
-                          href={`http://localhost:5001/api/download/document/${document._id}`}
+                          href={`${API_URL}/api/download/document/${document._id}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="mr-2 inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 // Helper function to map department abbreviations to full names
 const mapDepartment = (dept) => {
@@ -33,7 +34,7 @@ const Faculty = () => {
 
     try {
       // Try to fetch real faculty data from the API
-      const response = await axios.get('http://localhost:5001/api/faculty');
+      const response = await axios.get(`${API_URL}/api/faculty`);
 
       if (response.data && response.data.length > 0) {
         // Process the data to ensure all required fields are present and formatted correctly
@@ -75,7 +76,7 @@ const Faculty = () => {
   const getProfileImageUrl = (profilePicture, department) => {
     // If there's a profile picture, try to use it from the server
     if (profilePicture) {
-      return `http://localhost:5001/uploads/profiles/${profilePicture}`;
+      return `${API_URL}/uploads/profiles/${profilePicture}`;
     }
 
     // Map department to full name if it's an abbreviation

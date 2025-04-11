@@ -2,20 +2,21 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
+import { API_URL } from '../../config/api';
 
 const Chatbot = () => {
   const { token } = useAuth();
   const [faqs, setFaqs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   // Form state
   const [formMode, setFormMode] = useState('add'); // 'add' or 'edit'
   const [currentFaqId, setCurrentFaqId] = useState(null);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [keywords, setKeywords] = useState('');
-  
+
   // Test chatbot state
   const [testQuery, setTestQuery] = useState('');
   const [testResponse, setTestResponse] = useState(null);
@@ -25,7 +26,7 @@ const Chatbot = () => {
   const fetchFaqs = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5001/api/chatbot/faqs');
+      const response = await axios.get(`${API_URL}/api/chatbot/faqs`);
       setFaqs(response.data);
       setLoading(false);
     } catch (error) {
@@ -103,7 +104,7 @@ const Chatbot = () => {
       } else {
         // Update existing FAQ
         await axios.put(
-          `http://localhost:5001/api/chatbot/faqs/${currentFaqId}`,
+          `${API_URL}/api/chatbot/faqs/${currentFaqId}`,
           { question, answer, keywords: keywordsArray },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -130,7 +131,7 @@ const Chatbot = () => {
 
     try {
       setTestLoading(true);
-      const response = await axios.post('http://localhost:5001/api/chatbot/query', { query: testQuery });
+      const response = await axios.post(`${API_URL}/api/chatbot/query`, { query: testQuery });
       setTestResponse(response.data);
       setTestLoading(false);
     } catch (error) {
@@ -143,14 +144,14 @@ const Chatbot = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">Chatbot Management</h1>
-      
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* FAQ Form */}
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-xl font-semibold mb-4">
             {formMode === 'add' ? 'Add New FAQ' : 'Edit FAQ'}
           </h2>
-          
+
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="question">
@@ -166,7 +167,7 @@ const Chatbot = () => {
                 required
               />
             </div>
-            
+
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="answer">
                 Answer
@@ -181,7 +182,7 @@ const Chatbot = () => {
                 required
               ></textarea>
             </div>
-            
+
             <div className="mb-6">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="keywords">
                 Keywords (comma-separated)
@@ -198,7 +199,7 @@ const Chatbot = () => {
                 Example: admission, apply, join
               </p>
             </div>
-            
+
             <div className="flex items-center justify-between">
               <button
                 type="submit"
@@ -206,7 +207,7 @@ const Chatbot = () => {
               >
                 {formMode === 'add' ? 'Add FAQ' : 'Update FAQ'}
               </button>
-              
+
               {formMode === 'edit' && (
                 <button
                   type="button"
@@ -219,11 +220,11 @@ const Chatbot = () => {
             </div>
           </form>
         </div>
-        
+
         {/* Test Chatbot */}
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-xl font-semibold mb-4">Test Chatbot</h2>
-          
+
           <form onSubmit={handleTestChatbot}>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="testQuery">
@@ -239,7 +240,7 @@ const Chatbot = () => {
                 required
               />
             </div>
-            
+
             <button
               type="submit"
               className="bg-secondary-600 hover:bg-secondary-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -248,7 +249,7 @@ const Chatbot = () => {
               {testLoading ? 'Processing...' : 'Ask'}
             </button>
           </form>
-          
+
           {testResponse && (
             <div className="mt-6 p-4 border rounded-lg">
               <h3 className="font-semibold text-lg mb-2">Response:</h3>
@@ -264,11 +265,11 @@ const Chatbot = () => {
           )}
         </div>
       </div>
-      
+
       {/* FAQ List */}
       <div className="mt-8 bg-white rounded-lg shadow-md p-6">
         <h2 className="text-xl font-semibold mb-4">Existing FAQs</h2>
-        
+
         {loading ? (
           <p>Loading FAQs...</p>
         ) : error ? (

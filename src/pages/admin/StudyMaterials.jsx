@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../config/api';
 
 const StudyMaterials = () => {
   const [materials, setMaterials] = useState([]);
@@ -62,7 +63,7 @@ const StudyMaterials = () => {
         return;
       }
 
-      const response = await axios.get('http://localhost:5001/api/study-materials', {
+      const response = await axios.get(`${API_URL}/api/study-materials`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -87,7 +88,7 @@ const StudyMaterials = () => {
       }
 
       // Fetch students to get classes
-      const studentsResponse = await axios.get('http://localhost:5001/api/students', {
+      const studentsResponse = await axios.get(`${API_URL}/api/students`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -98,7 +99,7 @@ const StudyMaterials = () => {
       setClasses(uniqueClasses);
 
       // Fetch teachers to get subjects
-      const teachersResponse = await axios.get('http://localhost:5001/api/teachers', {
+      const teachersResponse = await axios.get(`${API_URL}/api/teachers`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -360,7 +361,7 @@ const StudyMaterials = () => {
                     </div>
                     <div className="mt-2 flex justify-between items-center">
                       <a
-                        href={`http://localhost:5001/uploads/study-materials/${material.fileUrl}`}
+                        href={`${API_URL}/uploads/study-materials/${material.fileUrl}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm font-medium text-green-600 hover:text-green-500"

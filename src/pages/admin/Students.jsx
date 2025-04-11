@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../config/api';
 
 const Students = () => {
   const [students, setStudents] = useState([]);
@@ -57,7 +58,7 @@ const Students = () => {
         return;
       }
 
-      const response = await axios.get('http://localhost:5001/api/students', {
+      const response = await axios.get(`${API_URL}/api/students`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -89,7 +90,7 @@ const Students = () => {
       const token = localStorage.getItem('token');
 
       await axios.post(
-        'http://localhost:5001/api/admin/add-student',
+        `${API_URL}/api/admin/add-student`,
         formData,
         {
           headers: {

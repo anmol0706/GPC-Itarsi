@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 const Gallery = () => {
   const [images, setImages] = useState([]);
@@ -10,7 +11,7 @@ const Gallery = () => {
   useEffect(() => {
     const fetchGallery = async () => {
       try {
-        const response = await axios.get('http://localhost:5001/api/gallery');
+        const response = await axios.get(`${API_URL}/api/gallery`);
         setImages(response.data);
         setLoading(false);
       } catch (error) {
@@ -69,7 +70,7 @@ const Gallery = () => {
                 <div className="h-64 w-full overflow-hidden">
                   <img
                     className="w-full h-full object-cover"
-                    src={`http://localhost:5001/uploads/gallery/${image.imageUrl}`}
+                    src={`${API_URL}/uploads/gallery/${image.imageUrl}`}
                     alt={image.title}
                   />
                 </div>
@@ -94,7 +95,7 @@ const Gallery = () => {
               <div className="relative">
                 <img
                   className="w-full max-h-[80vh] object-contain"
-                  src={`http://localhost:5001/uploads/gallery/${selectedImage.imageUrl}`}
+                  src={`${API_URL}/uploads/gallery/${selectedImage.imageUrl}`}
                   alt={selectedImage.title}
                 />
                 <button

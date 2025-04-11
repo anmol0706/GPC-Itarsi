@@ -218,7 +218,7 @@ const StudyMaterials = () => {
                         <div className="mt-4">
                           {material.fileExists ? (
                             <a
-                              href={`http://localhost:5001/uploads/study-materials/${material.fileUrl}`}
+                              href={`${API_URL}/uploads/study-materials/${material.fileUrl}`}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"
