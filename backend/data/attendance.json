@@ -1,0 +1,1102 @@
+[
+  {
+    "_id": "attendance_1",
+    "studentId": "3",
+    "studentName": "Student User",
+    "rollNumber": "CS001",
+    "class": "Computer Science",
+    "records": [
+      {
+        "date": "2023-05-01",
+        "status": "present",
+        "subject": "Programming"
+      },
+      {
+        "date": "2023-05-02",
+        "status": "present",
+        "subject": "Database"
+      },
+      {
+        "date": "2023-05-03",
+        "status": "absent",
+        "subject": "Web Development"
+      },
+      {
+        "date": "2023-05-04",
+        "status": "present",
+        "subject": "Programming"
+      },
+      {
+        "date": "2023-05-05",
+        "status": "present",
+        "subject": "Database"
+      }
+    ]
+  },
+  {
+    "_id": "attendance_2",
+    "studentId": "user_1743871714239",
+    "studentName": "anmol",
+    "rollNumber": "22124C04009",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2023-05-01",
+        "status": "present",
+        "subject": "AI"
+      },
+      {
+        "date": "2023-05-02",
+        "status": "present",
+        "subject": "AI"
+      },
+      {
+        "date": "2023-05-03",
+        "status": "present",
+        "subject": "AI"
+      },
+      {
+        "date": "2023-05-04",
+        "status": "absent",
+        "subject": "AI"
+      },
+      {
+        "date": "2023-05-05",
+        "status": "present",
+        "subject": "AI"
+      }
+    ]
+  },
+  {
+    "studentId": "student_01",
+    "studentName": "Anjali Rajput",
+    "rollNumber": "22124C04001",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775382"
+  },
+  {
+    "studentId": "student_10",
+    "studentName": "Ayush Mehto",
+    "rollNumber": "22124C04010",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775390"
+  },
+  {
+    "studentId": "student_11",
+    "studentName": "Chetan Bobade",
+    "rollNumber": "22124C04011",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775399"
+  },
+  {
+    "studentId": "student_12",
+    "studentName": "Chitransh Choudhary",
+    "rollNumber": "22124C04012",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775410"
+  },
+  {
+    "studentId": "student_13",
+    "studentName": "Divya Mahalaha",
+    "rollNumber": "22124C04013",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775416"
+  },
+  {
+    "studentId": "student_14",
+    "studentName": "Gracy Dongre",
+    "rollNumber": "22124C04014",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775423"
+  },
+  {
+    "studentId": "student_15",
+    "studentName": "Jay Shri Mehra",
+    "rollNumber": "22124C04015",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775429"
+  },
+  {
+    "studentId": "student_16",
+    "studentName": "Kajal Chourey",
+    "rollNumber": "22124C04016",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775434"
+  },
+  {
+    "studentId": "student_17",
+    "studentName": "Ku Deeksha Yadav",
+    "rollNumber": "22124C04017",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775443"
+  },
+  {
+    "studentId": "student_18",
+    "studentName": "Mahima Choudhary",
+    "rollNumber": "22124C04018",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775449"
+  },
+  {
+    "studentId": "student_19",
+    "studentName": "Mayank Ku.Kumbhare",
+    "rollNumber": "22124C04019",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775457"
+  },
+  {
+    "studentId": "student_20",
+    "studentName": "Mayank Yadav",
+    "rollNumber": "22124C04020",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775464"
+  },
+  {
+    "studentId": "student_21",
+    "studentName": "Meena Rani Patel",
+    "rollNumber": "22124C04021",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775469"
+  },
+  {
+    "studentId": "student_22",
+    "studentName": "Megha Barche",
+    "rollNumber": "22124C04022",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775480"
+  },
+  {
+    "studentId": "student_23",
+    "studentName": "Megha Pawar",
+    "rollNumber": "22124C04023",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775511"
+  },
+  {
+    "studentId": "student_02",
+    "studentName": "Prashant Singh Rajput",
+    "rollNumber": "22124C04002",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775516"
+  },
+  {
+    "studentId": "student_24",
+    "studentName": "Meghna Choudhary",
+    "rollNumber": "22124C04024",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775523"
+  },
+  {
+    "studentId": "student_25",
+    "studentName": "Megha Sahu",
+    "rollNumber": "22124C04025",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775529"
+  },
+  {
+    "studentId": "student_26",
+    "studentName": "Muskan Rajak",
+    "rollNumber": "22124C04026",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775533"
+  },
+  {
+    "studentId": "student_27",
+    "studentName": "Muskan Singh",
+    "rollNumber": "22124C04027",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775541"
+  },
+  {
+    "studentId": "student_28",
+    "studentName": "Nikita Patel",
+    "rollNumber": "22124C04028",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775547"
+  },
+  {
+    "studentId": "student_29",
+    "studentName": "Pallavi Patel",
+    "rollNumber": "22124C04029",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775551"
+  },
+  {
+    "studentId": "student_30",
+    "studentName": "Pooja Vishwakarma",
+    "rollNumber": "22124C04030",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775558"
+  },
+  {
+    "studentId": "student_31",
+    "studentName": "Priya Patel",
+    "rollNumber": "22124C04031",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775563"
+  },
+  {
+    "studentId": "student_03",
+    "studentName": "Akshay Gour",
+    "rollNumber": "22124C04003",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775568"
+  },
+  {
+    "studentId": "student_32",
+    "studentName": "Priyanka Mehar",
+    "rollNumber": "22124C04032",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775576"
+  },
+  {
+    "studentId": "student_33",
+    "studentName": "Puja Kumari",
+    "rollNumber": "22124C04033",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775581"
+  },
+  {
+    "studentId": "student_34",
+    "studentName": "Radhika Patel",
+    "rollNumber": "22124C04034",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775586"
+  },
+  {
+    "studentId": "student_35",
+    "studentName": "Rashi Raj",
+    "rollNumber": "22124C04035",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775595"
+  },
+  {
+    "studentId": "student_36",
+    "studentName": "Ritika Patel",
+    "rollNumber": "22124C04036",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775599"
+  },
+  {
+    "studentId": "student_37",
+    "studentName": "Sakshi Rathore",
+    "rollNumber": "22124C04037",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775605"
+  },
+  {
+    "studentId": "student_38",
+    "studentName": "Sanjana Rajak",
+    "rollNumber": "22124C04038",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775612"
+  },
+  {
+    "studentId": "student_39",
+    "studentName": "Sarita Mehar",
+    "rollNumber": "22124C04039",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775617"
+  },
+  {
+    "studentId": "student_04",
+    "studentName": "Anmol Malviya",
+    "rollNumber": "22124C04004",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775624"
+  },
+  {
+    "studentId": "student_40",
+    "studentName": "Shalini Patel",
+    "rollNumber": "22124C04040",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775630"
+  },
+  {
+    "studentId": "student_41",
+    "studentName": "Shraddha Mehar",
+    "rollNumber": "22124C04041",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775635"
+  },
+  {
+    "studentId": "student_42",
+    "studentName": "Sneha Mehar",
+    "rollNumber": "22124C04042",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775642"
+  },
+  {
+    "studentId": "student_43",
+    "studentName": "Srishti Yadav",
+    "rollNumber": "22124C04043",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775648"
+  },
+  {
+    "studentId": "student_44",
+    "studentName": "Swati Mehar",
+    "rollNumber": "22124C04044",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775652"
+  },
+  {
+    "studentId": "student_45",
+    "studentName": "Tanuja Patel",
+    "rollNumber": "22124C04045",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775661"
+  },
+  {
+    "studentId": "student_46",
+    "studentName": "Tripti Mehar",
+    "rollNumber": "22124C04046",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775665"
+  },
+  {
+    "studentId": "student_05",
+    "studentName": "Anurag Patel",
+    "rollNumber": "22124C04005",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775669"
+  },
+  {
+    "studentId": "student_47",
+    "studentName": "Upasana Mehar",
+    "rollNumber": "22124C04047",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775678"
+  },
+  {
+    "studentId": "student_48",
+    "studentName": "Vanshika Sahu",
+    "rollNumber": "22124C04048",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775682"
+  },
+  {
+    "studentId": "student_06",
+    "studentName": "Arpan Dongare",
+    "rollNumber": "22124C04006",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775686"
+  },
+  {
+    "studentId": "student_49",
+    "studentName": "Vaishnavi Mehar",
+    "rollNumber": "22124C04049",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775695"
+  },
+  {
+    "studentId": "student_50",
+    "studentName": "Yamini Mehar",
+    "rollNumber": "22124C04050",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775699"
+  },
+  {
+    "studentId": "student_51",
+    "studentName": "Yash Patel",
+    "rollNumber": "22124C04051",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775705"
+  },
+  {
+    "studentId": "student_07",
+    "studentName": "Arun Yadav",
+    "rollNumber": "22124C04007",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775712"
+  },
+  {
+    "studentId": "student_08",
+    "studentName": "Ayush",
+    "rollNumber": "22124C04008",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775716"
+  },
+  {
+    "studentId": "student_09",
+    "studentName": "Aryan Choudhary",
+    "rollNumber": "22124C04009",
+    "class": "cs 6",
+    "records": [
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      },
+      {
+        "date": "2025-04-06",
+        "status": "present",
+        "subject": "Data Structures"
+      }
+    ],
+    "_id": "attendance_1743938775720"
+  },
+  {
+    "studentId": "student_1743957504708",
+    "studentName": "22124C04009",
+    "rollNumber": "22124C04009",
+    "class": "CS 6",
+    "records": [
+      {
+        "date": "2025-04-07",
+        "status": "present",
+        "subject": "Business"
+      },
+      {
+        "date": "2025-04-07",
+        "status": "present",
+        "subject": "Business"
+      },
+      {
+        "date": "2025-04-07",
+        "status": "present",
+        "subject": "Business"
+      },
+      {
+        "date": "2025-04-07",
+        "status": "present",
+        "subject": "Business"
+      },
+      {
+        "date": "2025-04-07",
+        "status": "present",
+        "subject": "Business"
+      }
+    ],
+    "_id": "attendance_1744009237281"
+  },
+  {
+    "studentId": "student_1744101084087",
+    "studentName": "palak yadav",
+    "rollNumber": "22124C04044",
+    "class": "CS 6",
+    "records": [
+      {
+        "date": "2025-04-08",
+        "status": "present",
+        "subject": "AI"
+      },
+      {
+        "date": "2025-04-08",
+        "status": "present",
+        "subject": "AI"
+      },
+      {
+        "date": "2025-04-08",
+        "status": "present",
+        "subject": "AI"
+      },
+      {
+        "date": "2025-04-08",
+        "status": "present",
+        "subject": "AI"
+      }
+    ],
+    "_id": "attendance_1744102823433"
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "_id": "admin_1",
+    "username": "anmol",
+    "password": "2007",
+    "role": "admin",
+    "name": "Anmol Malviya",
+    "profilePicture": "profile-1743956149454-13377553.png",
+    "email": "anmoldiscord4328@gmail.com",
+    "phone": "7987837169",
+    "bio": "AI Website Builder"
+  }
+]

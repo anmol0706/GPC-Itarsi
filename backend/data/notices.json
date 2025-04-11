@@ -1,0 +1,44 @@
+[
+  {
+    "_id": "notice_1744200000000",
+    "title": "Admission Open for 2024-25 Academic Year",
+    "content": "Applications are now being accepted for the 2024-25 academic year. Visit the Admission page for more details and to download the application form.",
+    "important": true,
+    "createdAt": "2024-05-10T10:00:00.000Z"
+  },
+  {
+    "_id": "notice_1744100000000",
+    "title": "Upcoming Examination Schedule",
+    "content": "The final examination schedule for the current semester has been released. Please check the Downloads section for the detailed timetable.",
+    "important": true,
+    "createdAt": "2024-05-08T09:30:00.000Z"
+  },
+  {
+    "_id": "notice_1744000000000",
+    "title": "Campus Maintenance Notice",
+    "content": "The main building will be closed for maintenance on Saturday, May 18th. All scheduled classes will be moved to the secondary building.",
+    "important": false,
+    "createdAt": "2024-05-05T14:15:00.000Z"
+  },
+  {
+    "_id": "notice_1743900000000",
+    "title": "Faculty Meeting Announcement",
+    "content": "All faculty members are requested to attend the monthly meeting on Monday, May 13th at 3:00 PM in the conference hall.",
+    "important": false,
+    "createdAt": "2024-05-03T11:45:00.000Z"
+  },
+  {
+    "_id": "notice_1743800000000",
+    "title": "New Library Resources Available",
+    "content": "The college library has added new technical books and digital resources. Students are encouraged to visit the library to explore these resources.",
+    "important": false,
+    "createdAt": "2024-05-01T08:20:00.000Z"
+  },
+  {
+    "title": "anmol",
+    "content": "hello <a href=\"google.com\">Link text</a> click here ",
+    "important": false,
+    "_id": "notice_1744116729993",
+    "createdAt": "2025-04-08T12:52:09.993Z"
+  }
+]

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Principal Placeholder</title>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#E0E0E0" x="0" y="0" width="200" height="200" rx="100"></rect>
+        <g transform="translate(60.000000, 40.000000)" fill="#A0A0A0">
+            <circle cx="40" cy="30" r="30"></circle>
+            <path d="M0,120 C0,90 80,90 80,120" id="Path"></path>
+        </g>
+    </g>
+</svg>

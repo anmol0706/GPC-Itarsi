@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Nikhil Vijayvar",
+    "department": "Computer science",
+    "subjects": [
+      "AI",
+      "DBMS",
+      "Scripting language",
+      "Software testing",
+      "Data science"
+    ],
+    "qualification": "M-tech ",
+    "experience": "2 years",
+    "designation": "hye i am nikhil vijayvar i am cs faculty",
+    "_id": "teacher_1744096344124",
+    "profilePicture": "profile-1744102562422-683152050.jpg"
+  },
+  {
+    "name": "Pravesh Chourey",
+    "department": "Mechanical engineering",
+    "subjects": [
+      "Engineering graphics",
+      "Production and Operation Management",
+      "Metrology and measurement",
+      "industrial engineering",
+      "power plant engineering"
+    ],
+    "qualification": "BE- Mechanical engineering",
+    "experience": "6 years",
+    "designation": "Hye i am Pravesh Chourey  i am ME faculty",
+    "_id": "teacher_1744096588977"
+  },
+  {
+    "name": "Soniya Sarathe",
+    "department": "Computer science",
+    "subjects": [
+      "Web Technology",
+      "Operating System",
+      "Internet Of Things",
+      "Computer Programming",
+      "Entrepreneurship"
+    ],
+    "qualification": "M-tech ",
+    "experience": "5 years",
+    "designation": "Hii... I am Soniya Sarathe i am CSE faculty",
+    "_id": "teacher_1744097702684"
+  },
+  {
+    "name": "Anita Varma",
+    "department": "Computer science",
+    "subjects": [
+      "Data structure",
+      "Artificial Intelligence",
+      "Software Engineering",
+      "E-governance"
+    ],
+    "qualification": "M-tech ",
+    "experience": "8 years",
+    "designation": "",
+    "_id": "teacher_1744098017637"
+  }
+]

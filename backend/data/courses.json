@@ -1,0 +1,24 @@
+[
+  {
+    "_id": "course_1744080865595",
+    "title": "Computer Science",
+    "code": "C04",
+    "description": "\"Computer Science\" is the study of computers, coding 💻, and problem-solving 🤖 using technology.",
+    "duration": "3 years",
+    "eligibility": "60%+ in 10th",
+    "seats": 60,
+    "fees": 8000,
+    "image": "image-1744080865588-656231091.jpeg"
+  },
+  {
+    "_id": "course_1744081219352",
+    "title": "Mechanical ",
+    "code": "M02",
+    "description": "\"Mechanical Engineering\" ⚙️🛠️ – The branch of engineering that designs and builds machines, engines, and mechanical systems used in industries like automotive, aerospace, and manufacturing.",
+    "duration": "3 years",
+    "eligibility": "60%+ in 10th",
+    "seats": 60,
+    "fees": 8000,
+    "image": "image-1744081219344-341666146.jpg"
+  }
+]

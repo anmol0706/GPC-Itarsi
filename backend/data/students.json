@@ -1,0 +1,52 @@
+[
+  {
+    "name": "22124C04009",
+    "rollNumber": "22124C04009",
+    "class": "CS 6",
+    "branch": "CS",
+    "password": "2007",
+    "attendance": [],
+    "profilePicture": "profile-1743957533470-489810003.jpg",
+    "_id": "student_1743957504708"
+  },
+  {
+    "name": "palak yadav",
+    "rollNumber": "22124C04044",
+    "class": "CS 6",
+    "branch": "CS",
+    "password": "1234",
+    "attendance": [],
+    "profilePicture": null,
+    "_id": "student_1744101084087"
+  },
+  {
+    "name": "Rahul Sharma",
+    "rollNumber": "22124M02001",
+    "class": "ME 4",
+    "branch": "ME",
+    "password": "1234",
+    "attendance": [],
+    "profilePicture": null,
+    "_id": "student_1744200000001"
+  },
+  {
+    "name": "Priya Patel",
+    "rollNumber": "22124E04001",
+    "class": "ET 4",
+    "branch": "ET",
+    "password": "1234",
+    "attendance": [],
+    "profilePicture": null,
+    "_id": "student_1744200000002"
+  },
+  {
+    "name": "Amit Kumar",
+    "rollNumber": "22124E02001",
+    "class": "EE 4",
+    "branch": "EE",
+    "password": "1234",
+    "attendance": [],
+    "profilePicture": null,
+    "_id": "student_1744200000003"
+  }
+]

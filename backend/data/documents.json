@@ -1,0 +1,41 @@
+[
+  {
+    "_id": "doc_1712345678901",
+    "title": "Admission Form 2025",
+    "description": "Admission form for the academic year 2025-26",
+    "type": "form",
+    "category": "admission",
+    "fileUrl": "admission-form-2025.pdf",
+    "filePath": "forms/admission-form-2025.pdf",
+    "fileSize": 245678,
+    "fileType": "application/pdf",
+    "uploadDate": "2025-04-01T10:30:00.000Z",
+    "uploadedBy": "Admin"
+  },
+  {
+    "_id": "doc_1712345678902",
+    "title": "Scholarship Application",
+    "description": "Application form for merit scholarship",
+    "type": "application",
+    "category": "scholarship",
+    "fileUrl": "scholarship-application.pdf",
+    "filePath": "applications/scholarship-application.pdf",
+    "fileSize": 198765,
+    "fileType": "application/pdf",
+    "uploadDate": "2025-04-02T11:45:00.000Z",
+    "uploadedBy": "Admin"
+  },
+  {
+    "_id": "doc_1712345678903",
+    "title": "College Newsletter - April 2025",
+    "description": "Monthly newsletter with college updates and events",
+    "type": "newsletter",
+    "category": "general",
+    "fileUrl": "newsletter-april-2025.pdf",
+    "filePath": "newsletters/newsletter-april-2025.pdf",
+    "fileSize": 356789,
+    "fileType": "application/pdf",
+    "uploadDate": "2025-04-05T09:15:00.000Z",
+    "uploadedBy": "Admin"
+  }
+]

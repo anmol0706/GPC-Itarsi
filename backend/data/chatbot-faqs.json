@@ -1,0 +1,92 @@
+[
+  {
+    "_id": "faq_1",
+    "question": "What courses are offered at GPC Itarsi?",
+    "answer": "GPC Itarsi offers four main branches: Computer Science (CS), Mechanical Engineering (ME), Electronics & Telecommunication (ET), and Electrical Engineering (EE). Each program is a 3-year diploma course.",
+    "keywords": ["courses", "branches", "programs", "offered", "diploma", "study"]
+  },
+  {
+    "_id": "faq_2",
+    "question": "How do I apply for admission?",
+    "answer": "You can apply for admission by visiting our Admission page on the website. The admission process typically requires completing an application form, submitting required documents, and meeting the eligibility criteria (minimum 60% in 10th standard).",
+    "keywords": ["admission", "apply", "application", "enroll", "join", "how to join"]
+  },
+  {
+    "_id": "faq_3",
+    "question": "What are the fees for different courses?",
+    "answer": "The fee structure for all diploma courses at GPC Itarsi is approximately ₹8,000 per year. Additional fees may apply for specific activities or facilities.",
+    "keywords": ["fees", "cost", "tuition", "payment", "expense"]
+  },
+  {
+    "_id": "faq_4",
+    "question": "What is the eligibility criteria for admission?",
+    "answer": "The basic eligibility criteria for admission to diploma courses at GPC Itarsi is a minimum of 60% marks in 10th standard (SSC) examination.",
+    "keywords": ["eligibility", "criteria", "requirements", "qualification", "required"]
+  },
+  {
+    "_id": "faq_5",
+    "question": "How many seats are available in each branch?",
+    "answer": "Each branch (CS, ME, ET, EE) typically has 60 seats available per academic year.",
+    "keywords": ["seats", "capacity", "intake", "available", "vacancy"]
+  },
+  {
+    "_id": "faq_6",
+    "question": "Who is the principal of GPC Itarsi?",
+    "answer": "The principal of Government Polytechnic College, Itarsi is Dr. Rajesh Kumar.",
+    "keywords": ["principal", "director", "head", "chief", "dean"]
+  },
+  {
+    "_id": "faq_7",
+    "question": "When was GPC Itarsi established?",
+    "answer": "Government Polytechnic College, Itarsi was established in 1960 and has been providing quality technical education for over 60 years.",
+    "keywords": ["established", "founded", "started", "history", "old"]
+  },
+  {
+    "_id": "faq_8",
+    "question": "What is the college's contact information?",
+    "answer": "You can contact GPC Itarsi via email at info@gpitarsi.ac.in or by phone at +91 07572-222704. The college is located in Itarsi, Madhya Pradesh.",
+    "keywords": ["contact", "email", "phone", "address", "location", "reach"]
+  },
+  {
+    "_id": "faq_9",
+    "question": "Are there any hostel facilities available?",
+    "answer": "Yes, GPC Itarsi provides hostel facilities for both boys and girls. The hostels are equipped with necessary amenities to ensure a comfortable stay for students.",
+    "keywords": ["hostel", "accommodation", "stay", "residence", "living"]
+  },
+  {
+    "_id": "faq_10",
+    "question": "What extracurricular activities are available?",
+    "answer": "GPC Itarsi offers various extracurricular activities including sports, cultural events, technical competitions, and clubs for different interests. These activities help in the overall development of students.",
+    "keywords": ["extracurricular", "activities", "sports", "cultural", "events", "clubs"]
+  },
+  {
+    "_id": "faq_11",
+    "question": "Is there a placement cell in the college?",
+    "answer": "Yes, GPC Itarsi has an active placement cell that helps students with career guidance, training, and job placements. The college maintains good relationships with various industries to facilitate better placement opportunities.",
+    "keywords": ["placement", "job", "career", "employment", "recruitment", "companies"]
+  },
+  {
+    "_id": "faq_12",
+    "question": "What is the duration of the diploma courses?",
+    "answer": "All diploma courses at GPC Itarsi are of 3 years duration, divided into 6 semesters.",
+    "keywords": ["duration", "years", "length", "time", "period", "semesters"]
+  },
+  {
+    "_id": "faq_13",
+    "question": "Are there any scholarships available?",
+    "answer": "Yes, various scholarships are available for eligible students, including government scholarships, merit-based scholarships, and scholarships for students from economically weaker sections and reserved categories.",
+    "keywords": ["scholarship", "financial aid", "assistance", "support", "grant"]
+  },
+  {
+    "_id": "faq_14",
+    "question": "What facilities are available on campus?",
+    "answer": "GPC Itarsi campus includes well-equipped laboratories, a comprehensive library, computer centers, workshops, sports facilities, canteen, and medical facilities to support students' academic and personal needs.",
+    "keywords": ["facilities", "amenities", "infrastructure", "campus", "resources"]
+  },
+  {
+    "_id": "faq_15",
+    "question": "How can I download important forms and documents?",
+    "answer": "You can download important forms, applications, and newsletters from the Downloads section of our website. Various documents like admission forms and scholarship applications are available there.",
+    "keywords": ["download", "forms", "documents", "applications", "papers"]
+  }
+]
