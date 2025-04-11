@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
           // Get user data
-          const response = await axios.get('http://localhost:5001/api/auth/me');
+          const response = await axios.get('https://gpc-itarsi-backend.onrender.com');
           console.log('User data from /me endpoint:', response.data);
           setUser(response.data.user);
 
