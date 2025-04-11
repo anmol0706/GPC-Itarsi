@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import collegeLogo from '../assets/college-logo.png';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -36,7 +35,7 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4 text-primary-400">GPC Itarsi</h3>
             <div className="flex justify-center sm:justify-start mb-4">
               <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-3 p-2 overflow-hidden shadow-md">
-                <img src={collegeLogo} alt="GPC Itarsi Logo" className="w-full h-full object-contain" />
+                <img src="/images/college-logo.png" alt="GPC Itarsi Logo" className="w-full h-full object-contain" />
               </div>
             </div>
             <p className="text-gray-300 mb-4">
