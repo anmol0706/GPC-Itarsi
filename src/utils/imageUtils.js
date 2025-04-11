@@ -2,7 +2,7 @@
  * Utility functions for handling images in the application
  */
 
-const API_URL = 'http://localhost:5001';
+const API_URL = 'https://gpc-itarsi-backend.onrender.com';
 
 /**
  * Get the full URL for a profile image
