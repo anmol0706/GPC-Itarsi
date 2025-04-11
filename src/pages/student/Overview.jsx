@@ -330,7 +330,7 @@ const Overview = () => {
                         </div>
                         <div className="mt-2">
                           <a
-                            href={`http://localhost:5000/uploads/${material.fileUrl}`}
+                            href={`${API_URL}/uploads/study-materials/${material.fileUrl}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
