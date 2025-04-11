@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
+import { API_URL } from '../../config/api';
 
 const Courses = () => {
   const { user } = useAuth();
@@ -32,7 +33,7 @@ const Courses = () => {
   const fetchCourses = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5001/api/courses');
+      const response = await axios.get(`${API_URL}/api/courses`);
       setCourses(response.data);
       setLoading(false);
     } catch (error) {
@@ -103,7 +104,7 @@ const Courses = () => {
       fees: course.fees.toString(),
       image: null
     });
-    setPreviewUrl(course.image ? `http://localhost:5001/uploads/${course.image}` : '');
+    setPreviewUrl(course.image ? `${API_URL}/uploads/${course.image}` : '');
     setShowEditModal(true);
   };
 
@@ -146,7 +147,7 @@ const Courses = () => {
       }
 
       await axios.post(
-        'http://localhost:5001/api/admin/add-course',
+        `${API_URL}/api/admin/add-course`,
         formDataToSend,
         {
           headers: {
@@ -223,7 +224,7 @@ const Courses = () => {
 
       const token = localStorage.getItem('token');
 
-      await axios.delete(`http://localhost:5001/api/admin/delete-course/${selectedCourse._id}`, {
+      await axios.delete(`${API_URL}/api/admin/delete-course/${selectedCourse._id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -318,7 +319,7 @@ const Courses = () => {
                         <div className="flex-shrink-0 h-10 w-10">
                           <img
                             className="h-10 w-10 rounded-full object-cover"
-                            src={course.image ? `http://localhost:5001/uploads/${course.image}` : '/images/placeholder.svg'}
+                            src={course.image ? `${API_URL}/uploads/${course.image}` : '/images/placeholder.svg'}
                             alt={course.title}
                             onError={(e) => {
                               console.error('Image failed to load:', e.target.src);

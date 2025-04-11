@@ -386,7 +386,7 @@ const StudyMaterials = () => {
                     <div className="mt-2 flex justify-between items-center">
                       {material.fileExists ? (
                         <a
-                          href={`http://localhost:5001/uploads/study-materials/${material.fileUrl}`}
+                          href={`${API_URL}/uploads/study-materials/${material.fileUrl}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-sm font-medium text-green-600 hover:text-green-500"

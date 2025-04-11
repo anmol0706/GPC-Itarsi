@@ -157,7 +157,7 @@ const StudyMaterials = () => {
       formDataToSend.append('file', formData.file);
 
       await axios.post(
-        'http://localhost:5001/api/admin/upload-study-material',
+        `${API_URL}/api/admin/upload-study-material`,
         formDataToSend,
         {
           headers: {
@@ -200,7 +200,7 @@ const StudyMaterials = () => {
 
       const token = localStorage.getItem('token');
 
-      await axios.delete(`http://localhost:5001/api/admin/study-materials/${materialId}`, {
+      await axios.delete(`${API_URL}/api/admin/study-materials/${materialId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

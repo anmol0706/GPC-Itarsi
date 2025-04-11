@@ -155,7 +155,7 @@ const Attendance = () => {
       // Create attendance records for each student
       const attendancePromises = filteredStudents.map(student => {
         return axios.post(
-          'http://localhost:5001/api/teachers/mark-attendance',
+          `${API_URL}/api/teachers/mark-attendance`,
           {
             studentId: student._id,
             subject: selectedSubject,

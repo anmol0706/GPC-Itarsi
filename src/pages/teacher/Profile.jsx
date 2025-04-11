@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 import { getProfileImageUrl, handleImageError } from '../../utils/imageUtils';
+import { API_URL } from '../../config/api';
 
 const Profile = () => {
   const { user, updateProfile } = useAuth();
@@ -39,7 +40,7 @@ const Profile = () => {
         return;
       }
 
-      const response = await axios.get('http://localhost:5001/api/teachers/profile', {
+      const response = await axios.get(`${API_URL}/api/teachers/profile`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

@@ -1,20 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../../config/api';
 
 const CourseEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const isEditMode = !!id;
-  
+
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  
+
   const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
-  
+
   const [formData, setFormData] = useState({
     title: '',
     code: '',
@@ -24,24 +25,24 @@ const CourseEdit = () => {
     seats: '',
     fees: ''
   });
-  
+
   const [courseImage, setCourseImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  
+
   useEffect(() => {
     fetchCourses();
   }, []);
-  
+
   useEffect(() => {
     if (id) {
       fetchCourseDetails(id);
     }
   }, [id]);
-  
+
   const fetchCourses = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5001/api/courses');
+      const response = await axios.get(`${API_URL}/api/courses`);
       setCourses(response.data);
     } catch (error) {
       console.error('Error fetching courses:', error);
@@ -50,13 +51,13 @@ const CourseEdit = () => {
       setLoading(false);
     }
   };
-  
+
   const fetchCourseDetails = async (courseId) => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:5001/api/courses/${courseId}`);
+      const response = await axios.get(`${API_URL}/api/courses/${courseId}`);
       const course = response.data;
-      
+
       setFormData({
         title: course.title || '',
         code: course.code || '',
@@ -66,11 +67,11 @@ const CourseEdit = () => {
         seats: course.seats || '',
         fees: course.fees || ''
       });
-      
+
       setSelectedCourse(course);
-      
+
       if (course.image) {
-        setImagePreview(`http://localhost:5001/uploads/courses/${course.image}`);
+        setImagePreview(`${API_URL}/uploads/courses/${course.image}`);
       }
     } catch (error) {
       console.error('Error fetching course details:', error);
@@ -79,7 +80,7 @@ const CourseEdit = () => {
       setLoading(false);
     }
   };
-  
+
   const handleCourseSelect = (e) => {
     const courseId = e.target.value;
     if (courseId) {
@@ -90,7 +91,7 @@ const CourseEdit = () => {
       navigate('/admin/courses/edit');
     }
   };
-  
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -98,7 +99,7 @@ const CourseEdit = () => {
       [name]: value
     });
   };
-  
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -110,7 +111,7 @@ const CourseEdit = () => {
       reader.readAsDataURL(file);
     }
   };
-  
+
   const resetForm = () => {
     setFormData({
       title: '',
@@ -124,15 +125,15 @@ const CourseEdit = () => {
     setCourseImage(null);
     setImagePreview(null);
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       setSaving(true);
       setError('');
       setSuccess('');
-      
+
       const formDataToSend = new FormData();
       formDataToSend.append('title', formData.title);
       formDataToSend.append('code', formData.code);
@@ -141,15 +142,15 @@ const CourseEdit = () => {
       formDataToSend.append('eligibility', formData.eligibility);
       formDataToSend.append('seats', formData.seats);
       formDataToSend.append('fees', formData.fees);
-      
+
       if (courseImage) {
         formDataToSend.append('image', courseImage);
       }
-      
+
       let response;
-      
+
       if (isEditMode) {
-        response = await axios.put(`http://localhost:5001/api/admin/update-course/${id}`, formDataToSend, {
+        response = await axios.put(`${API_URL}/api/admin/update-course/${id}`, formDataToSend, {
           headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -157,7 +158,7 @@ const CourseEdit = () => {
         });
         setSuccess('Course updated successfully');
       } else {
-        response = await axios.post('http://localhost:5001/api/admin/add-course', formDataToSend, {
+        response = await axios.post(`${API_URL}/api/admin/add-course`, formDataToSend, {
           headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -166,10 +167,10 @@ const CourseEdit = () => {
         setSuccess('Course added successfully');
         resetForm();
       }
-      
+
       // Refresh the courses list
       fetchCourses();
-      
+
     } catch (error) {
       console.error('Error saving course:', error);
       setError(error.response?.data?.message || 'Failed to save course');
@@ -177,33 +178,33 @@ const CourseEdit = () => {
       setSaving(false);
     }
   };
-  
+
   const handleDelete = async () => {
     if (!id) return;
-    
+
     if (!window.confirm('Are you sure you want to delete this course?')) {
       return;
     }
-    
+
     try {
       setSaving(true);
       setError('');
       setSuccess('');
-      
-      await axios.delete(`http://localhost:5001/api/admin/delete-course/${id}`, {
+
+      await axios.delete(`${API_URL}/api/admin/delete-course/${id}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       });
-      
+
       setSuccess('Course deleted successfully');
       resetForm();
       setSelectedCourse(null);
       navigate('/admin/courses/edit');
-      
+
       // Refresh the courses list
       fetchCourses();
-      
+
     } catch (error) {
       console.error('Error deleting course:', error);
       setError(error.response?.data?.message || 'Failed to delete course');
@@ -211,25 +212,25 @@ const CourseEdit = () => {
       setSaving(false);
     }
   };
-  
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-primary-700 mb-8">
         {isEditMode ? 'Edit Course' : 'Add New Course'}
       </h1>
-      
+
       {error && (
         <div className="bg-error bg-opacity-10 border border-error text-error px-4 py-3 rounded mb-4">
           {error}
         </div>
       )}
-      
+
       {success && (
         <div className="bg-success bg-opacity-10 border border-success text-success px-4 py-3 rounded mb-4">
           {success}
         </div>
       )}
-      
+
       <div className="bg-white shadow-md rounded-lg overflow-hidden mb-8">
         <div className="p-6">
           <div className="mb-6">
@@ -250,7 +251,7 @@ const CourseEdit = () => {
               ))}
             </select>
           </div>
-          
+
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -267,7 +268,7 @@ const CourseEdit = () => {
                   required
                 />
               </div>
-              
+
               <div>
                 <label htmlFor="code" className="block text-sm font-medium text-gray-700 mb-1">
                   Course Code
@@ -282,7 +283,7 @@ const CourseEdit = () => {
                   required
                 />
               </div>
-              
+
               <div className="md:col-span-2">
                 <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
                   Description
@@ -297,7 +298,7 @@ const CourseEdit = () => {
                   required
                 ></textarea>
               </div>
-              
+
               <div>
                 <label htmlFor="duration" className="block text-sm font-medium text-gray-700 mb-1">
                   Duration
@@ -312,7 +313,7 @@ const CourseEdit = () => {
                   required
                 />
               </div>
-              
+
               <div>
                 <label htmlFor="eligibility" className="block text-sm font-medium text-gray-700 mb-1">
                   Eligibility
@@ -327,7 +328,7 @@ const CourseEdit = () => {
                   required
                 />
               </div>
-              
+
               <div>
                 <label htmlFor="seats" className="block text-sm font-medium text-gray-700 mb-1">
                   Number of Seats
@@ -342,7 +343,7 @@ const CourseEdit = () => {
                   required
                 />
               </div>
-              
+
               <div>
                 <label htmlFor="fees" className="block text-sm font-medium text-gray-700 mb-1">
                   Fees (₹)
@@ -357,7 +358,7 @@ const CourseEdit = () => {
                   required
                 />
               </div>
-              
+
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Course Image
@@ -413,7 +414,7 @@ const CourseEdit = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="mt-8 flex justify-between">
               <div>
                 {isEditMode && (

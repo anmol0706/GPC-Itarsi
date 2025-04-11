@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../config/api';
 
 const Gallery = () => {
   const [images, setImages] = useState([]);
@@ -42,7 +43,7 @@ const Gallery = () => {
         return;
       }
 
-      const response = await axios.get('http://localhost:5001/api/gallery', {
+      const response = await axios.get(`${API_URL}/api/gallery`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -101,7 +102,7 @@ const Gallery = () => {
       formDataToSend.append('image', formData.image);
 
       await axios.post(
-        'http://localhost:5001/api/gallery',
+        `${API_URL}/api/gallery`,
         formDataToSend,
         {
           headers: {
@@ -138,7 +139,7 @@ const Gallery = () => {
       setLoading(true);
       const token = localStorage.getItem('token');
 
-      await axios.delete(`http://localhost:5001/api/gallery/${imageId}`, {
+      await axios.delete(`${API_URL}/api/gallery/${imageId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -213,7 +214,7 @@ const Gallery = () => {
                 <div className="h-48 w-full overflow-hidden">
                   <img
                     className="w-full h-full object-cover"
-                    src={`http://localhost:5001/uploads/gallery/${image.imageUrl}`}
+                    src={`${API_URL}/uploads/gallery/${image.imageUrl}`}
                     alt={image.title}
                   />
                 </div>

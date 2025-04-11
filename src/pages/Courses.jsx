@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
@@ -10,7 +11,7 @@ const Courses = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get('http://localhost:5001/api/courses');
+        const response = await axios.get(`${API_URL}/api/courses`);
         setCourses(response.data);
         setLoading(false);
       } catch (error) {
@@ -25,7 +26,7 @@ const Courses = () => {
 
   const handleCourseClick = async (courseId) => {
     try {
-      const response = await axios.get(`http://localhost:5001/api/courses/${courseId}`);
+      const response = await axios.get(`${API_URL}/api/courses/${courseId}`);
       setSelectedCourse(response.data);
     } catch (error) {
       console.error('Error fetching course details:', error);
@@ -69,7 +70,7 @@ const Courses = () => {
                 <div className="h-48 w-full overflow-hidden">
                   <img
                     className="w-full h-full object-cover"
-                    src={course.image ? `http://localhost:5001/uploads/${course.image}` : 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'}
+                    src={course.image ? `${API_URL}/uploads/${course.image}` : 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'}
                     alt={course.title}
                     onError={(e) => {
                       console.error('Image failed to load:', e.target.src);
@@ -121,7 +122,7 @@ const Courses = () => {
                           <div className="mb-4 rounded-lg overflow-hidden">
                             <img
                               className="w-full h-48 object-cover"
-                              src={`http://localhost:5001/uploads/${selectedCourse.image}`}
+                              src={`${API_URL}/uploads/${selectedCourse.image}`}
                               alt={selectedCourse.title}
                               onError={(e) => {
                                 console.error('Image failed to load:', e.target.src);
