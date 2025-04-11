@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 import { getProfileImageUrl, handleImageError } from '../../utils/imageUtils';
+import { API_URL } from '../../config/api';
 
 const Profile = () => {
   const { user, updateProfile } = useAuth();
@@ -82,7 +83,7 @@ const Profile = () => {
         formData.append('profilePicture', profileImage);
       }
 
-      const response = await axios.put('http://localhost:5001/api/admin/profile', formData, {
+      const response = await axios.put(`${API_URL}/api/admin/profile`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -112,7 +113,7 @@ const Profile = () => {
       setError(null);
       setSuccess('');
 
-      await axios.put('http://localhost:5001/api/admin/change-password', {
+      await axios.put(`${API_URL}/api/admin/change-password`, {
         currentPassword: passwordData.currentPassword,
         newPassword: passwordData.newPassword
       }, {

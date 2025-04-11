@@ -65,7 +65,7 @@ const Chatbot = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:5001/api/chatbot/faqs/${id}`, {
+      await axios.delete(`${API_URL}/api/chatbot/faqs/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('FAQ deleted successfully');
@@ -96,7 +96,7 @@ const Chatbot = () => {
       if (formMode === 'add') {
         // Add new FAQ
         await axios.post(
-          'http://localhost:5001/api/chatbot/faqs',
+          `${API_URL}/api/chatbot/faqs`,
           { question, answer, keywords: keywordsArray },
           { headers: { Authorization: `Bearer ${token}` } }
         );

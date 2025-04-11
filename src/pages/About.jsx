@@ -371,7 +371,7 @@ const About = () => {
                     <div className="absolute -top-4 -left-4 w-24 h-24 bg-primary-100 rounded-full opacity-50 z-0"></div>
                     <div className="h-56 w-56 rounded-full overflow-hidden bg-white border-4 border-primary-100 shadow-xl relative z-10 image-hover">
                       <img
-                        src={overviewData?.principalImage ? `http://localhost:5001/uploads/profiles/${overviewData.principalImage}` : "https://via.placeholder.com/300x300.png?text=Principal"}
+                        src={overviewData?.principalImage ? `${API_URL}/uploads/profiles/${overviewData.principalImage}` : "https://via.placeholder.com/300x300.png?text=Principal"}
                         alt={overviewData?.principalName || "Principal, GPC Itarsi"}
                         className="h-full w-full object-cover"
                         onError={(e) => {

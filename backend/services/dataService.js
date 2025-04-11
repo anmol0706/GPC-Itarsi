@@ -437,6 +437,36 @@ const addAttendanceRecord = (record) => {
   }
 };
 
+// Reset attendance for a specific student
+const resetStudentAttendance = (studentId) => {
+  const attendance = getAttendance();
+
+  // Find the student's attendance record
+  const studentIndex = attendance.findIndex(record => record.studentId === studentId);
+
+  if (studentIndex === -1) {
+    return false; // Student not found
+  }
+
+  // Keep the student's basic info but reset the records
+  attendance[studentIndex].records = [];
+
+  return writeData('attendance.json', attendance);
+};
+
+// Reset attendance for all students
+const resetAllAttendance = () => {
+  const attendance = getAttendance();
+
+  // Reset records for all students
+  const resetAttendance = attendance.map(record => ({
+    ...record,
+    records: []
+  }));
+
+  return writeData('attendance.json', resetAttendance);
+};
+
 // Chatbot FAQ operations
 const getChatbotFaqs = () => readData('chatbot-faqs.json');
 const getChatbotFaqById = (id) => {
@@ -590,6 +620,8 @@ module.exports = {
   getAttendance,
   getStudentAttendance,
   addAttendanceRecord,
+  resetStudentAttendance,
+  resetAllAttendance,
 
   // Chatbot operations
   getChatbotFaqs,

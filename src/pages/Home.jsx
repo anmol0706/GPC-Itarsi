@@ -146,7 +146,7 @@ const Home = () => {
         <div className="absolute inset-0">
           <img
             className="w-full h-full object-cover"
-            src="https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1650&q=80"
+            src="src\assets\background.jpg"
             alt="College campus building"
           />
           <div className="absolute inset-0 bg-secondary-900 opacity-80"></div>
@@ -218,7 +218,7 @@ const Home = () => {
             <AnimatedCard className="group relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-secondary-200" delay={0.1}>
               <div className="relative w-full h-48 overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1650&q=80"
+                  src="src\assets\background.jpg"
                   alt="Modern campus building"
                   className="w-full h-full object-center object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -235,7 +235,7 @@ const Home = () => {
             <AnimatedCard className="group relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-secondary-200" delay={0.3}>
               <div className="relative w-full h-48 overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1568667256549-094345857637?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1650&q=80"
+                  src="src\assets\library1.jpg"
                   alt="College library"
                   className="w-full h-full object-center object-cover transition-transform duration-500 group-hover:scale-110"
                 />

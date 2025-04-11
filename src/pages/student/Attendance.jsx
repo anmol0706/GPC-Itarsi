@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../config/api';
 import { useAuth } from '../../context/AuthContext';
 
 const Attendance = () => {
@@ -41,7 +42,7 @@ const Attendance = () => {
         return;
       }
 
-      const response = await axios.get('http://localhost:5001/api/students/attendance', {
+      const response = await axios.get(`${API_URL}/api/students/attendance`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

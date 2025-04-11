@@ -21,7 +21,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174', 'https://gpc-itarsi.onrender.com', 'https://gpc-itarsi.vercel.app'],
+  origin: ['http://localhost:5173', 'http://localhost:5174', 'https://gpc-itarsi.onrender.com', 'https://gpc-itarsi.vercel.app', 'https://gpc-itarsi.netlify.app'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -1099,6 +1099,51 @@ app.get('/api/attendance/:studentId', authenticateToken, (req, res) => {
   } catch (error) {
     console.error('Error reading attendance records:', error);
     res.status(500).json({ message: 'Failed to load attendance records' });
+  }
+});
+
+// Get all attendance records (admin only)
+app.get('/api/admin/attendance', authenticateToken, authorize(['admin']), (req, res) => {
+  try {
+    const attendance = dataService.getAttendance();
+    res.json(attendance);
+  } catch (error) {
+    console.error('Error fetching attendance records:', error);
+    res.status(500).json({ message: 'Failed to load attendance records' });
+  }
+});
+
+// Reset attendance for a specific student (admin only)
+app.post('/api/admin/reset-student-attendance/:studentId', authenticateToken, authorize(['admin']), (req, res) => {
+  try {
+    const { studentId } = req.params;
+
+    const success = dataService.resetStudentAttendance(studentId);
+
+    if (!success) {
+      return res.status(404).json({ message: 'Student attendance record not found' });
+    }
+
+    res.json({ message: 'Student attendance reset successfully' });
+  } catch (error) {
+    console.error('Error resetting student attendance:', error);
+    res.status(500).json({ message: 'Failed to reset student attendance' });
+  }
+});
+
+// Reset attendance for all students (admin only)
+app.post('/api/admin/reset-all-attendance', authenticateToken, authorize(['admin']), (req, res) => {
+  try {
+    const success = dataService.resetAllAttendance();
+
+    if (!success) {
+      return res.status(500).json({ message: 'Failed to reset all attendance records' });
+    }
+
+    res.json({ message: 'All attendance records reset successfully' });
+  } catch (error) {
+    console.error('Error resetting all attendance records:', error);
+    res.status(500).json({ message: 'Failed to reset all attendance records' });
   }
 });
 

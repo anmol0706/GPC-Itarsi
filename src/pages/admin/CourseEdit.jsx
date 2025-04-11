@@ -367,7 +367,7 @@ const CourseEdit = () => {
                   {(imagePreview || selectedCourse?.image) && (
                     <div className="w-32 h-32 rounded-md overflow-hidden">
                       <img
-                        src={imagePreview || `http://localhost:5001/uploads/courses/${selectedCourse.image}`}
+                        src={imagePreview || `${API_URL}/uploads/courses/${selectedCourse.image}`}
                         alt="Course Preview"
                         className="w-full h-full object-cover"
                       />

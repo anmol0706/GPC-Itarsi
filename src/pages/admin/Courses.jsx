@@ -193,7 +193,7 @@ const Courses = () => {
       }
 
       await axios.put(
-        `http://localhost:5001/api/admin/update-course/${selectedCourse._id}`,
+        `${API_URL}/api/admin/update-course/${selectedCourse._id}`,
         formDataToSend,
         {
           headers: {

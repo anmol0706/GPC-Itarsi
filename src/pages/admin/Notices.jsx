@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import sanitizeHtml from '../../utils/sanitizeHtml';
+import { API_URL } from '../../config/api';
 
 const Notices = () => {
   const [notices, setNotices] = useState([]);
@@ -44,7 +45,7 @@ const Notices = () => {
         return;
       }
 
-      const response = await axios.get('http://localhost:5001/api/notices', {
+      const response = await axios.get(`${API_URL}/api/notices`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -76,7 +77,7 @@ const Notices = () => {
       const token = localStorage.getItem('token');
 
       await axios.post(
-        'http://localhost:5001/api/notices',
+        `${API_URL}/api/notices`,
         formData,
         {
           headers: {
@@ -110,7 +111,7 @@ const Notices = () => {
       const token = localStorage.getItem('token');
 
       await axios.put(
-        `http://localhost:5001/api/notices/${selectedNotice._id}`,
+        `${API_URL}/api/notices/${selectedNotice._id}`,
         formData,
         {
           headers: {
@@ -146,7 +147,7 @@ const Notices = () => {
       setLoading(true);
       const token = localStorage.getItem('token');
 
-      await axios.delete(`http://localhost:5001/api/notices/${noticeId}`, {
+      await axios.delete(`${API_URL}/api/notices/${noticeId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

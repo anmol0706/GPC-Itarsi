@@ -126,7 +126,7 @@ const Students = () => {
       const token = localStorage.getItem('token');
 
       await axios.put(
-        `http://localhost:5001/api/admin/update-student/${selectedStudent._id}`,
+        `${API_URL}/api/admin/update-student/${selectedStudent._id}`,
         {
           name: formData.name,
           className: formData.className,
@@ -169,7 +169,7 @@ const Students = () => {
       setLoading(true);
       const token = localStorage.getItem('token');
 
-      await axios.delete(`http://localhost:5001/api/admin/delete-student/${studentId}`, {
+      await axios.delete(`${API_URL}/api/admin/delete-student/${studentId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

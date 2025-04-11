@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../config/api';
 
 const Teachers = () => {
   const [teachers, setTeachers] = useState([]);
@@ -51,7 +52,7 @@ const Teachers = () => {
         return;
       }
 
-      const response = await axios.get('http://localhost:5001/api/teachers', {
+      const response = await axios.get(`${API_URL}/api/teachers`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -88,7 +89,7 @@ const Teachers = () => {
         : [];
 
       await axios.post(
-        'http://localhost:5001/api/admin/add-teacher',
+        `${API_URL}/api/admin/add-teacher`,
         {
           name: formData.name,
           department: formData.department,
@@ -141,7 +142,7 @@ const Teachers = () => {
         : [];
 
       await axios.put(
-        `http://localhost:5001/api/admin/update-teacher/${selectedTeacher._id}`,
+        `${API_URL}/api/admin/update-teacher/${selectedTeacher._id}`,
         {
           name: formData.name,
           department: formData.department,
@@ -186,7 +187,7 @@ const Teachers = () => {
       setLoading(true);
       const token = localStorage.getItem('token');
 
-      await axios.delete(`http://localhost:5001/api/admin/delete-teacher/${teacherId}`, {
+      await axios.delete(`${API_URL}/api/admin/delete-teacher/${teacherId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

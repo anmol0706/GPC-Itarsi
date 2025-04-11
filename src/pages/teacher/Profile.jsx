@@ -79,7 +79,7 @@ const Profile = () => {
       const token = localStorage.getItem('token');
 
       await axios.post(
-        'http://localhost:5001/api/auth/change-password',
+        `${API_URL}/api/auth/change-password`,
         {
           currentPassword: passwordData.currentPassword,
           newPassword: passwordData.newPassword
@@ -139,7 +139,7 @@ const Profile = () => {
       formData.append('profilePicture', profileImage);
 
       const response = await axios.put(
-        'http://localhost:5001/api/teachers/update-profile-picture',
+        `${API_URL}/api/teachers/update-profile-picture`,
         formData,
         {
           headers: {
