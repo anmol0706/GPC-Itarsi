@@ -21,7 +21,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174', 'https://gpc-itarsi.onrender.com', 'https://gpc-itarsi.vercel.app', 'https://gpc-itarsi.netlify.app'],
+  origin: ['http://localhost:5173', 'http://localhost:5174', 'https://gpc-itarsi.onrender.com', 'https://gpc-itarsi.vercel.app', 'https://gpc-itarsi.netlify.app', 'https://gpc-itarsi-5col.onrender.com'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
