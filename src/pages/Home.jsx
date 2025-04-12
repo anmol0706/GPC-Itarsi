@@ -308,9 +308,6 @@ const Home = () => {
       <div className="bg-white py-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-base text-primary-500 font-semibold tracking-wide uppercase">
-              Quick Navigation
-            </h2>
             <TextReveal className="mt-2 text-3xl font-extrabold text-primary-600 sm:text-4xl">
               Useful Resources
             </TextReveal>
