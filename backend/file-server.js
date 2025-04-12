@@ -9,26 +9,10 @@ const dataService = require('./services/dataService');
 // Initialize Express app
 const app = express();
 
-// Test endpoint with detailed CORS information
+// Test endpoint
 app.get('/api/test', (req, res) => {
   console.log('Test endpoint called');
-  console.log('Origin:', req.headers.origin);
-  console.log('Headers:', req.headers);
-
-  // Return detailed information about the request
-  res.json({
-    message: 'Server is running correctly',
-    timestamp: new Date().toISOString(),
-    headers: {
-      origin: req.headers.origin,
-      host: req.headers.host,
-      referer: req.headers.referer
-    },
-    cors: {
-      enabled: true,
-      allowedOrigins: ['https://gpc-itarsi-5col.onrender.com', 'http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175']
-    }
-  });
+  res.json({ message: 'Server is running correctly' });
 });
 
 // Environment variables
@@ -36,35 +20,12 @@ const PORT = process.env.PORT || 5001;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 // Middleware
-// Configure CORS
-app.use((req, res, next) => {
-  // Allow requests from specific origins
-  const allowedOrigins = ['https://gpc-itarsi-5col.onrender.com', 'http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175'];
-  const origin = req.headers.origin;
-
-  if (allowedOrigins.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  } else {
-    // For any other origin, allow it in development but restrict in production
-    res.header('Access-Control-Allow-Origin', process.env.NODE_ENV === 'production' ? 'https://gpc-itarsi-5col.onrender.com' : '*');
-  }
-
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-
-  // Handle preflight requests
-  if (req.method === 'OPTIONS') {
-    return res.status(204).end();
-  }
-
-  next();
-});
-
-// Also apply the cors middleware as a backup
-app.use(cors());
-
-// Handle OPTIONS requests explicitly
-app.options('*', cors());
+app.use(cors({
+  origin: ['http://localhost:5173', 'http://localhost:5174', 'https://gpc-itarsi.onrender.com', 'https://gpc-itarsi.vercel.app', 'https://gpc-itarsi.netlify.app'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -1990,8 +1951,6 @@ app.post('/api/admin/upload-study-material', authenticateToken, authorize(['admi
 });
 
 // Document Management (Forms, Applications, Newsletters)
-// Documents endpoint is handled by the global CORS configuration
-
 // Data structure for documents
 let documents = [];
 const documentsFilePath = path.join(__dirname, 'data/documents.json');
@@ -2046,10 +2005,6 @@ app.get('/api/documents', (req, res) => {
 
 // Get document by ID
 app.get('/api/documents/:id', (req, res) => {
-  // Set CORS headers specifically for this route
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   try {
     const document = documents.find(doc => doc._id === req.params.id);
 
@@ -2212,10 +2167,6 @@ app.delete('/api/admin/documents/:id', authenticateToken, authorize(['admin']), 
 
 // Download a document
 app.get('/api/download/document/:id', (req, res) => {
-  // Set CORS headers specifically for this route
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   try {
     const documentId = req.params.id;
 

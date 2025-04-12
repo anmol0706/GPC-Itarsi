@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import axiosInstance from '../config/axiosConfig';
-import { API_URL } from '../config/api';
 
 const Downloads = () => {
   const [loading, setLoading] = useState(true);
@@ -52,94 +50,70 @@ const Downloads = () => {
     try {
       setLoading(true);
 
-      // Try to fetch from API, fall back to mock data if it fails
-      let response;
-      try {
-        response = await axiosInstance.get('/api/documents');
-      } catch (apiError) {
-        console.error('API Error:', apiError);
-        // Fall back to mock data
-        response = {
-          data: [
-            {
-              _id: '1',
-              title: 'College Newsletter - April 2025',
-              description: 'Monthly newsletter with college updates and events',
-              type: 'newsletter',
-              category: 'general',
-              fileType: 'application/pdf',
-              uploadDate: new Date().toISOString(),
-              fileExists: true,
-              filePath: 'newsletters/newsletter-april-2025.pdf'
-            },
-            {
-              _id: '2',
-              title: 'Admission Form 2025-26',
-              description: 'Application form for new admissions',
-              type: 'form',
-              category: 'admission',
-              fileType: 'application/pdf',
-              uploadDate: new Date().toISOString(),
-              fileExists: true,
-              filePath: 'forms/admission-form-2025.pdf'
-            },
-            {
-              _id: '3',
-              title: 'Scholarship Application',
-              description: 'Form to apply for various scholarship programs',
-              type: 'application',
-              category: 'scholarship',
-              fileType: 'application/pdf',
-              uploadDate: new Date().toISOString(),
-              fileExists: true,
-              filePath: 'applications/scholarship-application.pdf'
-            },
-            {
-              _id: '4',
-              title: 'Academic Calendar 2025-26',
-              description: 'Complete academic calendar with important dates',
-              type: 'drive_link',
-              category: 'academic',
-              uploadDate: new Date().toISOString(),
-              driveUrl: 'https://docs.google.com/document/d/example',
-              fileExists: true
-            }
-          ]
-        };
-      }
-
-      // Process the documents to add file type icons
-      const processedDocuments = response.data.map(doc => {
-        let fileIcon = 'file-text';
-        let fileExists = true;
-
-        if (doc.fileType) {
-          if (doc.fileType.includes('pdf')) {
-            fileIcon = 'file-pdf';
-          } else if (doc.fileType.includes('word') || doc.fileType.includes('doc')) {
-            fileIcon = 'file-word';
-          } else if (doc.fileType.includes('sheet') || doc.fileType.includes('excel') || doc.fileType.includes('xls')) {
-            fileIcon = 'file-excel';
-          } else if (doc.fileType.includes('presentation') || doc.fileType.includes('powerpoint') || doc.fileType.includes('ppt')) {
-            fileIcon = 'file-powerpoint';
-          } else if (doc.fileType.includes('image')) {
-            fileIcon = 'image';
-          } else if (doc.fileType.includes('zip') || doc.fileType.includes('rar') || doc.fileType.includes('tar')) {
-            fileIcon = 'archive';
-          }
+      // Mock data for documents since we're having server issues
+      const mockDocuments = [
+        {
+          _id: "doc_1712345678901",
+          title: "Admission Form 2025",
+          description: "Admission form for the academic year 2025-26",
+          type: "form",
+          category: "admission",
+          fileUrl: "admission-form-2025.pdf",
+          filePath: "forms/admission-form-2025.pdf",
+          fileSize: 245678,
+          fileType: "application/pdf",
+          uploadDate: "2025-04-01T10:30:00.000Z",
+          uploadedBy: "Admin",
+          fileExists: true,
+          fileIcon: "file-pdf",
+          fileExtension: "pdf"
+        },
+        {
+          _id: "doc_1712345678902",
+          title: "Scholarship Application",
+          description: "Application form for merit scholarship",
+          type: "application",
+          category: "scholarship",
+          fileUrl: "scholarship-application.pdf",
+          filePath: "applications/scholarship-application.pdf",
+          fileSize: 198765,
+          fileType: "application/pdf",
+          uploadDate: "2025-04-02T11:45:00.000Z",
+          uploadedBy: "Admin",
+          fileExists: true,
+          fileIcon: "file-pdf",
+          fileExtension: "pdf"
+        },
+        {
+          _id: "doc_1712345678903",
+          title: "College Newsletter - April 2025",
+          description: "Monthly newsletter with college updates and events",
+          type: "newsletter",
+          category: "general",
+          fileUrl: "newsletter-april-2025.pdf",
+          filePath: "newsletters/newsletter-april-2025.pdf",
+          fileSize: 356789,
+          fileType: "application/pdf",
+          uploadDate: "2025-04-05T09:15:00.000Z",
+          uploadedBy: "Admin",
+          fileExists: true,
+          fileIcon: "file-pdf",
+          fileExtension: "pdf"
+        },
+        {
+          _id: "doc_1712345678904",
+          title: "Computer Science Study Resources",
+          description: "Collection of CS study materials and resources",
+          type: "drive_link",
+          category: "academic",
+          driveUrl: "https://drive.google.com/drive/folders/example",
+          uploadDate: "2025-04-10T14:20:00.000Z",
+          uploadedBy: "Admin"
         }
+      ];
 
-        return {
-          ...doc,
-          fileExists,
-          fileIcon
-        };
-      });
-
-      setDocuments(processedDocuments);
-      setFilteredDocuments(processedDocuments.filter(doc =>
-        activeTab === 'downloads' ? doc.type !== 'drive_link' : doc.type === 'drive_link'
-      ));
+      setDocuments(mockDocuments);
+      setFilteredDocuments(mockDocuments);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching documents:', error);
@@ -446,19 +420,11 @@ const Downloads = () => {
                       </a>
                     ) : doc.fileExists ? (
                       <a
-                        onClick={(e) => {
-                          e.preventDefault();
-                          // Check if it's a mock document
-                          if (doc._id.toString().length === 1) {
-                            // For mock data, just show an alert
-                            alert('This is a mock document. In production, this would download the actual file.');
-                          } else {
-                            // Use window.open to download with CORS headers
-                            window.open(`${API_URL}/api/download/document/${doc._id}`, '_blank');
-                          }
-                        }}
-                        href="#"
+                        href={`/sample-files/${doc.fileUrl}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="hero-btn programs-btn inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-500 hover:bg-primary-600 transition-all duration-300"
+                        download
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />

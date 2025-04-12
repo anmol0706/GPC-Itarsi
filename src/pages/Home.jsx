@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axiosInstance from '../config/axiosConfig';
+import axios from 'axios';
 import sanitizeHtml from '../utils/sanitizeHtml';
+import { API_URL } from '../config/api';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { AnimatedBackground, TextReveal, CanvasWave, AnimatedCard } from '../components/animations';
 import SEO from '../components/SEO';
-import ApiTest from '../components/ApiTest';
 
 // Import images
 import backgroundImg from '../assets/images/background.jpg';
@@ -27,7 +27,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         // Fetch notices
-        const noticesResponse = await axiosInstance.get('/api/notices');
+        const noticesResponse = await axios.get(`${API_URL}/api/notices`);
 
         if (noticesResponse.data && Array.isArray(noticesResponse.data)) {
           // Sort notices by date (newest first) and get only the latest 5
@@ -56,7 +56,7 @@ const Home = () => {
         // Quick links section has been removed
 
         // Fetch custom buttons
-        const buttonsResponse = await axiosInstance.get('/api/custom-buttons');
+        const buttonsResponse = await axios.get(`${API_URL}/api/custom-buttons`);
         if (buttonsResponse.data && Array.isArray(buttonsResponse.data)) {
           // Sort buttons by order
           const sortedButtons = [...buttonsResponse.data].sort((a, b) => a.order - b.order);
@@ -467,11 +467,6 @@ const Home = () => {
             )}
           </div>
         </div>
-      </div>
-
-      {/* API Test Section - Temporary for debugging */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <ApiTest />
       </div>
 
       {/* Call to Action Section */}

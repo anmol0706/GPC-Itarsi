@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../../config/axiosConfig';
+import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 import { API_URL } from '../../config/api';
 
@@ -42,7 +42,7 @@ const Documents = () => {
   const fetchDocuments = async () => {
     try {
       setLoading(true);
-      const response = await axiosInstance.get('/api/documents');
+      const response = await axios.get(`${API_URL}/api/documents`);
       setDocuments(response.data);
       setLoading(false);
     } catch (error) {
@@ -109,9 +109,10 @@ const Documents = () => {
         data.append('file', formData.file);
       }
 
-      await axiosInstance.post('/api/admin/documents', data, {
+      await axios.post(`${API_URL}/api/admin/documents`, data, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`
         },
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
@@ -160,7 +161,11 @@ const Documents = () => {
     }
 
     try {
-      await axiosInstance.delete(`/api/admin/documents/${id}`);
+      await axios.delete(`${API_URL}/api/admin/documents/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
 
       // Refresh documents list
       fetchDocuments();
@@ -572,13 +577,11 @@ const Documents = () => {
                         </a>
                       ) : (
                         <a
-                          onClick={(e) => {
-                            e.preventDefault();
-                            // Use axios to download with CORS headers
-                            window.open(`${API_URL}/api/download/document/${document._id}`, '_blank');
-                          }}
-                          href="#"
+                          href={`${API_URL}/api/download/document/${document._id}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="mr-2 inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                          download
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
