@@ -9,10 +9,26 @@ const dataService = require('./services/dataService');
 // Initialize Express app
 const app = express();
 
-// Test endpoint
+// Test endpoint with detailed CORS information
 app.get('/api/test', (req, res) => {
   console.log('Test endpoint called');
-  res.json({ message: 'Server is running correctly' });
+  console.log('Origin:', req.headers.origin);
+  console.log('Headers:', req.headers);
+
+  // Return detailed information about the request
+  res.json({
+    message: 'Server is running correctly',
+    timestamp: new Date().toISOString(),
+    headers: {
+      origin: req.headers.origin,
+      host: req.headers.host,
+      referer: req.headers.referer
+    },
+    cors: {
+      enabled: true,
+      allowedOrigins: ['https://gpc-itarsi-5col.onrender.com', 'http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175']
+    }
+  });
 });
 
 // Environment variables
@@ -20,21 +36,35 @@ const PORT = process.env.PORT || 5001;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 // Middleware
-// Configure CORS options
-const corsOptions = {
-  origin: ['https://gpc-itarsi-5col.onrender.com', 'http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
-  credentials: true,
-  preflightContinue: false,
-  optionsSuccessStatus: 204
-};
+// Configure CORS
+app.use((req, res, next) => {
+  // Allow requests from specific origins
+  const allowedOrigins = ['https://gpc-itarsi-5col.onrender.com', 'http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175'];
+  const origin = req.headers.origin;
 
-// Apply CORS middleware
-app.use(cors(corsOptions));
+  if (allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  } else {
+    // For any other origin, allow it in development but restrict in production
+    res.header('Access-Control-Allow-Origin', process.env.NODE_ENV === 'production' ? 'https://gpc-itarsi-5col.onrender.com' : '*');
+  }
+
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+
+  next();
+});
+
+// Also apply the cors middleware as a backup
+app.use(cors());
 
 // Handle OPTIONS requests explicitly
-app.options('*', cors(corsOptions));
+app.options('*', cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

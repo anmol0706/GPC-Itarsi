@@ -6,4 +6,6 @@
 // Use environment variable if available, otherwise fallback to the hardcoded URL
 export const API_URL = process.env.VITE_API_URL || 'https://gpc-itarsi-backend-1wu5.onrender.com';
 
+// Ensure trailing slash is not included in the API_URL
+
 // Export other API-related constants here if needed
