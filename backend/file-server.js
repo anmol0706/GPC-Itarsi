@@ -20,8 +20,24 @@ const PORT = process.env.PORT || 5001;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 // Middleware
+// Enable CORS for all routes
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Credentials", "true");
+
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  next();
+});
+
+// Also keep the cors middleware for compatibility
 app.use(cors({
-  origin: '*', // Allow all origins temporarily to debug the issue
+  origin: '*',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -1951,6 +1967,14 @@ app.post('/api/admin/upload-study-material', authenticateToken, authorize(['admi
 });
 
 // Document Management (Forms, Applications, Newsletters)
+// Add specific OPTIONS handler for documents endpoint
+app.options('/api/documents', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.status(200).end();
+});
+
 // Data structure for documents
 let documents = [];
 const documentsFilePath = path.join(__dirname, 'data/documents.json');
@@ -1981,6 +2005,10 @@ const saveDocuments = () => {
 
 // Get all documents
 app.get('/api/documents', (req, res) => {
+  // Set CORS headers specifically for this route
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   try {
     // Filter out documents based on query parameters
     let filteredDocuments = [...documents];
@@ -2005,6 +2033,10 @@ app.get('/api/documents', (req, res) => {
 
 // Get document by ID
 app.get('/api/documents/:id', (req, res) => {
+  // Set CORS headers specifically for this route
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   try {
     const document = documents.find(doc => doc._id === req.params.id);
 
@@ -2167,6 +2199,10 @@ app.delete('/api/admin/documents/:id', authenticateToken, authorize(['admin']), 
 
 // Download a document
 app.get('/api/download/document/:id', (req, res) => {
+  // Set CORS headers specifically for this route
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   try {
     const documentId = req.params.id;
 

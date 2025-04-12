@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { API_URL } from '../config/api';
 
 const Downloads = () => {
   const [loading, setLoading] = useState(true);
@@ -50,70 +52,49 @@ const Downloads = () => {
     try {
       setLoading(true);
 
-      // Mock data for documents since we're having server issues
-      const mockDocuments = [
-        {
-          _id: "doc_1712345678901",
-          title: "Admission Form 2025",
-          description: "Admission form for the academic year 2025-26",
-          type: "form",
-          category: "admission",
-          fileUrl: "admission-form-2025.pdf",
-          filePath: "forms/admission-form-2025.pdf",
-          fileSize: 245678,
-          fileType: "application/pdf",
-          uploadDate: "2025-04-01T10:30:00.000Z",
-          uploadedBy: "Admin",
-          fileExists: true,
-          fileIcon: "file-pdf",
-          fileExtension: "pdf"
+      // Use actual API instead of mock data
+      const response = await axios.get(`${API_URL}/api/documents`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
         },
-        {
-          _id: "doc_1712345678902",
-          title: "Scholarship Application",
-          description: "Application form for merit scholarship",
-          type: "application",
-          category: "scholarship",
-          fileUrl: "scholarship-application.pdf",
-          filePath: "applications/scholarship-application.pdf",
-          fileSize: 198765,
-          fileType: "application/pdf",
-          uploadDate: "2025-04-02T11:45:00.000Z",
-          uploadedBy: "Admin",
-          fileExists: true,
-          fileIcon: "file-pdf",
-          fileExtension: "pdf"
-        },
-        {
-          _id: "doc_1712345678903",
-          title: "College Newsletter - April 2025",
-          description: "Monthly newsletter with college updates and events",
-          type: "newsletter",
-          category: "general",
-          fileUrl: "newsletter-april-2025.pdf",
-          filePath: "newsletters/newsletter-april-2025.pdf",
-          fileSize: 356789,
-          fileType: "application/pdf",
-          uploadDate: "2025-04-05T09:15:00.000Z",
-          uploadedBy: "Admin",
-          fileExists: true,
-          fileIcon: "file-pdf",
-          fileExtension: "pdf"
-        },
-        {
-          _id: "doc_1712345678904",
-          title: "Computer Science Study Resources",
-          description: "Collection of CS study materials and resources",
-          type: "drive_link",
-          category: "academic",
-          driveUrl: "https://drive.google.com/drive/folders/example",
-          uploadDate: "2025-04-10T14:20:00.000Z",
-          uploadedBy: "Admin"
-        }
-      ];
+        withCredentials: false
+      });
 
-      setDocuments(mockDocuments);
-      setFilteredDocuments(mockDocuments);
+      // Process the documents to add file type icons
+      const processedDocuments = response.data.map(doc => {
+        let fileIcon = 'file-text';
+        let fileExists = true;
+
+        if (doc.fileType) {
+          if (doc.fileType.includes('pdf')) {
+            fileIcon = 'file-pdf';
+          } else if (doc.fileType.includes('word') || doc.fileType.includes('doc')) {
+            fileIcon = 'file-word';
+          } else if (doc.fileType.includes('sheet') || doc.fileType.includes('excel') || doc.fileType.includes('xls')) {
+            fileIcon = 'file-excel';
+          } else if (doc.fileType.includes('presentation') || doc.fileType.includes('powerpoint') || doc.fileType.includes('ppt')) {
+            fileIcon = 'file-powerpoint';
+          } else if (doc.fileType.includes('image')) {
+            fileIcon = 'image';
+          } else if (doc.fileType.includes('zip') || doc.fileType.includes('rar') || doc.fileType.includes('tar')) {
+            fileIcon = 'archive';
+          }
+        }
+
+        return {
+          ...doc,
+          fileExists,
+          fileIcon
+        };
+      });
+
+      setDocuments(processedDocuments);
+      setFilteredDocuments(processedDocuments.filter(doc =>
+        activeTab === 'downloads' ? doc.type !== 'drive_link' : doc.type === 'drive_link'
+      ));
       setLoading(false);
     } catch (error) {
       console.error('Error fetching documents:', error);
@@ -420,11 +401,13 @@ const Downloads = () => {
                       </a>
                     ) : doc.fileExists ? (
                       <a
-                        href={`/sample-files/${doc.fileUrl}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          // Use window.open to download with CORS headers
+                          window.open(`${API_URL}/api/download/document/${doc._id}`, '_blank');
+                        }}
+                        href="#"
                         className="hero-btn programs-btn inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-500 hover:bg-primary-600 transition-all duration-300"
-                        download
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />

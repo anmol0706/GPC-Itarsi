@@ -42,7 +42,15 @@ const Documents = () => {
   const fetchDocuments = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_URL}/api/documents`);
+      const response = await axios.get(`${API_URL}/api/documents`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+        },
+        withCredentials: false
+      });
       setDocuments(response.data);
       setLoading(false);
     } catch (error) {
@@ -112,8 +120,12 @@ const Documents = () => {
       await axios.post(`${API_URL}/api/admin/documents`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
         },
+        withCredentials: false,
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
           setUploadProgress(percentCompleted);
@@ -163,8 +175,13 @@ const Documents = () => {
     try {
       await axios.delete(`${API_URL}/api/admin/documents/${id}`, {
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+        },
+        withCredentials: false
       });
 
       // Refresh documents list
@@ -577,11 +594,13 @@ const Documents = () => {
                         </a>
                       ) : (
                         <a
-                          href={`${API_URL}/api/download/document/${document._id}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            // Use axios to download with CORS headers
+                            window.open(`${API_URL}/api/download/document/${document._id}`, '_blank');
+                          }}
+                          href="#"
                           className="mr-2 inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-                          download
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
