@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../config/api';
+import StudentCard from '../../components/StudentCard';
 
 const Attendance = () => {
   const [attendance, setAttendance] = useState([]);
@@ -14,6 +15,8 @@ const Attendance = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [confirmAction, setConfirmAction] = useState(null);
   const [selectedStudent, setSelectedStudent] = useState(null);
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'detail'
+  const [selectedStudentDetails, setSelectedStudentDetails] = useState(null);
 
   useEffect(() => {
     fetchAttendance();
@@ -79,6 +82,16 @@ const Attendance = () => {
     setSelectedStudent(student);
     setConfirmAction('resetStudent');
     setShowConfirmModal(true);
+  };
+
+  const handleStudentClick = (student) => {
+    setSelectedStudentDetails(student);
+    setViewMode('detail');
+  };
+
+  const handleBackToGrid = () => {
+    setSelectedStudentDetails(null);
+    setViewMode('grid');
   };
 
   const handleResetAllAttendance = () => {
@@ -221,82 +234,119 @@ const Attendance = () => {
           <div className="bg-white px-4 py-12 text-center shadow rounded-lg text-gray-500">
             No attendance records found.
           </div>
-        ) : (
-          <div className="bg-white shadow overflow-hidden sm:rounded-md">
-            <ul className="divide-y divide-gray-200">
+        ) : viewMode === 'grid' ? (
+          <div className="bg-white shadow rounded-lg p-6">
+            <h2 className="text-lg font-medium text-gray-900 mb-4">Student Attendance</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
               {filteredAttendance.map((record) => (
-                <li key={record._id}>
-                  <div className="px-4 py-4 sm:px-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="text-lg font-medium text-gray-900">{record.studentName}</h3>
-                        <p className="text-sm text-gray-500">Roll Number: {record.rollNumber}</p>
-                        <p className="text-sm text-gray-500">Class: {record.class}</p>
-                      </div>
-                      <div>
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                          {record.records.length} Attendance Records
-                        </span>
-                      </div>
-                    </div>
-                    
-                    <div className="mt-4">
-                      <h4 className="text-sm font-medium text-gray-700">Recent Records:</h4>
-                      <div className="mt-2 overflow-x-auto">
-                        <table className="min-w-full divide-y divide-gray-200">
-                          <thead className="bg-gray-50">
-                            <tr>
-                              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Date
-                              </th>
-                              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Subject
-                              </th>
-                              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Status
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody className="bg-white divide-y divide-gray-200">
-                            {record.records.slice(0, 5).map((attendance, index) => (
-                              <tr key={index}>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                  {formatDate(attendance.date)}
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                  {attendance.subject}
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                  <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                                    attendance.status === 'present' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                                  }`}>
-                                    {attendance.status === 'present' ? 'Present' : 'Absent'}
-                                  </span>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                      {record.records.length > 5 && (
-                        <p className="mt-2 text-sm text-gray-500">
-                          Showing 5 of {record.records.length} records
-                        </p>
-                      )}
-                    </div>
-                    
-                    <div className="mt-4">
-                      <button
-                        onClick={() => handleResetStudentAttendance(record)}
-                        className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
-                      >
-                        Reset Attendance
-                      </button>
-                    </div>
-                  </div>
-                </li>
+                <StudentCard
+                  key={record._id}
+                  student={{
+                    _id: record._id,
+                    name: record.studentName,
+                    rollNumber: record.rollNumber,
+                    class: record.class,
+                    profilePicture: record.profilePicture
+                  }}
+                  onClick={() => handleStudentClick(record)}
+                />
               ))}
-            </ul>
+            </div>
+          </div>
+        ) : (
+          <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+            <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
+              <div>
+                <button
+                  onClick={handleBackToGrid}
+                  className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 mr-2"
+                >
+                  <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                  Back
+                </button>
+              </div>
+              <div>
+                <button
+                  onClick={() => handleResetStudentAttendance(selectedStudentDetails)}
+                  className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
+                >
+                  Reset Attendance
+                </button>
+              </div>
+            </div>
+
+            <div className="border-t border-gray-200">
+              <div className="px-4 py-5 sm:px-6">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0 h-12 w-12 rounded-full bg-primary-100 flex items-center justify-center">
+                    {selectedStudentDetails.profilePicture ? (
+                      <img
+                        src={`${API_URL}/uploads/profiles/${selectedStudentDetails.profilePicture}`}
+                        alt={selectedStudentDetails.studentName}
+                        className="h-12 w-12 rounded-full object-cover"
+                        onError={(e) => {
+                          e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(selectedStudentDetails.studentName)}&background=6366F1&color=fff`;
+                        }}
+                      />
+                    ) : (
+                      <span className="text-primary-600 font-medium text-xl">{selectedStudentDetails.studentName.charAt(0)}</span>
+                    )}
+                  </div>
+                  <div className="ml-4">
+                    <h3 className="text-lg font-medium text-gray-900">{selectedStudentDetails.studentName}</h3>
+                    <p className="text-sm text-gray-500">Roll Number: {selectedStudentDetails.rollNumber}</p>
+                    <p className="text-sm text-gray-500">Class: {selectedStudentDetails.class}</p>
+                  </div>
+                  <div className="ml-auto">
+                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                      {selectedStudentDetails.records.length} Attendance Records
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mt-6">
+                  <h4 className="text-sm font-medium text-gray-700 mb-3">Attendance Records:</h4>
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full divide-y divide-gray-200">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Date
+                          </th>
+                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Subject
+                          </th>
+                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Status
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white divide-y divide-gray-200">
+                        {selectedStudentDetails.records.map((attendance, index) => (
+                          <tr key={index}>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                              {formatDate(attendance.date)}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                              {attendance.subject}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                                attendance.status === 'present' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                              }`}>
+                                {attendance.status === 'present' ? 'Present' : 'Absent'}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
