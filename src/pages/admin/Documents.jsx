@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../config/axiosConfig';
 import { useAuth } from '../../context/AuthContext';
 import { API_URL } from '../../config/api';
 
@@ -42,15 +42,7 @@ const Documents = () => {
   const fetchDocuments = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_URL}/api/documents`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-        },
-        withCredentials: false
-      });
+      const response = await axiosInstance.get('/api/documents');
       setDocuments(response.data);
       setLoading(false);
     } catch (error) {
@@ -117,15 +109,10 @@ const Documents = () => {
         data.append('file', formData.file);
       }
 
-      await axios.post(`${API_URL}/api/admin/documents`, data, {
+      await axiosInstance.post('/api/admin/documents', data, {
         headers: {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${token}`,
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+          'Content-Type': 'multipart/form-data'
         },
-        withCredentials: false,
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
           setUploadProgress(percentCompleted);
@@ -173,16 +160,7 @@ const Documents = () => {
     }
 
     try {
-      await axios.delete(`${API_URL}/api/admin/documents/${id}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-        },
-        withCredentials: false
-      });
+      await axiosInstance.delete(`/api/admin/documents/${id}`);
 
       // Refresh documents list
       fetchDocuments();

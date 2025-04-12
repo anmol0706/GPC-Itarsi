@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../config/axiosConfig';
 import { API_URL } from '../config/api';
 
 const Downloads = () => {
@@ -53,15 +53,7 @@ const Downloads = () => {
       setLoading(true);
 
       // Use actual API instead of mock data
-      const response = await axios.get(`${API_URL}/api/documents`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-        },
-        withCredentials: false
-      });
+      const response = await axiosInstance.get('/api/documents');
 
       // Process the documents to add file type icons
       const processedDocuments = response.data.map(doc => {

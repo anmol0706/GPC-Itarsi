@@ -5,6 +5,9 @@ import 'react-toastify/dist/ReactToastify.css'
 import './index.css'
 import App from './App.jsx'
 
+// Import axios config to ensure it's loaded before any requests
+import './config/axiosConfig'
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
