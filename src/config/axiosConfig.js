@@ -5,7 +5,12 @@ import { API_URL } from './api';
 const axiosInstance = axios.create({
   baseURL: API_URL,
   timeout: 30000, // 30 seconds timeout
-  withCredentials: false // Disable sending cookies with cross-origin requests
+  withCredentials: false, // Disable sending cookies with cross-origin requests
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+  }
 });
 
 // Request interceptor

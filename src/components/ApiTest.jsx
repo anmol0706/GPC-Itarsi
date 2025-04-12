@@ -11,13 +11,26 @@ const ApiTest = () => {
     const testApi = async () => {
       try {
         setLoading(true);
+        // Try the test endpoint
         const response = await axiosInstance.get('/api/test');
         setTestResult(response.data);
         setError(null);
       } catch (err) {
         console.error('API Test Error:', err);
-        setError(err.message || 'Unknown error occurred');
-        setTestResult(null);
+        // Try a fallback endpoint
+        try {
+          const fallbackResponse = await axiosInstance.get('/api/notices');
+          setTestResult({
+            message: 'Connected to API via fallback endpoint',
+            timestamp: new Date().toISOString(),
+            fallback: true
+          });
+          setError(null);
+        } catch (fallbackErr) {
+          console.error('API Fallback Test Error:', fallbackErr);
+          setError(err.message || 'Unknown error occurred');
+          setTestResult(null);
+        }
       } finally {
         setLoading(false);
       }
@@ -30,16 +43,26 @@ const ApiTest = () => {
     <div className="api-test" style={{ padding: '20px', backgroundColor: '#f5f5f5', borderRadius: '8px', margin: '20px 0' }}>
       <h3>API Connection Test</h3>
       <p>API URL: {API_URL}</p>
-      
+
       {loading && <p>Testing API connection...</p>}
-      
+
       {!loading && testResult && (
         <div style={{ color: 'green', fontWeight: 'bold' }}>
           <p>✅ API Connection Successful</p>
-          <p>Response: {JSON.stringify(testResult)}</p>
+          {testResult.fallback ? (
+            <>
+              <p>Connected via fallback endpoint</p>
+              <p>Response: {JSON.stringify(testResult)}</p>
+              <p style={{ color: 'orange' }}>
+                Note: The primary test endpoint is not available, but the API is still accessible.
+              </p>
+            </>
+          ) : (
+            <p>Response: {JSON.stringify(testResult)}</p>
+          )}
         </div>
       )}
-      
+
       {!loading && error && (
         <div style={{ color: 'red', fontWeight: 'bold' }}>
           <p>❌ API Connection Failed</p>

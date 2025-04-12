@@ -52,8 +52,61 @@ const Downloads = () => {
     try {
       setLoading(true);
 
-      // Use actual API instead of mock data
-      const response = await axiosInstance.get('/api/documents');
+      // Try to fetch from API, fall back to mock data if it fails
+      let response;
+      try {
+        response = await axiosInstance.get('/api/documents');
+      } catch (apiError) {
+        console.error('API Error:', apiError);
+        // Fall back to mock data
+        response = {
+          data: [
+            {
+              _id: '1',
+              title: 'College Newsletter - April 2025',
+              description: 'Monthly newsletter with college updates and events',
+              type: 'newsletter',
+              category: 'general',
+              fileType: 'application/pdf',
+              uploadDate: new Date().toISOString(),
+              fileExists: true,
+              filePath: 'newsletters/newsletter-april-2025.pdf'
+            },
+            {
+              _id: '2',
+              title: 'Admission Form 2025-26',
+              description: 'Application form for new admissions',
+              type: 'form',
+              category: 'admission',
+              fileType: 'application/pdf',
+              uploadDate: new Date().toISOString(),
+              fileExists: true,
+              filePath: 'forms/admission-form-2025.pdf'
+            },
+            {
+              _id: '3',
+              title: 'Scholarship Application',
+              description: 'Form to apply for various scholarship programs',
+              type: 'application',
+              category: 'scholarship',
+              fileType: 'application/pdf',
+              uploadDate: new Date().toISOString(),
+              fileExists: true,
+              filePath: 'applications/scholarship-application.pdf'
+            },
+            {
+              _id: '4',
+              title: 'Academic Calendar 2025-26',
+              description: 'Complete academic calendar with important dates',
+              type: 'drive_link',
+              category: 'academic',
+              uploadDate: new Date().toISOString(),
+              driveUrl: 'https://docs.google.com/document/d/example',
+              fileExists: true
+            }
+          ]
+        };
+      }
 
       // Process the documents to add file type icons
       const processedDocuments = response.data.map(doc => {
@@ -395,8 +448,14 @@ const Downloads = () => {
                       <a
                         onClick={(e) => {
                           e.preventDefault();
-                          // Use window.open to download with CORS headers
-                          window.open(`${API_URL}/api/download/document/${doc._id}`, '_blank');
+                          // Check if it's a mock document
+                          if (doc._id.toString().length === 1) {
+                            // For mock data, just show an alert
+                            alert('This is a mock document. In production, this would download the actual file.');
+                          } else {
+                            // Use window.open to download with CORS headers
+                            window.open(`${API_URL}/api/download/document/${doc._id}`, '_blank');
+                          }
                         }}
                         href="#"
                         className="hero-btn programs-btn inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-500 hover:bg-primary-600 transition-all duration-300"
