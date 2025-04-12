@@ -14,7 +14,7 @@ const DeveloperPopup = ({ isOpen, onClose }) => {
     if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     }
-    
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -27,7 +27,7 @@ const DeveloperPopup = ({ isOpen, onClose }) => {
     } else {
       document.body.style.overflow = 'auto';
     }
-    
+
     return () => {
       document.body.style.overflow = 'auto';
     };
@@ -42,22 +42,22 @@ const DeveloperPopup = ({ isOpen, onClose }) => {
     email: 'anmolmalviya4328@gmail.com',
     image: '/team/anmol.jpg', // Add your image to public/team folder
     social: {
-      github: 'https://github.com/anmolmalviya',
-      linkedin: 'https://linkedin.com/in/anmolmalviya',
-      instagram: 'https://instagram.com/anmolmalviya'
+      github: 'https://github.com/anmol0706',
+      portfolio: '#', // You can update this URL later
+      instagram: 'https://www.instagram.com/_anmol_20_7_/?hl=en'
     }
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div 
+      <div
         ref={popupRef}
         className="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
       >
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold text-primary-600">Developer</h2>
-            <button 
+            <button
               onClick={onClose}
               className="text-gray-500 hover:text-gray-700 focus:outline-none"
               aria-label="Close"
@@ -67,12 +67,12 @@ const DeveloperPopup = ({ isOpen, onClose }) => {
               </svg>
             </button>
           </div>
-          
+
           <p className="text-gray-600 mb-8">
-            Meet the developer behind the GPC Itarsi website. I've worked hard to create a modern, 
+            Meet the developer behind the GPC Itarsi website. I've worked hard to create a modern,
             user-friendly platform for the college community.
           </p>
-          
+
           <div className="flex justify-center">
             <div className="bg-gray-50 rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow duration-300 max-w-md w-full">
               <div className="flex flex-col items-center">
@@ -88,9 +88,9 @@ const DeveloperPopup = ({ isOpen, onClose }) => {
                 </div>
                 <h3 className="text-2xl font-semibold text-primary-600 mb-2">{developer.name}</h3>
                 <p className="text-gray-600 mb-4">{developer.role}</p>
-                
-                <a 
-                  href={`mailto:${developer.email}`} 
+
+                <a
+                  href={`mailto:${developer.email}`}
                   className="text-gray-600 hover:text-primary-600 mb-6 flex items-center"
                 >
                   <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -99,12 +99,12 @@ const DeveloperPopup = ({ isOpen, onClose }) => {
                   </svg>
                   {developer.email}
                 </a>
-                
+
                 <div className="flex space-x-6">
                   {developer.social.github && (
-                    <a 
-                      href={developer.social.github} 
-                      target="_blank" 
+                    <a
+                      href={developer.social.github}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-600 hover:text-gray-900 transition-colors duration-300"
                     >
@@ -113,24 +113,24 @@ const DeveloperPopup = ({ isOpen, onClose }) => {
                       </svg>
                     </a>
                   )}
-                  
-                  {developer.social.linkedin && (
-                    <a 
-                      href={developer.social.linkedin} 
-                      target="_blank" 
+
+                  {developer.social.portfolio && (
+                    <a
+                      href={developer.social.portfolio}
+                      target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-600 hover:text-blue-600 transition-colors duration-300"
+                      className="text-gray-600 hover:text-green-600 transition-colors duration-300"
                     >
                       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        <path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm0 2v10h16V7H4zm8 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm0 6a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-5-3h1v-1H7v1zm8 0h2v-1h-2v1z"/>
                       </svg>
                     </a>
                   )}
-                  
+
                   {developer.social.instagram && (
-                    <a 
-                      href={developer.social.instagram} 
-                      target="_blank" 
+                    <a
+                      href={developer.social.instagram}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-600 hover:text-pink-600 transition-colors duration-300"
                     >
