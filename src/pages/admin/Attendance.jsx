@@ -132,7 +132,7 @@ const Attendance = () => {
 
       // Fetch both students and attendance data in parallel
       const [studentsResponse, attendanceResponse] = await Promise.all([
-        axios.get(`${API_URL}/api/admin/students`, {
+        axios.get(`${API_URL}/api/students`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -146,13 +146,18 @@ const Attendance = () => {
 
       // Merge student and attendance data
       const students = studentsResponse.data;
-      const attendanceRecords = attendanceResponse.data;
+      const attendanceRecords = attendanceResponse.data || [];
 
       // Create a map of attendance records by student ID
       const attendanceMap = {};
-      attendanceRecords.forEach(record => {
-        attendanceMap[record.studentId] = record;
-      });
+      // Make sure attendanceRecords is an array before using forEach
+      if (Array.isArray(attendanceRecords)) {
+        attendanceRecords.forEach(record => {
+          if (record && record.studentId) {
+            attendanceMap[record.studentId] = record;
+          }
+        });
+      }
 
       // Create combined records with student data and attendance
       const combinedRecords = students.map(student => {
@@ -184,7 +189,18 @@ const Attendance = () => {
       setLoading(false);
     } catch (error) {
       console.error('Error fetching data:', error);
-      setError(error.response?.data?.message || 'Failed to load data');
+      // Provide more detailed error message
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        setError(`Server error: ${error.response.data?.message || error.response.status}`);
+      } else if (error.request) {
+        // The request was made but no response was received
+        setError('Network error: No response received from server. Please check your connection.');
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        setError(`Error: ${error.message}`);
+      }
       setLoading(false);
     }
   };
