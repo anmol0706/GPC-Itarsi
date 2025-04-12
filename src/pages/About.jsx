@@ -9,21 +9,30 @@ const About = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [overviewData, setOverviewData] = useState(null);
+  const [hods, setHods] = useState([]);
 
   useEffect(() => {
-    const fetchOverviewData = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/overview`);
-        setOverviewData(response.data);
+        // Fetch overview data
+        const overviewResponse = await axios.get(`${API_URL}/api/overview`);
+        setOverviewData(overviewResponse.data);
+
+        // Fetch HODs data
+        const hodsResponse = await axios.get(`${API_URL}/api/hods`);
+        if (hodsResponse.data && Array.isArray(hodsResponse.data)) {
+          setHods(hodsResponse.data);
+        }
+
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching overview data:', err);
+        console.error('Error fetching data:', err);
         setError('Failed to load college information. Please try again later.');
         setLoading(false);
       }
     };
 
-    fetchOverviewData();
+    fetchData();
   }, []);
 
   if (loading) {
@@ -421,6 +430,76 @@ const About = () => {
           </div>
         </div>
       </div>
+
+      {/* HODs Section */}
+      {hods.length > 0 && (
+        <div className="py-20 bg-white relative overflow-hidden">
+          {/* Background pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute inset-0" style={{
+              backgroundImage: 'radial-gradient(#4f46e5 1px, transparent 1px)',
+              backgroundSize: '40px 40px'
+            }}></div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div className="lg:text-center mb-16">
+              <h2 className="text-base text-primary-600 font-semibold tracking-wide uppercase inline-block highlight-text">Leadership</h2>
+              <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                Our Department Heads
+              </p>
+              <div className="h-1 w-20 bg-primary-500 mx-auto mt-4 rounded-full"></div>
+              <p className="mt-6 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                Meet the experienced professionals who lead our academic departments
+              </p>
+            </div>
+
+            <div className="mt-12 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4">
+              {hods.map((hod) => (
+                <div
+                  key={hod._id}
+                  className="group relative bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200 department-card"
+                >
+                  <div className="relative w-full h-56 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    {hod.image ? (
+                      <img
+                        src={`${API_URL}/uploads/profiles/${hod.image}`}
+                        alt={`${hod.name} - ${hod.department} HOD`}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = 'https://via.placeholder.com/300x300?text=HOD';
+                        }}
+                      />
+                    ) : (
+                      <div className="text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-1">
+                      {hod.name}
+                    </h3>
+                    <p className="text-md font-medium text-primary-600 mb-2">{hod.designation || `HOD, ${hod.department}`}</p>
+                    <div className="mt-2 space-y-1">
+                      {hod.qualification && <p className="text-sm text-gray-600"><span className="font-medium">Qualification:</span> {hod.qualification}</p>}
+                      {hod.experience && <p className="text-sm text-gray-600"><span className="font-medium">Experience:</span> {hod.experience}</p>}
+                    </div>
+                    {hod.message && (
+                      <div className="mt-4 pt-4 border-t border-gray-100">
+                        <p className="text-sm text-gray-600 line-clamp-3">{hod.message}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Departments/Branches Section */}
       <div className="py-20 bg-white relative overflow-hidden">
