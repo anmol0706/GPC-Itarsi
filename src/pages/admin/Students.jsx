@@ -20,7 +20,9 @@ const Students = () => {
   });
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBranch, setSelectedBranch] = useState('all');
+  const [selectedYear, setSelectedYear] = useState('all');
   const [filteredStudents, setFilteredStudents] = useState([]);
+  const [groupedStudents, setGroupedStudents] = useState({});
 
   useEffect(() => {
     fetchStudents();
@@ -35,6 +37,25 @@ const Students = () => {
         filtered = filtered.filter(student => student.branch === selectedBranch);
       }
 
+      // Filter by year if a specific year is selected
+      if (selectedYear !== 'all') {
+        filtered = filtered.filter(student => {
+          // Extract year from class (assuming format like "1st Year", "2nd Year", etc.)
+          const yearMatch = student.class.match(/(1st|2nd|3rd|I|II|III|1|2|3)/i);
+          if (yearMatch) {
+            const yearText = yearMatch[0].toLowerCase();
+            if (yearText.includes('1') || yearText.includes('i') || yearText.includes('first')) {
+              return selectedYear === '1';
+            } else if (yearText.includes('2') || yearText.includes('ii') || yearText.includes('second')) {
+              return selectedYear === '2';
+            } else if (yearText.includes('3') || yearText.includes('iii') || yearText.includes('third')) {
+              return selectedYear === '3';
+            }
+          }
+          return false;
+        });
+      }
+
       // Filter by search term
       if (searchTerm) {
         filtered = filtered.filter(
@@ -46,8 +67,41 @@ const Students = () => {
       }
 
       setFilteredStudents(filtered);
+
+      // Group students by branch and year
+      const grouped = {};
+      filtered.forEach(student => {
+        const branch = student.branch || 'Not Assigned';
+
+        // Extract year from class
+        let year = 'Other';
+        const yearMatch = student.class.match(/(1st|2nd|3rd|I|II|III|1|2|3)/i);
+        if (yearMatch) {
+          const yearText = yearMatch[0].toLowerCase();
+          if (yearText.includes('1') || yearText.includes('i') || yearText.includes('first')) {
+            year = '1st Year';
+          } else if (yearText.includes('2') || yearText.includes('ii') || yearText.includes('second')) {
+            year = '2nd Year';
+          } else if (yearText.includes('3') || yearText.includes('iii') || yearText.includes('third')) {
+            year = '3rd Year';
+          }
+        }
+
+        // Create branch-year key
+        const key = `${branch}-${year}`;
+        if (!grouped[key]) {
+          grouped[key] = {
+            branch,
+            year,
+            students: []
+          };
+        }
+        grouped[key].students.push(student);
+      });
+
+      setGroupedStudents(grouped);
     }
-  }, [searchTerm, selectedBranch, students]);
+  }, [searchTerm, selectedBranch, selectedYear, students]);
 
   const fetchStudents = async () => {
     try {
@@ -306,6 +360,22 @@ const Students = () => {
             <option value="EE">Electrical Engineering (EE)</option>
           </select>
         </div>
+
+        {/* Year Filter */}
+        <div className="flex-shrink-0">
+          <label htmlFor="year-filter" className="sr-only">Filter by Year</label>
+          <select
+            id="year-filter"
+            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md admin-form-input"
+            value={selectedYear}
+            onChange={(e) => setSelectedYear(e.target.value)}
+          >
+            <option value="all">All Years</option>
+            <option value="1">1st Year</option>
+            <option value="2">2nd Year</option>
+            <option value="3">3rd Year</option>
+          </select>
+        </div>
       </div>
 
       {/* Error Message */}
@@ -331,104 +401,135 @@ const Students = () => {
                 </div>
               ) : (
                 <>
-                  {/* Desktop Table View */}
+                  {/* Desktop Table View - Grouped by Branch and Year */}
                   <div className="hidden sm:block">
-                    <table className="min-w-full divide-y divide-gray-200 admin-table-responsive">
-                      <thead className="bg-gray-50">
-                        <tr>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Name
-                          </th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Roll Number
-                          </th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Class
-                          </th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Branch
-                          </th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Actions
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody className="bg-white divide-y divide-gray-200">
-                        {filteredStudents.map((student) => (
-                          <tr key={student._id}>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm font-medium text-gray-900">{student.name}</div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm text-gray-500">{student.rollNumber}</div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm text-gray-500">{student.class}</div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm text-gray-500">
-                                {student.branch || 'Not Assigned'}
+                    {Object.keys(groupedStudents).length === 0 ? (
+                      <div className="bg-white px-4 py-12 text-center text-gray-500">
+                        No students match your filter criteria
+                      </div>
+                    ) : (
+                      <div className="space-y-8">
+                        {Object.keys(groupedStudents).sort().map(key => {
+                          const group = groupedStudents[key];
+                          return (
+                            <div key={key} className="overflow-hidden border border-gray-200 sm:rounded-lg mb-6">
+                              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-3 border-b border-gray-200">
+                                <h3 className="text-lg font-medium text-gray-900">
+                                  {group.branch} - {group.year}
+                                  <span className="ml-2 text-sm text-gray-500">({group.students.length} students)</span>
+                                </h3>
                               </div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                              <button
-                                onClick={() => openEditModal(student)}
-                                className="text-blue-600 hover:text-blue-900 mr-4 admin-action-btn"
-                              >
-                                Edit
-                              </button>
-                              <button
-                                onClick={() => handleDeleteStudent(student._id)}
-                                className="text-red-600 hover:text-red-900 admin-action-btn"
-                              >
-                                Delete
-                              </button>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                              <table className="min-w-full divide-y divide-gray-200 admin-table-responsive">
+                                <thead className="bg-gray-50">
+                                  <tr>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                      Name
+                                    </th>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                      Roll Number
+                                    </th>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                      Class
+                                    </th>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                      Actions
+                                    </th>
+                                  </tr>
+                                </thead>
+                                <tbody className="bg-white divide-y divide-gray-200">
+                                  {group.students.map((student) => (
+                                    <tr key={student._id}>
+                                      <td className="px-6 py-4 whitespace-nowrap">
+                                        <div className="text-sm font-medium text-gray-900">{student.name}</div>
+                                      </td>
+                                      <td className="px-6 py-4 whitespace-nowrap">
+                                        <div className="text-sm text-gray-500">{student.rollNumber}</div>
+                                      </td>
+                                      <td className="px-6 py-4 whitespace-nowrap">
+                                        <div className="text-sm text-gray-500">{student.class}</div>
+                                      </td>
+                                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button
+                                          onClick={() => openEditModal(student)}
+                                          className="text-blue-600 hover:text-blue-900 mr-4 admin-action-btn"
+                                        >
+                                          Edit
+                                        </button>
+                                        <button
+                                          onClick={() => handleDeleteStudent(student._id)}
+                                          className="text-red-600 hover:text-red-900 admin-action-btn"
+                                        >
+                                          Delete
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
 
                   {/* Mobile Card View */}
                   <div className="sm:hidden">
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                      {filteredStudents.map((student) => (
-                        <div key={student._id} className="bg-white overflow-hidden shadow rounded-lg admin-table-card">
-                          <div className="admin-mobile-card-header">
-                            <h3 className="text-sm font-medium text-gray-900">{student.name}</h3>
-                          </div>
-                          <div className="admin-mobile-card-content">
-                            <div className="mb-2">
-                              <span className="text-xs font-medium text-gray-500">Roll Number:</span>
-                              <p className="text-sm text-gray-900">{student.rollNumber}</p>
+                    {Object.keys(groupedStudents).length === 0 ? (
+                      <div className="bg-white px-4 py-12 text-center text-gray-500">
+                        No students match your filter criteria
+                      </div>
+                    ) : (
+                      <div className="space-y-6">
+                        {Object.keys(groupedStudents).sort().map(key => {
+                          const group = groupedStudents[key];
+                          return (
+                            <div key={key} className="mb-6">
+                              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-4 py-2 rounded-t-lg border border-gray-200">
+                                <h3 className="text-base font-medium text-gray-900">
+                                  {group.branch} - {group.year}
+                                  <span className="ml-2 text-xs text-gray-500">({group.students.length} students)</span>
+                                </h3>
+                              </div>
+
+                              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mt-3">
+                                {group.students.map((student) => (
+                                  <div key={student._id} className="bg-white overflow-hidden shadow rounded-lg admin-table-card">
+                                    <div className="admin-mobile-card-header">
+                                      <h3 className="text-sm font-medium text-gray-900">{student.name}</h3>
+                                    </div>
+                                    <div className="admin-mobile-card-content">
+                                      <div className="mb-2">
+                                        <span className="text-xs font-medium text-gray-500">Roll Number:</span>
+                                        <p className="text-sm text-gray-900">{student.rollNumber}</p>
+                                      </div>
+                                      <div className="mb-2">
+                                        <span className="text-xs font-medium text-gray-500">Class:</span>
+                                        <p className="text-sm text-gray-900">{student.class}</p>
+                                      </div>
+                                    </div>
+                                    <div className="admin-mobile-card-actions">
+                                      <button
+                                        onClick={() => openEditModal(student)}
+                                        className="text-blue-600 hover:text-blue-900 text-sm font-medium admin-action-btn"
+                                      >
+                                        Edit
+                                      </button>
+                                      <button
+                                        onClick={() => handleDeleteStudent(student._id)}
+                                        className="text-red-600 hover:text-red-900 text-sm font-medium admin-action-btn"
+                                      >
+                                        Delete
+                                      </button>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
                             </div>
-                            <div className="mb-2">
-                              <span className="text-xs font-medium text-gray-500">Class:</span>
-                              <p className="text-sm text-gray-900">{student.class}</p>
-                            </div>
-                            <div>
-                              <span className="text-xs font-medium text-gray-500">Branch:</span>
-                              <p className="text-sm text-gray-900">{student.branch || 'Not Assigned'}</p>
-                            </div>
-                          </div>
-                          <div className="admin-mobile-card-actions">
-                            <button
-                              onClick={() => openEditModal(student)}
-                              className="text-blue-600 hover:text-blue-900 text-sm font-medium admin-action-btn"
-                            >
-                              Edit
-                            </button>
-                            <button
-                              onClick={() => handleDeleteStudent(student._id)}
-                              className="text-red-600 hover:text-red-900 text-sm font-medium admin-action-btn"
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
                 </>
               )}
