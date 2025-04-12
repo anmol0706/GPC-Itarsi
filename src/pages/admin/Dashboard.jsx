@@ -20,6 +20,7 @@ import Documents from './Documents';
 import Chatbot from './Chatbot';
 import Attendance from './Attendance';
 import CustomButtons from './CustomButtons';
+import Hods from './Hods';
 
 const Dashboard = () => {
   const { user, isAdmin } = useAuth();
@@ -328,6 +329,28 @@ const Dashboard = () => {
                       />
                     </svg>
                     Forms & Applications
+                  </Link>
+                  <Link
+                    to="/admin/hods"
+                    className={`${
+                      isActive('/hods') ? 'bg-primary-700 text-white' : 'text-blue-100 hover:bg-primary-600'
+                    } group flex items-center px-2 py-3 text-base font-medium rounded-md transition-colors duration-150`}
+                  >
+                    <svg
+                      className="mr-4 h-5 w-5 text-blue-300"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                      />
+                    </svg>
+                    HODs
                   </Link>
 
                   <Link
@@ -664,6 +687,29 @@ const Dashboard = () => {
                 </Link>
 
                 <Link
+                  to="/admin/hods"
+                  className={`${
+                    isActive('/hods') ? 'bg-primary-700 text-white' : 'text-blue-100 hover:bg-primary-600'
+                  } group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors duration-150`}
+                >
+                  <svg
+                    className="mr-3 h-5 w-5 text-blue-300"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                  HODs
+                </Link>
+
+                <Link
                   to="/admin/chatbot"
                   className={`${
                     isActive('/chatbot') ? 'bg-primary-700 text-white' : 'text-blue-100 hover:bg-primary-600'
@@ -803,6 +849,7 @@ const Dashboard = () => {
                 <Route path="/chatbot" element={<Chatbot />} />
                 <Route path="/attendance" element={<Attendance />} />
                 <Route path="/custom-buttons" element={<CustomButtons />} />
+                <Route path="/hods" element={<Hods />} />
                 <Route path="/profile" element={<Profile />} />
               </Routes>
             </div>

@@ -1,0 +1,46 @@
+[
+  {
+    "_id": "hod_1744500000001",
+    "name": "Dr. Rajesh Kumar",
+    "department": "Computer Science",
+    "designation": "HOD, Computer Science Department",
+    "qualification": "Ph.D. in Computer Science",
+    "experience": "15 years",
+    "message": "Welcome to the Computer Science Department. Our department is committed to providing quality education in the field of computer science and information technology.",
+    "image": "",
+    "createdAt": "2024-05-25T10:00:00.000Z"
+  },
+  {
+    "_id": "hod_1744500000002",
+    "name": "Dr. Sunil Verma",
+    "department": "Mechanical Engineering",
+    "designation": "HOD, Mechanical Engineering Department",
+    "qualification": "Ph.D. in Mechanical Engineering",
+    "experience": "12 years",
+    "message": "The Mechanical Engineering Department focuses on practical skills and theoretical knowledge to prepare students for industry challenges.",
+    "image": "",
+    "createdAt": "2024-05-25T10:00:00.000Z"
+  },
+  {
+    "_id": "hod_1744500000003",
+    "name": "Dr. Priya Sharma",
+    "department": "Electronics & Telecommunication",
+    "designation": "HOD, Electronics & Telecommunication Department",
+    "qualification": "Ph.D. in Electronics Engineering",
+    "experience": "10 years",
+    "message": "Our department is equipped with modern labs and experienced faculty to provide hands-on experience in electronics and telecommunication.",
+    "image": "",
+    "createdAt": "2024-05-25T10:00:00.000Z"
+  },
+  {
+    "_id": "hod_1744500000004",
+    "name": "Dr. Amit Patel",
+    "department": "Electrical Engineering",
+    "designation": "HOD, Electrical Engineering Department",
+    "qualification": "Ph.D. in Electrical Engineering",
+    "experience": "14 years",
+    "message": "The Electrical Engineering Department is dedicated to providing comprehensive education in electrical systems, power generation, and distribution.",
+    "image": "",
+    "createdAt": "2024-05-25T10:00:00.000Z"
+  }
+]

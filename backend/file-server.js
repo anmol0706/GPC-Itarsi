@@ -2600,6 +2600,134 @@ app.delete('/api/custom-buttons/:id', authenticateToken, authorize(['admin']), (
   }
 });
 
+// HOD API endpoints
+
+// Get all HODs
+app.get('/api/hods', (req, res) => {
+  try {
+    const hods = dataService.getHods();
+    res.json(hods);
+  } catch (error) {
+    console.error('Error fetching HODs:', error);
+    res.status(500).json({ message: 'Failed to load HODs' });
+  }
+});
+
+// Get a specific HOD by ID
+app.get('/api/hods/:id', (req, res) => {
+  try {
+    const hod = dataService.getHodById(req.params.id);
+    if (!hod) {
+      return res.status(404).json({ message: 'HOD not found' });
+    }
+    res.json(hod);
+  } catch (error) {
+    console.error('Error fetching HOD:', error);
+    res.status(500).json({ message: 'Failed to load HOD' });
+  }
+});
+
+// Add a new HOD (admin only)
+app.post('/api/hods', authenticateToken, authorize(['admin']), profileUpload.single('image'), (req, res) => {
+  try {
+    const { name, department, designation, qualification, experience, message } = req.body;
+
+    if (!name || !department) {
+      return res.status(400).json({ message: 'Name and department are required' });
+    }
+
+    const newHod = dataService.addHod({
+      name,
+      department,
+      designation: designation || '',
+      qualification: qualification || '',
+      experience: experience || '',
+      message: message || '',
+      image: req.file ? req.file.filename : ''
+    });
+
+    if (!newHod) {
+      return res.status(500).json({ message: 'Failed to add HOD' });
+    }
+
+    res.status(201).json(newHod);
+  } catch (error) {
+    console.error('Error adding HOD:', error);
+    res.status(500).json({ message: 'Failed to add HOD' });
+  }
+});
+
+// Update an existing HOD (admin only)
+app.put('/api/hods/:id', authenticateToken, authorize(['admin']), profileUpload.single('image'), (req, res) => {
+  try {
+    const { name, department, designation, qualification, experience, message } = req.body;
+
+    if (!name && !department && !designation && !qualification && !experience && !message && !req.file) {
+      return res.status(400).json({ message: 'At least one field is required' });
+    }
+
+    const hod = dataService.getHodById(req.params.id);
+    if (!hod) {
+      return res.status(404).json({ message: 'HOD not found' });
+    }
+
+    // If a new image was uploaded, delete the old one if it exists
+    if (req.file && hod.image) {
+      const oldImagePath = path.join(profilesDir, hod.image);
+      if (fs.existsSync(oldImagePath)) {
+        fs.unlinkSync(oldImagePath);
+      }
+    }
+
+    const updatedHod = dataService.updateHod(req.params.id, {
+      ...(name && { name }),
+      ...(department && { department }),
+      ...(designation && { designation }),
+      ...(qualification && { qualification }),
+      ...(experience && { experience }),
+      ...(message && { message }),
+      ...(req.file && { image: req.file.filename })
+    });
+
+    if (!updatedHod) {
+      return res.status(404).json({ message: 'HOD not found' });
+    }
+
+    res.json(updatedHod);
+  } catch (error) {
+    console.error('Error updating HOD:', error);
+    res.status(500).json({ message: 'Failed to update HOD' });
+  }
+});
+
+// Delete an HOD (admin only)
+app.delete('/api/hods/:id', authenticateToken, authorize(['admin']), (req, res) => {
+  try {
+    const hod = dataService.getHodById(req.params.id);
+    if (!hod) {
+      return res.status(404).json({ message: 'HOD not found' });
+    }
+
+    // Delete the HOD's image if it exists
+    if (hod.image) {
+      const imagePath = path.join(profilesDir, hod.image);
+      if (fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath);
+      }
+    }
+
+    const success = dataService.deleteHod(req.params.id);
+    if (!success) {
+      return res.status(500).json({ message: 'Failed to delete HOD' });
+    }
+
+    res.json({ message: 'HOD deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting HOD:', error);
+    res.status(500).json({ message: 'Failed to delete HOD' });
+  }
+});
+
 // Chatbot API endpoints
 
 // Get all FAQs

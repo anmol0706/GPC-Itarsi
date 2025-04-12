@@ -19,6 +19,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Home = () => {
   const [notices, setNotices] = useState([]);
   const [customButtons, setCustomButtons] = useState([]);
+  const [hods, setHods] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showNoticePopup, setShowNoticePopup] = useState(false);
@@ -64,6 +65,15 @@ const Home = () => {
         } else {
           console.error('Invalid custom buttons data format:', buttonsResponse.data);
           setCustomButtons([]);
+        }
+
+        // Fetch HODs
+        const hodsResponse = await axios.get(`${API_URL}/api/hods`);
+        if (hodsResponse.data && Array.isArray(hodsResponse.data)) {
+          setHods(hodsResponse.data);
+        } else {
+          console.error('Invalid HODs data format:', hodsResponse.data);
+          setHods([]);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -293,6 +303,66 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      {/* HODs Section */}
+      {hods.length > 0 && (
+        <div className="bg-white py-16 relative">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <h2 className="text-base text-primary-500 font-semibold tracking-wide uppercase">
+                Leadership
+              </h2>
+              <TextReveal className="mt-2 text-3xl font-extrabold text-primary-600 sm:text-4xl">
+                Our Department Heads
+              </TextReveal>
+              <TextReveal className="mt-4 max-w-2xl text-xl text-secondary-600 lg:mx-auto" delay={0.3}>
+                Meet the experienced professionals who lead our academic departments
+              </TextReveal>
+            </div>
+
+            <div className="mt-12 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4">
+              {hods.map((hod) => (
+                <AnimatedCard
+                  key={hod._id}
+                  className="group relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-secondary-200"
+                  delay={0.1}
+                >
+                  <div className="relative w-full h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+                    {hod.image ? (
+                      <img
+                        src={`${API_URL}/uploads/profiles/${hod.image}`}
+                        alt={`${hod.name} - ${hod.department} HOD`}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = 'https://via.placeholder.com/300x200?text=No+Image';
+                        }}
+                      />
+                    ) : (
+                      <div className="text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-lg font-medium text-primary-500">
+                      {hod.name}
+                    </h3>
+                    <p className="text-sm font-medium text-secondary-600">{hod.designation || `HOD, ${hod.department}`}</p>
+                    <p className="mt-1 text-sm text-secondary-500">{hod.qualification}</p>
+                    {hod.experience && <p className="text-sm text-secondary-500">{hod.experience} Experience</p>}
+                    {hod.message && (
+                      <p className="mt-2 text-sm text-secondary-600 line-clamp-2">{hod.message}</p>
+                    )}
+                  </div>
+                </AnimatedCard>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Custom Buttons Section */}
       {console.log('Custom Buttons:', customButtons)}

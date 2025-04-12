@@ -625,6 +625,36 @@ const getChatbotResponse = (query) => {
   };
 };
 
+// HOD data operations
+const getHods = () => readData('hods.json');
+const getHodById = (id) => {
+  const hods = getHods();
+  return hods.find(hod => hod._id === id);
+};
+const addHod = (hod) => {
+  const hods = getHods();
+  const newHod = {
+    ...hod,
+    _id: generateId('hod_'),
+    createdAt: new Date().toISOString()
+  };
+  hods.push(newHod);
+  return writeData('hods.json', hods) ? newHod : null;
+};
+const updateHod = (id, hodData) => {
+  const hods = getHods();
+  const index = hods.findIndex(hod => hod._id === id);
+  if (index === -1) return null;
+
+  hods[index] = { ...hods[index], ...hodData };
+  return writeData('hods.json', hods) ? hods[index] : null;
+};
+const deleteHod = (id) => {
+  const hods = getHods();
+  const filteredHods = hods.filter(hod => hod._id !== id);
+  return writeData('hods.json', filteredHods);
+};
+
 module.exports = {
   // User operations (now using teachers.json and students.json)
   getUserById,
@@ -700,6 +730,13 @@ module.exports = {
   addCustomButton,
   updateCustomButton,
   deleteCustomButton,
+
+  // HOD operations
+  getHods,
+  getHodById,
+  addHod,
+  updateHod,
+  deleteHod,
 
   // Chatbot operations
   getChatbotFaqs,
