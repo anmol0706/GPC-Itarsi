@@ -211,10 +211,26 @@ const Students = () => {
 
       await Promise.all(deletePromises);
 
+      // Also reset all attendance records
+      try {
+        await axios.post(
+          `${API_URL}/api/admin/reset-all-attendance`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        );
+      } catch (attendanceError) {
+        console.error('Error resetting attendance:', attendanceError);
+        // Continue even if attendance reset fails
+      }
+
       // Refresh student list
       fetchStudents();
       setShowDeleteAllModal(false);
-      toast.success('All students deleted successfully');
+      toast.success('All students and attendance records deleted successfully');
     } catch (error) {
       console.error('Error deleting all students:', error);
       setError(error.response?.data?.message || 'Failed to delete all students');
@@ -251,7 +267,7 @@ const Students = () => {
             onClick={() => setShowDeleteAllModal(true)}
             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 w-full sm:w-auto admin-action-btn"
           >
-            Delete All Students
+            Delete All Students & Attendance
           </button>
         </div>
       </div>
@@ -663,10 +679,10 @@ const Students = () => {
                     </svg>
                   </div>
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <h3 className="text-lg leading-6 font-medium text-gray-900">Delete All Students</h3>
+                    <h3 className="text-lg leading-6 font-medium text-gray-900">Delete All Students & Attendance</h3>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        Are you sure you want to delete all students? This action cannot be undone and will permanently remove all student data from the system.
+                        Are you sure you want to delete all students and reset all attendance records? This action cannot be undone and will permanently remove all student data and attendance records from the system.
                       </p>
                     </div>
                   </div>
