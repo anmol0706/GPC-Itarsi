@@ -4,6 +4,8 @@
 
 // API base URL - used for all API requests
 // Use environment variable if available, otherwise fallback to the hardcoded URL
-export const API_URL = process.env.VITE_API_URL || 'https://gpc-itarsi-backend.onrender.com';
+export const API_URL = process.env.VITE_API_URL || 'https://gpc-itarsi-backend-1wu5.onrender.com';
+
+// No fallback URLs needed as we're using the correct one
 
 // Export other API-related constants here if needed

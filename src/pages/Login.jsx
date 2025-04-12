@@ -59,7 +59,26 @@ const Login = () => {
       }
     } catch (error) {
       console.error('Login error:', error);
-      setError('Login failed. Please check your credentials and ensure the server is running.');
+
+      // Provide more specific error messages based on the error
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        if (error.response.status === 401) {
+          setError('Invalid credentials. Please check your username and password.');
+        } else if (error.response.status === 404) {
+          setError('Login endpoint not found. The server might be misconfigured.');
+        } else if (error.response.status >= 500) {
+          setError('Server error. Please try again later.');
+        } else {
+          setError(`Login failed: ${error.response.data.message || 'Unknown error'}`);
+        }
+      } else if (error.request) {
+        // The request was made but no response was received
+        setError('No response from server. Please check your internet connection or try again later.');
+      } else {
+        // Something happened in setting up the request
+        setError('Login failed. Please check your credentials and ensure the server is running.');
+      }
     } finally {
       setLoading(false);
     }
