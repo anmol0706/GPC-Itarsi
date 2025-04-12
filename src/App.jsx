@@ -25,12 +25,14 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ProtectedRoute from './components/ProtectedRoute'
 import ChatbotWidget from './components/ChatbotWidget'
+import StructuredData from './components/StructuredData'
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <div className="min-h-screen flex flex-col">
+          <StructuredData />
           <Navbar />
           <main className="flex-grow">
             <Routes>

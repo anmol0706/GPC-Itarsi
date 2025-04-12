@@ -6,6 +6,7 @@ import { API_URL } from '../config/api';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { AnimatedBackground, TextReveal, CanvasWave, AnimatedCard } from '../components/animations';
+import SEO from '../components/SEO';
 
 // Import images
 import backgroundImg from '../assets/images/background.jpg';
@@ -67,6 +68,11 @@ const Home = () => {
 
   return (
     <div className="bg-white">
+      <SEO
+        title="Home"
+        description="Government Polytechnic College, Itarsi (GPC Itarsi) is a premier technical institution offering quality education in engineering and technology since 1960."
+        keywords="GPC Itarsi, Government Polytechnic College, Itarsi, engineering college, polytechnic, technical education, Madhya Pradesh, RGPV, diploma, engineering courses"
+      />
       {/* Notice Popup */}
       {showNoticePopup && notices.length > 0 && (
         <div className="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
