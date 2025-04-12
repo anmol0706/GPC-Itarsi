@@ -467,6 +467,70 @@ const resetAllAttendance = () => {
   return writeData('attendance.json', resetAttendance);
 };
 
+// Quick Links operations
+const getQuickLinks = () => readData('quick-links.json');
+const getQuickLinkById = (id) => {
+  const links = getQuickLinks();
+  return links.find(link => link._id === id);
+};
+const addQuickLink = (link) => {
+  const links = getQuickLinks();
+  const newLink = {
+    ...link,
+    _id: generateId('link_'),
+    createdAt: new Date().toISOString()
+  };
+  links.push(newLink);
+  return writeData('quick-links.json', links) ? newLink : null;
+};
+const updateQuickLink = (id, linkData) => {
+  const links = getQuickLinks();
+  const index = links.findIndex(link => link._id === id);
+  if (index === -1) return null;
+
+  links[index] = { ...links[index], ...linkData };
+  return writeData('quick-links.json', links) ? links[index] : null;
+};
+const deleteQuickLink = (id) => {
+  const links = getQuickLinks();
+  const filteredLinks = links.filter(link => link._id !== id);
+  return writeData('quick-links.json', filteredLinks);
+};
+
+// Custom Buttons operations
+const getCustomButtons = () => readData('custom-buttons.json');
+const getCustomButtonById = (id) => {
+  const buttons = getCustomButtons();
+  return buttons.find(button => button._id === id);
+};
+const addCustomButton = (button) => {
+  const buttons = getCustomButtons();
+  // Get existing buttons to determine the next order value
+  const maxOrder = buttons.length > 0 ? Math.max(...buttons.map(btn => btn.order || 0)) : 0;
+
+  const newButton = {
+    ...button,
+    _id: generateId('button_'),
+    order: button.order || maxOrder + 1,
+    createdAt: new Date().toISOString()
+  };
+  buttons.push(newButton);
+  return writeData('custom-buttons.json', buttons) ? newButton : null;
+};
+const updateCustomButton = (id, buttonData) => {
+  const buttons = getCustomButtons();
+  const index = buttons.findIndex(button => button._id === id);
+  if (index === -1) return null;
+
+  buttons[index] = { ...buttons[index], ...buttonData };
+  return writeData('custom-buttons.json', buttons) ? buttons[index] : null;
+};
+const deleteCustomButton = (id) => {
+  const buttons = getCustomButtons();
+  const filteredButtons = buttons.filter(button => button._id !== id);
+  return writeData('custom-buttons.json', filteredButtons);
+};
+
 // Chatbot FAQ operations
 const getChatbotFaqs = () => readData('chatbot-faqs.json');
 const getChatbotFaqById = (id) => {
@@ -622,6 +686,20 @@ module.exports = {
   addAttendanceRecord,
   resetStudentAttendance,
   resetAllAttendance,
+
+  // Quick Links operations
+  getQuickLinks,
+  getQuickLinkById,
+  addQuickLink,
+  updateQuickLink,
+  deleteQuickLink,
+
+  // Custom Buttons operations
+  getCustomButtons,
+  getCustomButtonById,
+  addCustomButton,
+  updateCustomButton,
+  deleteCustomButton,
 
   // Chatbot operations
   getChatbotFaqs,

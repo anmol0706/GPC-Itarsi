@@ -1,0 +1,29 @@
+[
+  {
+    "_id": "button_1744400000001",
+    "title": "Student Portal",
+    "url": "/student-portal",
+    "icon": "user-group",
+    "color": "indigo",
+    "order": 1,
+    "createdAt": "2024-05-20T10:00:00.000Z"
+  },
+  {
+    "_id": "button_1744400000002",
+    "title": "Library",
+    "url": "/library",
+    "icon": "book-open",
+    "color": "purple",
+    "order": 2,
+    "createdAt": "2024-05-20T10:00:00.000Z"
+  },
+  {
+    "_id": "button_1744400000003",
+    "title": "Events",
+    "url": "/events",
+    "icon": "calendar",
+    "color": "pink",
+    "order": 3,
+    "createdAt": "2024-05-20T10:00:00.000Z"
+  }
+]

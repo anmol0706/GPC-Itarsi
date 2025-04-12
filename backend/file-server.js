@@ -2394,6 +2394,212 @@ app.get('/api/teacher/study-materials', authenticateToken, (req, res) => {
   }
 });
 
+// Quick Links API endpoints
+
+// Get all quick links
+app.get('/api/quick-links', (req, res) => {
+  try {
+    const links = dataService.getQuickLinks();
+    res.json(links);
+  } catch (error) {
+    console.error('Error fetching quick links:', error);
+    res.status(500).json({ message: 'Failed to load quick links' });
+  }
+});
+
+// Get a specific quick link by ID
+app.get('/api/quick-links/:id', (req, res) => {
+  try {
+    const link = dataService.getQuickLinkById(req.params.id);
+    if (!link) {
+      return res.status(404).json({ message: 'Quick link not found' });
+    }
+    res.json(link);
+  } catch (error) {
+    console.error('Error fetching quick link:', error);
+    res.status(500).json({ message: 'Failed to load quick link' });
+  }
+});
+
+// Add a new quick link (admin only)
+app.post('/api/quick-links', authenticateToken, authorize(['admin']), (req, res) => {
+  try {
+    const { title, url, icon, color } = req.body;
+
+    if (!title || !url) {
+      return res.status(400).json({ message: 'Title and URL are required' });
+    }
+
+    // Get existing links to determine the next order value
+    const links = dataService.getQuickLinks();
+    const maxOrder = links.length > 0 ? Math.max(...links.map(link => link.order || 0)) : 0;
+
+    const newLink = dataService.addQuickLink({
+      title,
+      url,
+      icon: icon || 'link',
+      color: color || 'blue',
+      order: maxOrder + 1
+    });
+
+    if (!newLink) {
+      return res.status(500).json({ message: 'Failed to add quick link' });
+    }
+
+    res.status(201).json(newLink);
+  } catch (error) {
+    console.error('Error adding quick link:', error);
+    res.status(500).json({ message: 'Failed to add quick link' });
+  }
+});
+
+// Update an existing quick link (admin only)
+app.put('/api/quick-links/:id', authenticateToken, authorize(['admin']), (req, res) => {
+  try {
+    const { title, url, icon, color, order } = req.body;
+
+    if (!title && !url && !icon && !color && order === undefined) {
+      return res.status(400).json({ message: 'At least one field is required' });
+    }
+
+    const updatedLink = dataService.updateQuickLink(req.params.id, {
+      ...(title && { title }),
+      ...(url && { url }),
+      ...(icon && { icon }),
+      ...(color && { color }),
+      ...(order !== undefined && { order })
+    });
+
+    if (!updatedLink) {
+      return res.status(404).json({ message: 'Quick link not found' });
+    }
+
+    res.json(updatedLink);
+  } catch (error) {
+    console.error('Error updating quick link:', error);
+    res.status(500).json({ message: 'Failed to update quick link' });
+  }
+});
+
+// Delete a quick link (admin only)
+app.delete('/api/quick-links/:id', authenticateToken, authorize(['admin']), (req, res) => {
+  try {
+    const success = dataService.deleteQuickLink(req.params.id);
+
+    if (!success) {
+      return res.status(404).json({ message: 'Quick link not found' });
+    }
+
+    res.json({ message: 'Quick link deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting quick link:', error);
+    res.status(500).json({ message: 'Failed to delete quick link' });
+  }
+});
+
+// Custom Buttons API endpoints
+
+// Get all custom buttons
+app.get('/api/custom-buttons', (req, res) => {
+  try {
+    const buttons = dataService.getCustomButtons();
+    res.json(buttons);
+  } catch (error) {
+    console.error('Error fetching custom buttons:', error);
+    res.status(500).json({ message: 'Failed to load custom buttons' });
+  }
+});
+
+// Get a specific custom button by ID
+app.get('/api/custom-buttons/:id', (req, res) => {
+  try {
+    const button = dataService.getCustomButtonById(req.params.id);
+    if (!button) {
+      return res.status(404).json({ message: 'Custom button not found' });
+    }
+    res.json(button);
+  } catch (error) {
+    console.error('Error fetching custom button:', error);
+    res.status(500).json({ message: 'Failed to load custom button' });
+  }
+});
+
+// Add a new custom button (admin only)
+app.post('/api/custom-buttons', authenticateToken, authorize(['admin']), (req, res) => {
+  try {
+    const { title, url, icon, color } = req.body;
+
+    if (!title || !url) {
+      return res.status(400).json({ message: 'Title and URL are required' });
+    }
+
+    // Get existing buttons to determine the next order value
+    const buttons = dataService.getCustomButtons();
+    const maxOrder = buttons.length > 0 ? Math.max(...buttons.map(button => button.order || 0)) : 0;
+
+    const newButton = dataService.addCustomButton({
+      title,
+      url,
+      icon: icon || 'link',
+      color: color || 'blue',
+      order: maxOrder + 1
+    });
+
+    if (!newButton) {
+      return res.status(500).json({ message: 'Failed to add custom button' });
+    }
+
+    res.status(201).json(newButton);
+  } catch (error) {
+    console.error('Error adding custom button:', error);
+    res.status(500).json({ message: 'Failed to add custom button' });
+  }
+});
+
+// Update an existing custom button (admin only)
+app.put('/api/custom-buttons/:id', authenticateToken, authorize(['admin']), (req, res) => {
+  try {
+    const { title, url, icon, color, order } = req.body;
+
+    if (!title && !url && !icon && !color && order === undefined) {
+      return res.status(400).json({ message: 'At least one field is required' });
+    }
+
+    const updatedButton = dataService.updateCustomButton(req.params.id, {
+      ...(title && { title }),
+      ...(url && { url }),
+      ...(icon && { icon }),
+      ...(color && { color }),
+      ...(order !== undefined && { order })
+    });
+
+    if (!updatedButton) {
+      return res.status(404).json({ message: 'Custom button not found' });
+    }
+
+    res.json(updatedButton);
+  } catch (error) {
+    console.error('Error updating custom button:', error);
+    res.status(500).json({ message: 'Failed to update custom button' });
+  }
+});
+
+// Delete a custom button (admin only)
+app.delete('/api/custom-buttons/:id', authenticateToken, authorize(['admin']), (req, res) => {
+  try {
+    const success = dataService.deleteCustomButton(req.params.id);
+
+    if (!success) {
+      return res.status(404).json({ message: 'Custom button not found' });
+    }
+
+    res.json({ message: 'Custom button deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting custom button:', error);
+    res.status(500).json({ message: 'Failed to delete custom button' });
+  }
+});
+
 // Chatbot API endpoints
 
 // Get all FAQs

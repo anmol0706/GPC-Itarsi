@@ -19,6 +19,7 @@ import StudyMaterials from './StudyMaterials';
 import Documents from './Documents';
 import Chatbot from './Chatbot';
 import Attendance from './Attendance';
+import CustomButtons from './CustomButtons';
 
 const Dashboard = () => {
   const { user, isAdmin } = useAuth();
@@ -351,6 +352,29 @@ const Dashboard = () => {
                     </svg>
                     Chatbot
                   </Link>
+
+                  <Link
+                    to="/admin/custom-buttons"
+                    className={`${
+                      isActive('/custom-buttons') ? 'bg-primary-700 text-white' : 'text-blue-100 hover:bg-primary-600'
+                    } group flex items-center px-2 py-3 text-base font-medium rounded-md transition-colors duration-150`}
+                  >
+                    <svg
+                      className="mr-4 h-5 w-5 text-blue-300"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"
+                      />
+                    </svg>
+                    Custom Buttons
+                  </Link>
                 </div>
               </div>
 
@@ -662,6 +686,29 @@ const Dashboard = () => {
                   Chatbot
                 </Link>
 
+                <Link
+                  to="/admin/custom-buttons"
+                  className={`${
+                    isActive('/custom-buttons') ? 'bg-primary-700 text-white' : 'text-blue-100 hover:bg-primary-600'
+                  } group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors duration-150`}
+                >
+                  <svg
+                    className="mr-3 h-5 w-5 text-blue-300"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"
+                    />
+                  </svg>
+                  Custom Buttons
+                </Link>
+
                 {/* Settings Section */}
                 <div className="pt-4 pb-2">
                   <h3 className="px-2 text-xs font-semibold text-white uppercase tracking-wider">
@@ -755,6 +802,7 @@ const Dashboard = () => {
                 <Route path="/documents" element={<Documents />} />
                 <Route path="/chatbot" element={<Chatbot />} />
                 <Route path="/attendance" element={<Attendance />} />
+                <Route path="/custom-buttons" element={<CustomButtons />} />
                 <Route path="/profile" element={<Profile />} />
               </Routes>
             </div>

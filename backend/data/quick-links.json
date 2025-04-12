@@ -1,0 +1,29 @@
+[
+  {
+    "_id": "link_1744300000001",
+    "title": "Admission Form",
+    "url": "/admission",
+    "icon": "document-text",
+    "color": "blue",
+    "order": 1,
+    "createdAt": "2024-05-15T10:00:00.000Z"
+  },
+  {
+    "_id": "link_1744300000002",
+    "title": "Scholarship",
+    "url": "/downloads",
+    "icon": "academic-cap",
+    "color": "green",
+    "order": 2,
+    "createdAt": "2024-05-15T10:00:00.000Z"
+  },
+  {
+    "_id": "link_1744300000003",
+    "title": "Exam Schedule",
+    "url": "/downloads",
+    "icon": "calendar",
+    "color": "red",
+    "order": 3,
+    "createdAt": "2024-05-15T10:00:00.000Z"
+  }
+]
