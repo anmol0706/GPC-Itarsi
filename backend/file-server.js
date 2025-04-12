@@ -44,17 +44,39 @@ app.use('/uploads', (req, res, next) => {
     const ext = path.extname(filePath).toLowerCase();
     if (ext === '.pdf') {
       res.setHeader('Content-Type', 'application/pdf');
+      // Set Content-Disposition header for download for documents
+      const filename = path.basename(filePath);
+      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
     } else if (ext === '.doc' || ext === '.docx') {
       res.setHeader('Content-Type', 'application/msword');
+      // Set Content-Disposition header for download for documents
+      const filename = path.basename(filePath);
+      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
     } else if (ext === '.xls' || ext === '.xlsx') {
       res.setHeader('Content-Type', 'application/vnd.ms-excel');
+      // Set Content-Disposition header for download for documents
+      const filename = path.basename(filePath);
+      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
     } else if (ext === '.ppt' || ext === '.pptx') {
       res.setHeader('Content-Type', 'application/vnd.ms-powerpoint');
+      // Set Content-Disposition header for download for documents
+      const filename = path.basename(filePath);
+      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    } else if (ext === '.jpg' || ext === '.jpeg' || ext === '.png' || ext === '.gif') {
+      // For images, set the appropriate content type but don't force download
+      if (ext === '.jpg' || ext === '.jpeg') {
+        res.setHeader('Content-Type', 'image/jpeg');
+      } else if (ext === '.png') {
+        res.setHeader('Content-Type', 'image/png');
+      } else if (ext === '.gif') {
+        res.setHeader('Content-Type', 'image/gif');
+      }
+      // Don't set Content-Disposition for images so they display in the browser
+    } else {
+      // For other file types, set a generic content type and force download
+      const filename = path.basename(filePath);
+      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
     }
-
-    // Set Content-Disposition header for download
-    const filename = path.basename(filePath);
-    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
 
     next(); // File exists, continue to static middleware
   } else {
