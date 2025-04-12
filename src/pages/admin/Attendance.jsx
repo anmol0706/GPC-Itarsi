@@ -25,7 +25,7 @@ const Attendance = () => {
   const [showDeleteAllModal, setShowDeleteAllModal] = useState(false);
 
   useEffect(() => {
-    fetchAttendance();
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -117,7 +117,8 @@ const Attendance = () => {
     }
   }, [attendance, searchTerm, selectedClass, selectedBranch, selectedYear]);
 
-  const fetchAttendance = async () => {
+  // Fetch both students and attendance data
+  const fetchData = async () => {
     try {
       setLoading(true);
       setError(null);
@@ -129,18 +130,61 @@ const Attendance = () => {
         return;
       }
 
-      const response = await axios.get(`${API_URL}/api/admin/attendance`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
+      // Fetch both students and attendance data in parallel
+      const [studentsResponse, attendanceResponse] = await Promise.all([
+        axios.get(`${API_URL}/api/admin/students`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }),
+        axios.get(`${API_URL}/api/admin/attendance`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+      ]);
+
+      // Merge student and attendance data
+      const students = studentsResponse.data;
+      const attendanceRecords = attendanceResponse.data;
+
+      // Create a map of attendance records by student ID
+      const attendanceMap = {};
+      attendanceRecords.forEach(record => {
+        attendanceMap[record.studentId] = record;
       });
 
-      setAttendance(response.data);
-      setFilteredAttendance(response.data);
+      // Create combined records with student data and attendance
+      const combinedRecords = students.map(student => {
+        const attendanceRecord = attendanceMap[student._id] || {
+          studentId: student._id,
+          records: []
+        };
+
+        return {
+          _id: student._id,
+          studentId: student._id,
+          studentName: student.name,
+          rollNumber: student.rollNumber,
+          class: student.class,
+          branch: student.branch,
+          profilePicture: student.profilePicture,
+          records: attendanceRecord.records || [],
+          // Calculate attendance statistics
+          stats: {
+            total: attendanceRecord.records ? attendanceRecord.records.length : 0,
+            present: attendanceRecord.records ?
+              attendanceRecord.records.filter(r => r.status === 'present').length : 0
+          }
+        };
+      });
+
+      setAttendance(combinedRecords);
+      setFilteredAttendance(combinedRecords);
       setLoading(false);
     } catch (error) {
-      console.error('Error fetching attendance:', error);
-      setError(error.response?.data?.message || 'Failed to load attendance records');
+      console.error('Error fetching data:', error);
+      setError(error.response?.data?.message || 'Failed to load data');
       setLoading(false);
     }
   };
@@ -210,7 +254,7 @@ const Attendance = () => {
       );
 
       // Refresh attendance data
-      fetchAttendance();
+      fetchData();
       setShowDeleteAllModal(false);
       toast.success('All students and attendance records deleted successfully');
     } catch (error) {
@@ -260,7 +304,7 @@ const Attendance = () => {
       }
 
       // Refresh attendance data
-      fetchAttendance();
+      fetchData();
     } catch (error) {
       console.error('Error resetting attendance:', error);
       setError(error.response?.data?.message || 'Failed to reset attendance');
@@ -432,8 +476,11 @@ const Attendance = () => {
                               name: record.studentName,
                               rollNumber: record.rollNumber,
                               class: record.class,
-                              profilePicture: record.profilePicture
+                              branch: record.branch,
+                              profilePicture: record.profilePicture,
+                              stats: record.stats
                             }}
+                            showAttendance={true}
                             onClick={() => handleStudentClick(record)}
                           />
                         ))}
