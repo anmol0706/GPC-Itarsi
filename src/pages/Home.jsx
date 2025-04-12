@@ -19,7 +19,6 @@ gsap.registerPlugin(ScrollTrigger);
 const Home = () => {
   const [notices, setNotices] = useState([]);
   const [quickLinks, setQuickLinks] = useState([]);
-  const [customButtons, setCustomButtons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showNoticePopup, setShowNoticePopup] = useState(false);
@@ -63,17 +62,6 @@ const Home = () => {
         } else {
           console.error('Invalid quick links data format:', linksResponse.data);
           setQuickLinks([]);
-        }
-
-        // Fetch custom buttons
-        const buttonsResponse = await axios.get(`${API_URL}/api/custom-buttons`);
-        if (buttonsResponse.data && Array.isArray(buttonsResponse.data)) {
-          // Sort buttons by order
-          const sortedButtons = [...buttonsResponse.data].sort((a, b) => a.order - b.order);
-          setCustomButtons(sortedButtons);
-        } else {
-          console.error('Invalid custom buttons data format:', buttonsResponse.data);
-          setCustomButtons([]);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -304,54 +292,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Custom Buttons Section */}
-      <div className="bg-white py-16 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <TextReveal className="mt-2 text-3xl font-extrabold text-primary-600 sm:text-4xl">
-              Useful Resources
-            </TextReveal>
-            <TextReveal className="mt-4 max-w-2xl text-xl text-secondary-600 lg:mx-auto" delay={0.3}>
-              Access important resources and services with a single click
-            </TextReveal>
-          </div>
-
-          <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {customButtons.map((button, index) => (
-              <Link
-                key={button._id}
-                to={button.url}
-                className={`group flex flex-col items-center justify-center p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 bg-${button.color}-50 border border-${button.color}-200 hover:bg-${button.color}-100 transform hover:-translate-y-1`}
-              >
-                <div className={`p-4 rounded-full bg-${button.color}-100 text-${button.color}-600 mb-4`}>
-                  {button.icon === 'user-group' && (
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                  )}
-                  {button.icon === 'book-open' && (
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
-                  )}
-                  {button.icon === 'calendar' && (
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  )}
-                  {button.icon === 'link' && (
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-                    </svg>
-                  )}
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{button.title}</h3>
-                <p className="text-sm text-gray-600 text-center">Click to access</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* Quick Links Section */}
       <div className="bg-secondary-50 py-16 relative">
