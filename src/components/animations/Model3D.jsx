@@ -72,64 +72,64 @@ const Model3D = ({ modelType = 'book', width = '100%', height = '400px' }) => {
     // Animation
     const animate = () => {
       requestAnimationFrame(animate);
-
+      
       if (controlsRef.current) {
         controlsRef.current.update();
       }
-
+      
       renderer.render(scene, camera);
     };
-
+    
     animate();
 
     // GSAP animation
     gsap.fromTo(
-      model.rotation,
-      { y: -Math.PI },
-      {
-        y: 0,
-        duration: 2,
-        ease: "power3.out"
+      model.rotation, 
+      { y: -Math.PI }, 
+      { 
+        y: 0, 
+        duration: 2, 
+        ease: "power3.out" 
       }
     );
 
     gsap.fromTo(
-      model.scale,
-      { x: 0, y: 0, z: 0 },
-      {
-        x: 1, y: 1, z: 1,
-        duration: 1.5,
-        ease: "elastic.out(1, 0.5)"
+      model.scale, 
+      { x: 0, y: 0, z: 0 }, 
+      { 
+        x: 1, y: 1, z: 1, 
+        duration: 1.5, 
+        ease: "elastic.out(1, 0.5)" 
       }
     );
 
     // Handle resize
     const handleResize = () => {
       if (!containerRef.current || !cameraRef.current || !rendererRef.current) return;
-
+      
       const width = containerRef.current.clientWidth;
       const height = containerRef.current.clientHeight;
-
+      
       cameraRef.current.aspect = width / height;
       cameraRef.current.updateProjectionMatrix();
-
+      
       rendererRef.current.setSize(width, height);
     };
-
+    
     window.addEventListener('resize', handleResize);
 
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
-
+      
       if (rendererRef.current && containerRef.current) {
         containerRef.current.removeChild(rendererRef.current.domElement);
       }
-
+      
       if (controlsRef.current) {
         controlsRef.current.dispose();
       }
-
+      
       if (modelRef.current) {
         scene.remove(modelRef.current);
         modelRef.current.traverse((child) => {
@@ -149,20 +149,20 @@ const Model3D = ({ modelType = 'book', width = '100%', height = '400px' }) => {
   // Helper function to create a book model
   const createBookModel = () => {
     const group = new THREE.Group();
-
+    
     // Book cover
     const coverGeometry = new THREE.BoxGeometry(3, 4, 0.3);
-    const coverMaterial = new THREE.MeshStandardMaterial({
+    const coverMaterial = new THREE.MeshStandardMaterial({ 
       color: 0x147efb, // Primary blue
       roughness: 0.5,
       metalness: 0.2
     });
     const cover = new THREE.Mesh(coverGeometry, coverMaterial);
     group.add(cover);
-
+    
     // Book pages
     const pagesGeometry = new THREE.BoxGeometry(2.8, 3.8, 0.2);
-    const pagesMaterial = new THREE.MeshStandardMaterial({
+    const pagesMaterial = new THREE.MeshStandardMaterial({ 
       color: 0xffffff,
       roughness: 0.8,
       metalness: 0
@@ -170,10 +170,10 @@ const Model3D = ({ modelType = 'book', width = '100%', height = '400px' }) => {
     const pages = new THREE.Mesh(pagesGeometry, pagesMaterial);
     pages.position.z = 0.15;
     group.add(pages);
-
+    
     // Book title (simplified as a rectangle)
     const titleGeometry = new THREE.PlaneGeometry(2, 0.5);
-    const titleMaterial = new THREE.MeshStandardMaterial({
+    const titleMaterial = new THREE.MeshStandardMaterial({ 
       color: 0xffffff,
       roughness: 0.5,
       metalness: 0.1
@@ -182,27 +182,27 @@ const Model3D = ({ modelType = 'book', width = '100%', height = '400px' }) => {
     title.position.z = 0.16;
     title.position.y = 1;
     group.add(title);
-
+    
     return group;
   };
 
   // Helper function to create a computer model
   const createComputerModel = () => {
     const group = new THREE.Group();
-
+    
     // Monitor
     const monitorGeometry = new THREE.BoxGeometry(4, 3, 0.2);
-    const monitorMaterial = new THREE.MeshStandardMaterial({
+    const monitorMaterial = new THREE.MeshStandardMaterial({ 
       color: 0x333333,
       roughness: 0.5,
       metalness: 0.7
     });
     const monitor = new THREE.Mesh(monitorGeometry, monitorMaterial);
     group.add(monitor);
-
+    
     // Screen
     const screenGeometry = new THREE.PlaneGeometry(3.6, 2.6);
-    const screenMaterial = new THREE.MeshStandardMaterial({
+    const screenMaterial = new THREE.MeshStandardMaterial({ 
       color: 0x147efb, // Primary blue
       roughness: 0.2,
       metalness: 0.8,
@@ -212,10 +212,10 @@ const Model3D = ({ modelType = 'book', width = '100%', height = '400px' }) => {
     const screen = new THREE.Mesh(screenGeometry, screenMaterial);
     screen.position.z = 0.11;
     group.add(screen);
-
+    
     // Stand
     const standGeometry = new THREE.BoxGeometry(1, 1.5, 0.2);
-    const standMaterial = new THREE.MeshStandardMaterial({
+    const standMaterial = new THREE.MeshStandardMaterial({ 
       color: 0x666666,
       roughness: 0.5,
       metalness: 0.7
@@ -224,10 +224,10 @@ const Model3D = ({ modelType = 'book', width = '100%', height = '400px' }) => {
     stand.position.y = -2;
     stand.rotation.x = Math.PI / 4;
     group.add(stand);
-
+    
     // Base
     const baseGeometry = new THREE.CylinderGeometry(1, 1, 0.2, 32);
-    const baseMaterial = new THREE.MeshStandardMaterial({
+    const baseMaterial = new THREE.MeshStandardMaterial({ 
       color: 0x666666,
       roughness: 0.5,
       metalness: 0.7
@@ -235,28 +235,28 @@ const Model3D = ({ modelType = 'book', width = '100%', height = '400px' }) => {
     const base = new THREE.Mesh(baseGeometry, baseMaterial);
     base.position.y = -2.8;
     group.add(base);
-
+    
     return group;
   };
 
   // Helper function to create an atom model
   const createAtomModel = () => {
     const group = new THREE.Group();
-
+    
     // Nucleus
     const nucleusGeometry = new THREE.SphereGeometry(0.8, 32, 32);
-    const nucleusMaterial = new THREE.MeshStandardMaterial({
+    const nucleusMaterial = new THREE.MeshStandardMaterial({ 
       color: 0xff6b33, // Accent orange
       roughness: 0.3,
       metalness: 0.7
     });
     const nucleus = new THREE.Mesh(nucleusGeometry, nucleusMaterial);
     group.add(nucleus);
-
+    
     // Electron orbits
     const createOrbit = (radius, rotation) => {
       const orbitGeometry = new THREE.TorusGeometry(radius, 0.05, 16, 100);
-      const orbitMaterial = new THREE.MeshStandardMaterial({
+      const orbitMaterial = new THREE.MeshStandardMaterial({ 
         color: 0x147efb, // Primary blue
         roughness: 0.5,
         metalness: 0.5
@@ -265,10 +265,10 @@ const Model3D = ({ modelType = 'book', width = '100%', height = '400px' }) => {
       orbit.rotation.x = rotation.x;
       orbit.rotation.y = rotation.y;
       orbit.rotation.z = rotation.z;
-
+      
       // Add electron
       const electronGeometry = new THREE.SphereGeometry(0.2, 16, 16);
-      const electronMaterial = new THREE.MeshStandardMaterial({
+      const electronMaterial = new THREE.MeshStandardMaterial({ 
         color: 0x147efb, // Primary blue
         roughness: 0.3,
         metalness: 0.8,
@@ -276,22 +276,22 @@ const Model3D = ({ modelType = 'book', width = '100%', height = '400px' }) => {
         emissiveIntensity: 0.5
       });
       const electron = new THREE.Mesh(electronGeometry, electronMaterial);
-
+      
       // Position electron on orbit
       const angle = Math.random() * Math.PI * 2;
       electron.position.x = radius * Math.cos(angle);
       electron.position.y = radius * Math.sin(angle);
-
+      
       // Apply orbit rotation to electron position
       const electronGroup = new THREE.Group();
       electronGroup.add(electron);
       electronGroup.rotation.x = rotation.x;
       electronGroup.rotation.y = rotation.y;
       electronGroup.rotation.z = rotation.z;
-
+      
       group.add(orbit);
       group.add(electronGroup);
-
+      
       // Animate electron
       gsap.to(electronGroup.rotation, {
         z: electronGroup.rotation.z + Math.PI * 2,
@@ -300,19 +300,19 @@ const Model3D = ({ modelType = 'book', width = '100%', height = '400px' }) => {
         repeat: -1
       });
     };
-
+    
     // Create three orbits at different angles
     createOrbit(2, { x: 0, y: 0, z: 0 });
     createOrbit(2.5, { x: Math.PI / 3, y: Math.PI / 6, z: 0 });
     createOrbit(3, { x: Math.PI / 2, y: Math.PI / 4, z: Math.PI / 4 });
-
+    
     return group;
   };
 
   // Helper function to create a default model (cube)
   const createDefaultModel = () => {
     const geometry = new THREE.BoxGeometry(2, 2, 2);
-    const material = new THREE.MeshStandardMaterial({
+    const material = new THREE.MeshStandardMaterial({ 
       color: 0x147efb, // Primary blue
       roughness: 0.5,
       metalness: 0.2
@@ -321,10 +321,10 @@ const Model3D = ({ modelType = 'book', width = '100%', height = '400px' }) => {
   };
 
   return (
-    <div
-      ref={containerRef}
-      style={{
-        width: width,
+    <div 
+      ref={containerRef} 
+      style={{ 
+        width: width, 
         height: height,
         borderRadius: '8px',
         overflow: 'hidden'

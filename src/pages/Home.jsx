@@ -479,9 +479,7 @@ const Home = () => {
           />
           <div className="absolute inset-0 bg-secondary-900 opacity-80"></div>
         </div>
-        <Suspense fallback={<div style={{ height: '100px' }}></div>}>
-          <CanvasWave color="rgba(255, 255, 255, 0.1)" height={100} speed={0.15} />
-        </Suspense>
+        <CanvasWave color="rgba(255, 255, 255, 0.1)" height={100} speed={0.15} />
         <div className="relative max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
           <TextReveal className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
             Begin Your Educational Journey With Us
