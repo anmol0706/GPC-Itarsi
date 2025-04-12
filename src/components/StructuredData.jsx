@@ -7,7 +7,7 @@ const StructuredData = () => {
     "name": "Government Polytechnic College, Itarsi",
     "alternateName": "GPC Itarsi",
     "url": "https://gpc-itarsi.onrender.com",
-    "logo": "https://gpc-itarsi-backend.onrender.com/uploads/college-logo.png",
+    "logo": "https://gpc-itarsi-backend-1wu5.onrender.com/uploads/college-logo.png",
     "sameAs": [
       "https://www.facebook.com/gpitarsi",
       "https://twitter.com/gpitarsi"

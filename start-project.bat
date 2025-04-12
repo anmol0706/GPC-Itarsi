@@ -17,7 +17,7 @@ start cmd /k "npm run dev"
 echo.
 echo Servers are starting in separate windows.
 echo.
-echo Backend: https://gpc-itarsi-backend.onrender.com
+echo Backend: https://gpc-itarsi-backend-1wu5.onrender.com
 echo Frontend: http://localhost:5173
 echo.
 echo Admin Login:

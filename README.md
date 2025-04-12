@@ -6,7 +6,7 @@ A comprehensive college management system built with React and Node.js for Gover
 
 The application is deployed and accessible at:
 - Frontend: [https://gpc-itarsi.onrender.com](https://gpc-itarsi.onrender.com)
-- Backend API: [https://gpc-itarsi-backend.onrender.com](https://gpc-itarsi-backend.onrender.com)
+- Backend API: [https://gpc-itarsi-backend-1wu5.onrender.com](https://gpc-itarsi-backend-1wu5.onrender.com)
 
 ## Project Structure
 
@@ -181,7 +181,7 @@ The website is optimized for search engines with:
 The application is deployed on Render:
 
 1. Frontend: [https://gpc-itarsi.onrender.com](https://gpc-itarsi.onrender.com)
-2. Backend API: [https://gpc-itarsi-backend.onrender.com](https://gpc-itarsi-backend.onrender.com)
+2. Backend API: [https://gpc-itarsi-backend-1wu5.onrender.com](https://gpc-itarsi-backend-1wu5.onrender.com)
 
 The deployment configuration is defined in `render.yaml` and the build process is automated using the `build.bat` script.
 
