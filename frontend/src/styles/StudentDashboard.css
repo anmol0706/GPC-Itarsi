@@ -1,0 +1,350 @@
+/* StudentDashboard.css - Futuristic styling for the Student Dashboard */
+
+/* ===== Futuristic Color Variables ===== */
+:root {
+  --student-primary: #4338ca;
+  --student-primary-light: #6366f1;
+  --student-primary-dark: #3730a3;
+  --student-secondary: #0ea5e9;
+  --student-accent: #f59e0b;
+  --student-accent-glow: rgba(245, 158, 11, 0.5);
+  --student-dark: #1e293b;
+  --student-light: #f8fafc;
+  --student-success: #10b981;
+  --student-warning: #f59e0b;
+  --student-error: #ef4444;
+  --student-info: #3b82f6;
+  --student-glow-blue: rgba(99, 102, 241, 0.6);
+  --student-glow-cyan: rgba(6, 182, 212, 0.6);
+  --student-glow-purple: rgba(139, 92, 246, 0.6);
+  --student-gradient-1: linear-gradient(135deg, #4338ca, #3b82f6);
+  --student-gradient-2: linear-gradient(135deg, #3b82f6, #06b6d4);
+  --student-gradient-3: linear-gradient(135deg, #8b5cf6, #d946ef);
+  --student-gradient-4: linear-gradient(135deg, #f59e0b, #ef4444);
+  --student-glass: rgba(255, 255, 255, 0.1);
+  --student-glass-border: rgba(255, 255, 255, 0.2);
+  --student-shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 10px rgba(99, 102, 241, 0.1);
+  --student-shadow-md: 0 10px 15px rgba(0, 0, 0, 0.1), 0 0 15px rgba(99, 102, 241, 0.2);
+  --student-shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.1), 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+/* ===== Animation Keyframes ===== */
+
+/* Glowing animation */
+@keyframes student-glow {
+  0% {
+    box-shadow: 0 0 5px var(--student-glow-blue), 0 0 10px var(--student-glow-blue);
+  }
+  50% {
+    box-shadow: 0 0 10px var(--student-glow-blue), 0 0 20px var(--student-glow-blue);
+  }
+  100% {
+    box-shadow: 0 0 5px var(--student-glow-blue), 0 0 10px var(--student-glow-blue);
+  }
+}
+
+/* Pulse animation */
+@keyframes student-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Floating animation */
+@keyframes student-float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Shine effect */
+@keyframes student-shine {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Grid pattern animation */
+@keyframes student-gridMove {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+/* Neon glow for icons */
+@keyframes student-neonGlow {
+  0% {
+    filter: drop-shadow(0 0 2px currentColor) drop-shadow(0 0 4px currentColor);
+  }
+  50% {
+    filter: drop-shadow(0 0 4px currentColor) drop-shadow(0 0 8px currentColor);
+  }
+  100% {
+    filter: drop-shadow(0 0 2px currentColor) drop-shadow(0 0 4px currentColor);
+  }
+}
+
+/* ===== Student Dashboard Layout ===== */
+
+/* Main dashboard container */
+.student-dashboard {
+  background-color: #f8fafc;
+  background-image:
+    radial-gradient(circle at 25px 25px, rgba(99, 102, 241, 0.05) 2px, transparent 0),
+    linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px, 25px 25px, 25px 25px;
+  min-height: 100vh;
+}
+
+/* Sidebar styling */
+.student-sidebar {
+  background: var(--student-gradient-1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.student-sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: student-gridMove 20s linear infinite;
+  z-index: 0;
+}
+
+/* Sidebar profile container */
+.student-profile-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Sidebar navigation */
+.student-nav-link {
+  position: relative;
+  transition: all 0.3s ease;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.student-nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--student-accent);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.student-nav-link:hover::before,
+.student-nav-link.active::before {
+  transform: scaleY(1);
+}
+
+.student-nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.student-nav-link.active {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.student-nav-icon {
+  transition: all 0.3s ease;
+}
+
+.student-nav-link:hover .student-nav-icon,
+.student-nav-link.active .student-nav-icon {
+  animation: student-neonGlow 2s infinite;
+}
+
+/* ===== Student Cards ===== */
+
+/* Base card styling */
+.student-card {
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: var(--student-shadow-sm);
+  border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.student-card:hover {
+  /* Hover effects removed while maintaining futuristic design */
+  box-shadow: var(--student-shadow-sm);
+  transform: none;
+}
+
+/* Card header */
+.student-card-header {
+  background: var(--student-gradient-1);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.student-card-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+/* ===== Student Stats ===== */
+
+.student-stat {
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: var(--student-shadow-sm);
+  border: 1px solid rgba(99, 102, 241, 0.1);
+  position: relative;
+}
+
+.student-stat:hover {
+  /* Hover effects removed while maintaining futuristic design */
+  box-shadow: var(--student-shadow-sm);
+  transform: none;
+}
+
+.student-stat-icon {
+  border-radius: 0.375rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.student-stat-icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
+/* ===== Student Banner ===== */
+
+.student-banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  box-shadow: var(--student-shadow-md);
+}
+
+.student-banner-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: student-gridMove 20s linear infinite;
+  z-index: 0;
+}
+
+.student-banner-content {
+  position: relative;
+  z-index: 1;
+}
+
+.student-banner-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  animation: student-float 6s ease-in-out infinite;
+}
+
+/* ===== Student Profile ===== */
+
+.student-profile-image {
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  animation: student-float 4s ease-in-out infinite;
+  box-shadow: 0 0 15px var(--student-glow-blue);
+}
+
+.student-profile-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--student-gradient-2);
+  opacity: 0.2;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ===== Responsive Styles ===== */
+
+@media (max-width: 768px) {
+  .student-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 50;
+    width: 250px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .student-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .student-sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .student-sidebar-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

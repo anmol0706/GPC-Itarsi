@@ -1,0 +1,26 @@
+services:
+  # Frontend service
+  - type: web
+    name: gpc-itarsi-9cl7
+    env: static
+    runtime: node
+    nodeVersion: 18.x
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+      # Explicitly handle 404 errors
+      - type: rewrite
+        source: /404
+        destination: /index.html
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
+    envVars:
+      - key: VITE_API_URL
+        value: https://gpc-itarsi-backend-8dod.onrender.com
+
+  # Backend service is deployed separately from mongodb-backend directory

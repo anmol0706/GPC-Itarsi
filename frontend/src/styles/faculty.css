@@ -1,0 +1,75 @@
+/* Faculty page specific styles */
+
+/* Responsive faculty card styles */
+.faculty-card {
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+/* Ensure images load properly on all devices */
+.faculty-profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+/* Ensure text wrapping for long content */
+.faculty-text-content {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 640px) {
+  /* Adjust spacing for mobile */
+  .faculty-card {
+    margin-bottom: 1rem;
+  }
+  
+  /* Ensure subject lists don't overflow */
+  .faculty-subjects {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+  
+  /* Improve tap targets for mobile */
+  .faculty-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Ensure department filter buttons are properly sized on small screens */
+.department-filter-button {
+  white-space: normal;
+  text-align: center;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Add subtle loading animation for faculty images */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.faculty-profile-image {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Improve accessibility for screen readers */
+.faculty-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

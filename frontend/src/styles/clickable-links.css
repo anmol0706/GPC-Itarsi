@@ -1,0 +1,112 @@
+/**
+ * CSS-only solution for making links clickable within containers
+ * This approach uses CSS to ensure links are properly clickable without JavaScript
+ */
+
+/* Container for notice content with links */
+.clickable-content-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Make the container itself not capture pointer events */
+.clickable-content-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Ensure links inside the container capture pointer events */
+.clickable-content-container a {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto !important;
+}
+
+/* Style for links to make them visually distinct */
+.clickable-content-container a {
+  color: #0062f5;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 0 2px;
+  background-color: rgba(26, 117, 255, 0.1);
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid #1a75ff;
+  word-break: break-word;
+  display: inline-block;
+}
+
+/* Hover styles for links */
+.clickable-content-container a:hover,
+.clickable-content-container a:focus,
+.clickable-content-container a:active {
+  color: #0046b5;
+  background-color: rgba(26, 117, 255, 0.2);
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme styles for links */
+.dark-theme .clickable-content-container a {
+  color: #75acff;
+  background-color: rgba(71, 145, 255, 0.2);
+  border-bottom: 1px solid #4791ff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0 5px rgba(71, 145, 255, 0.3);
+}
+
+.dark-theme .clickable-content-container a:hover,
+.dark-theme .clickable-content-container a:focus,
+.dark-theme .clickable-content-container a:active {
+  color: #a5c7ff;
+  background-color: rgba(71, 145, 255, 0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2), 0 0 8px rgba(71, 145, 255, 0.4);
+}
+
+/* Add a more visible icon to indicate external links */
+.clickable-content-container a[target="_blank"]::after {
+  content: " ";
+  width: 0.9em;
+  height: 0.9em;
+  margin: 0 0.1em 0 0.3em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230062f5' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'%3E%3C/path%3E%3C/svg%3E") no-repeat;
+  background-size: contain;
+  display: inline-block;
+  vertical-align: middle;
+  opacity: 0.9;
+  transition: transform 0.2s ease;
+  position: relative;
+}
+
+.dark-theme .clickable-content-container a[target="_blank"]::after {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2375acff' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'%3E%3C/path%3E%3C/svg%3E") no-repeat;
+  background-size: contain;
+}
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 640px) {
+  .clickable-content-container {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .clickable-content-container a {
+    display: inline-block;
+    margin: 2px 0;
+  }
+
+  /* Adjust external link icon size on mobile */
+  .clickable-content-container a[target="_blank"]::after {
+    width: 0.8em;
+    height: 0.8em;
+    margin: 0 0.1em 0 0.2em;
+  }
+}

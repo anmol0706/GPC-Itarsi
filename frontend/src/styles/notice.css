@@ -1,0 +1,208 @@
+/* Notice styling */
+
+/* Base notice content styling for better mobile display */
+.notice-content {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  max-width: 100%;
+  position: relative; /* Ensure proper stacking context */
+  z-index: 10; /* Higher z-index to ensure links are clickable */
+}
+
+/* Ensure images in notice content are responsive */
+.notice-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* Style for links within notice content */
+.notice-content a,
+.notice-content a:link,
+.notice-content a:visited {
+  color: #0062f5 !important; /* Brighter blue for better visibility */
+  text-decoration: none !important; /* Remove default underline */
+  font-weight: 600 !important; /* Make text bolder */
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+  position: relative !important;
+  padding: 0 2px !important;
+  background-color: rgba(26, 117, 255, 0.1) !important; /* Light blue background */
+  border-radius: 3px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  border-bottom: 1px solid #1a75ff !important;
+  word-break: break-word !important; /* Allow links to break on mobile */
+  display: inline-block !important;
+  z-index: 20 !important; /* Higher z-index to ensure links are clickable */
+  pointer-events: auto !important; /* Ensure links are clickable */
+}
+
+.notice-content a:hover,
+.notice-content a:focus,
+.notice-content a:active {
+  color: #0046b5 !important; /* Darker shade for hover */
+  background-color: rgba(26, 117, 255, 0.2) !important; /* Slightly darker background on hover */
+  text-decoration: none !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  z-index: 20 !important; /* Higher z-index to ensure links are clickable */
+  pointer-events: auto !important; /* Ensure links are clickable */
+}
+
+/* Style for links in dark-themed notices (like in the home page) */
+.dark-theme .notice-content a,
+.dark-theme .notice-content a:link,
+.dark-theme .notice-content a:visited {
+  color: #75acff !important; /* Brighter blue for dark backgrounds */
+  background-color: rgba(71, 145, 255, 0.2) !important; /* Light blue background with transparency */
+  font-weight: 600 !important;
+  border-bottom: 1px solid #4791ff !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0 5px rgba(71, 145, 255, 0.3) !important;
+  display: inline-block !important;
+  z-index: 20 !important; /* Higher z-index to ensure links are clickable */
+  pointer-events: auto !important; /* Ensure links are clickable */
+}
+
+.dark-theme .notice-content a:hover,
+.dark-theme .notice-content a:focus,
+.dark-theme .notice-content a:active {
+  color: #a5c7ff !important; /* Even lighter blue for hover on dark backgrounds */
+  background-color: rgba(71, 145, 255, 0.3) !important; /* Slightly darker background on hover */
+  text-decoration: none !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2), 0 0 8px rgba(71, 145, 255, 0.4) !important;
+  z-index: 20 !important; /* Higher z-index to ensure links are clickable */
+  pointer-events: auto !important; /* Ensure links are clickable */
+}
+
+/* Add a more visible icon to indicate external links */
+.notice-content a[target="_blank"]::after {
+  content: " " !important;
+  width: 0.9em !important;
+  height: 0.9em !important;
+  margin: 0 0.1em 0 0.3em !important;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230062f5' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'%3E%3C/path%3E%3C/svg%3E") no-repeat !important;
+  background-size: contain !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  opacity: 0.9 !important;
+  transition: transform 0.2s ease !important;
+  position: relative !important;
+}
+
+.notice-content a[target="_blank"]:hover::after {
+  transform: translateY(-1px) translateX(1px) !important;
+  opacity: 1 !important;
+}
+
+.dark-theme .notice-content a[target="_blank"]::after {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2375acff' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'%3E%3C/path%3E%3C/svg%3E") no-repeat !important;
+  background-size: contain !important;
+  opacity: 0.9 !important;
+}
+
+/* Add focus styles for accessibility */
+.notice-content a:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #1a75ff !important;
+  border-radius: 3px !important;
+}
+
+.dark-theme .notice-content a:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5), 0 0 0 4px #4791ff !important;
+  border-radius: 3px !important;
+}
+
+/* Style for invalid links */
+.notice-content a.invalid-link {
+  color: #ef4444 !important; /* Red color for invalid links */
+  text-decoration: line-through !important;
+  background-color: rgba(239, 68, 68, 0.1) !important;
+  border-bottom: 1px dashed #ef4444 !important;
+  cursor: not-allowed !important;
+  position: relative !important;
+}
+
+.notice-content a.invalid-link:hover {
+  color: #b91c1c !important;
+  background-color: rgba(239, 68, 68, 0.2) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.notice-content a.invalid-link::after {
+  content: "⚠️" !important;
+  font-size: 0.8em !important;
+  margin-left: 0.3em !important;
+}
+
+.dark-theme .notice-content a.invalid-link {
+  color: #fca5a5 !important;
+  background-color: rgba(239, 68, 68, 0.2) !important;
+  border-bottom: 1px dashed #fca5a5 !important;
+}
+
+.dark-theme .notice-content a.invalid-link:hover {
+  color: #fecaca !important;
+  background-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+/* Add a special animation for links */
+@keyframes link-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(26, 117, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(26, 117, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(26, 117, 255, 0);
+  }
+}
+
+.notice-content a.important-link {
+  animation: link-pulse 2s infinite !important;
+  font-weight: 700 !important;
+  color: #0046b5 !important;
+  background-color: rgba(26, 117, 255, 0.15) !important;
+  border-bottom: 2px solid #0062f5 !important;
+}
+
+.dark-theme .notice-content a.important-link {
+  animation: link-pulse 2s infinite !important;
+  font-weight: 700 !important;
+  color: #a5c7ff !important;
+  background-color: rgba(71, 145, 255, 0.25) !important;
+  border-bottom: 2px solid #75acff !important;
+}
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 640px) {
+  .notice-content {
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .notice-content a {
+    display: inline-block !important;
+    margin: 2px 0 !important;
+  }
+
+  /* Adjust external link icon size on mobile */
+  .notice-content a[target="_blank"]::after {
+    width: 0.8em !important;
+    height: 0.8em !important;
+    margin: 0 0.1em 0 0.2em !important;
+  }
+
+  /* Make code blocks in notices responsive */
+  .notice-content pre,
+  .notice-content code {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+  }
+}

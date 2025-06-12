@@ -1,0 +1,118 @@
+warning: in the working copy of 'mongodb-backend/routes/developer.js', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/mongodb-backend/routes/developer.js b/mongodb-backend/routes/developer.js[m
+[1mindex 37c9e7d..0a2034f 100644[m
+[1m--- a/mongodb-backend/routes/developer.js[m
+[1m+++ b/mongodb-backend/routes/developer.js[m
+[36m@@ -313,4 +313,112 @@[m [mrouter.get('/s', async (req, res) => {[m
+   }[m
+ });[m
+ [m
+[32m+[m[32m// Get all users with passwords (developer only)[m
+[32m+[m[32mrouter.get('/users', authenticateToken, authorize(['developer']), async (req, res) => {[m
+[32m+[m[32m  try {[m
+[32m+[m[32m    console.log('Fetching all users with passwords for developer');[m
+[32m+[m[32m    const users = await User.find();[m
+[32m+[m
+[32m+[m[32m    res.json(users);[m
+[32m+[m[32m  } catch (error) {[m
+[32m+[m[32m    console.error('Error fetching users with passwords:', error);[m
+[32m+[m[32m    res.status(500).json({ message: 'Failed to fetch users', error: error.message });[m
+[32m+[m[32m  }[m
+[32m+[m[32m});[m
+[32m+[m
+[32m+[m[32m// Create a new user (developer only)[m
+[32m+[m[32mrouter.post('/users', authenticateToken, authorize(['developer']), async (req, res) => {[m
+[32m+[m[32m  try {[m
+[32m+[m[32m    const { username, password, name, role, email } = req.body;[m
+[32m+[m
+[32m+[m[32m    // Check if username already exists[m
+[32m+[m[32m    const existingUser = await User.findOne({ username: username.toLowerCase() });[m
+[32m+[m[32m    if (existingUser) {[m
+[32m+[m[32m      return res.status(400).json({ message: 'Username already exists' });[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    // Create new user[m
+[32m+[m[32m    const user = new User({[m
+[32m+[m[32m      username: username.toLowerCase(),[m
+[32m+[m[32m      password,[m
+[32m+[m[32m      name,[m
+[32m+[m[32m      role,[m
+[32m+[m[32m      email[m
+[32m+[m[32m    });[m
+[32m+[m
+[32m+[m[32m    // Add role-specific fields[m
+[32m+[m[32m    if (role === 'teacher') {[m
+[32m+[m[32m      user.department = req.body.department;[m
+[32m+[m[32m      user.subjects = req.body.subjects || [];[m
+[32m+[m[32m    } else if (role === 'student') {[m
+[32m+[m[32m      user.rollNumber = req.body.rollNumber;[m
+[32m+[m[32m      user.class = req.body.class;[m
+[32m+[m[32m      user.branch = req.body.branch;[m
+[32m+[m[32m    } else if (role === 'developer') {[m
+[32m+[m[32m      user.title = req.body.title;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    await user.save();[m
+[32m+[m
+[32m+[m[32m    res.status(201).json(user);[m
+[32m+[m[32m  } catch (error) {[m
+[32m+[m[32m    console.error('Error creating user:', error);[m
+[32m+[m[32m    res.status(500).json({ message: 'Failed to create user', error: error.message });[m
+[32m+[m[32m  }[m
+[32m+[m[32m});[m
+[32m+[m
+[32m+[m[32m// Update a user (developer only)[m
+[32m+[m[32mrouter.put('/users/:id', authenticateToken, authorize(['developer']), async (req, res) => {[m
+[32m+[m[32m  try {[m
+[32m+[m[32m    const userId = req.params.id;[m
+[32m+[m[32m    const updateData = req.body;[m
+[32m+[m
+[32m+[m[32m    // Find user[m
+[32m+[m[32m    const user = await User.findById(userId);[m
+[32m+[m
+[32m+[m[32m    if (!user) {[m
+[32m+[m[32m      return res.status(404).json({ message: 'User not found' });[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    // If password is not changed, don't update it[m
+[32m+[m[32m    if (!updateData.password) {[m
+[32m+[m[32m      delete updateData.password;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    // Update user[m
+[32m+[m[32m    const updatedUser = await User.findByIdAndUpdate([m
+[32m+[m[32m      userId,[m
+[32m+[m[32m      { $set: updateData },[m
+[32m+[m[32m      { new: true }[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    res.json(updatedUser);[m
+[32m+[m[32m  } catch (error) {[m
+[32m+[m[32m    console.error('Error updating user:', error);[m
+[32m+[m[32m    res.status(500).json({ message: 'Failed to update user', error: error.message });[m
+[32m+[m[32m  }[m
+[32m+[m[32m});[m
+[32m+[m
+[32m+[m[32m// Delete a user (developer only)[m
+[32m+[m[32mrouter.delete('/users/:id', authenticateToken, authorize(['developer']), async (req, res) => {[m
+[32m+[m[32m  try {[m
+[32m+[m[32m    const userId = req.params.id;[m
+[32m+[m
+[32m+[m[32m    // Find user[m
+[32m+[m[32m    const user = await User.findById(userId);[m
+[32m+[m
+[32m+[m[32m    if (!user) {[m
+[32m+[m[32m      return res.status(404).json({ message: 'User not found' });[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    // Delete user[m
+[32m+[m[32m    await User.findByIdAndDelete(userId);[m
+[32m+[m
+[32m+[m[32m    res.json({ message: 'User deleted successfully' });[m
+[32m+[m[32m  } catch (error) {[m
+[32m+[m[32m    console.error('Error deleting user:', error);[m
+[32m+[m[32m    res.status(500).json({ message: 'Failed to delete user', error: error.message });[m
+[32m+[m[32m  }[m
+[32m+[m[32m});[m
+[32m+[m
+ module.exports = router;[m

@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Disallow admin, student, and teacher dashboards
+Disallow: /admin/
+Disallow: /student/
+Disallow: /teacher/
+Disallow: /developer/
+
+# Sitemap location
+Sitemap: https://gpc-itarsi-9cl7.onrender.com/sitemap.xml

@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: gpc-itarsi-developer
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://gpc-itarsi-backend-8dod.onrender.com

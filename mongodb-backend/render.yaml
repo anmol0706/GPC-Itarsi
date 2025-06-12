@@ -1,0 +1,47 @@
+services:
+  - type: web
+    name: gpc-itarsi-backend-8dod
+    env: node
+    runtime: node
+    nodeVersion: 18.x
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 5001
+      - key: JWT_SECRET
+        generateValue: true
+      - key: NODE_ENV
+        value: production
+      - key: FRONTEND_URL
+        value: https://gpc-itarsi-9cl7.onrender.com
+      - key: PRODUCTION_FRONTEND_URL
+        value: https://gpc-itarsi-9cl7.onrender.com
+      - key: DEVELOPER_FRONTEND_URL
+        value: https://gpc-itarsi-developer.onrender.com
+      - key: MONGODB_URI
+        value: mongodb+srv://GPC:anmol4328@gpc-itarsi.puza0ta.mongodb.net/gpc-itarsi
+      - key: CLOUDINARY_CLOUD_NAME
+        value: daf99zan2
+      - key: CLOUDINARY_API_KEY
+        value: 913341681574171
+      - key: CLOUDINARY_API_SECRET
+        value: qTADLCaw8Fsh6HwtC4tLdgpObvU
+      - key: CLOUDINARY_URL
+        value: cloudinary://913341681574171:qTADLCaw8Fsh6HwtC4tLdgpObvU@daf99zan2
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: 465
+      - key: SMTP_SECURE
+        value: true
+      - key: SMTP_USER
+        value: gpolycitarsi@gmail.com
+      - key: SMTP_PASS
+        value: fxgnybochvrrkmgr
+      - key: SMTP_FROM
+        value: gpolycitarsi@gmail.com
+    disk:
+      name: uploads
+      mountPath: /opt/render/project/src/uploads
+      sizeGB: 1

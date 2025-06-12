@@ -1,0 +1,155 @@
+/* Custom styles for React Quill editor to match the futuristic design aesthetic */
+
+/* Editor container */
+.quill {
+  border-radius: 0.375rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.quill:focus-within {
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.4), 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Futuristic editor style */
+.futuristic-editor .quill {
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.futuristic-editor .quill:focus-within {
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Toolbar */
+.ql-toolbar {
+  background: linear-gradient(to right, rgba(99, 102, 241, 0.05), rgba(99, 102, 241, 0.1));
+  border-color: rgba(99, 102, 241, 0.3) !important;
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
+  padding: 0.5rem !important;
+}
+
+/* Toolbar buttons */
+.ql-toolbar button {
+  transition: all 0.2s ease;
+}
+
+.ql-toolbar button:hover {
+  background-color: rgba(99, 102, 241, 0.1);
+  border-radius: 0.25rem;
+}
+
+.ql-toolbar button.ql-active {
+  background-color: rgba(99, 102, 241, 0.2);
+  border-radius: 0.25rem;
+}
+
+/* Link tooltip */
+.ql-tooltip {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(99, 102, 241, 0.3) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06) !important;
+  border-radius: 0.375rem !important;
+  padding: 0.75rem !important;
+}
+
+.ql-tooltip input[type="text"] {
+  border: 1px solid rgba(99, 102, 241, 0.3) !important;
+  border-radius: 0.25rem !important;
+  padding: 0.25rem 0.5rem !important;
+  margin: 0.25rem 0 !important;
+  transition: all 0.2s ease;
+}
+
+.ql-tooltip input[type="text"]:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.5) !important;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2) !important;
+}
+
+.ql-tooltip a.ql-action,
+.ql-tooltip a.ql-remove {
+  color: #6366f1 !important;
+  transition: all 0.2s ease;
+}
+
+.ql-tooltip a.ql-action:hover,
+.ql-tooltip a.ql-remove:hover {
+  color: #4f46e5 !important;
+  text-decoration: none !important;
+}
+
+/* Editor content area */
+.ql-container {
+  border-color: rgba(99, 102, 241, 0.3) !important;
+  border-bottom-left-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+  background-color: #ffffff;
+  font-family: inherit;
+}
+
+.ql-editor {
+  min-height: 120px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.ql-editor p {
+  margin-bottom: 0.5rem;
+}
+
+/* Link styling within the editor */
+.ql-editor a {
+  color: #0062f5;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 0 2px;
+  background-color: rgba(26, 117, 255, 0.1);
+  border-radius: 3px;
+  border-bottom: 1px solid #1a75ff;
+}
+
+.ql-editor a:hover {
+  color: #0046b5;
+  background-color: rgba(26, 117, 255, 0.2);
+}
+
+/* Glow effect for the link button */
+.ql-toolbar .ql-link {
+  position: relative;
+}
+
+.ql-toolbar .ql-link:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ql-toolbar .ql-link:hover:after {
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .ql-toolbar {
+    padding: 0.25rem !important;
+  }
+
+  .ql-tooltip {
+    left: 0 !important;
+    max-width: 100% !important;
+  }
+}

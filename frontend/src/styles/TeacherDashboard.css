@@ -1,0 +1,243 @@
+/* TeacherDashboard.css - Futuristic styling for the Teacher Dashboard */
+
+/* ===== Futuristic Color Variables ===== */
+:root {
+  --teacher-primary: #4338ca;
+  --teacher-primary-light: #6366f1;
+  --teacher-primary-dark: #3730a3;
+  --teacher-secondary: #0ea5e9;
+  --teacher-accent: #f59e0b;
+  --teacher-accent-glow: rgba(245, 158, 11, 0.5);
+  --teacher-dark: #1e293b;
+  --teacher-light: #f8fafc;
+  --teacher-success: #10b981;
+  --teacher-warning: #f59e0b;
+  --teacher-error: #ef4444;
+  --teacher-info: #3b82f6;
+  --teacher-glow-blue: rgba(99, 102, 241, 0.6);
+  --teacher-glow-cyan: rgba(6, 182, 212, 0.6);
+  --teacher-glow-purple: rgba(139, 92, 246, 0.6);
+  --teacher-gradient-1: linear-gradient(135deg, #4338ca, #3b82f6);
+  --teacher-gradient-2: linear-gradient(135deg, #3b82f6, #06b6d4);
+  --teacher-gradient-3: linear-gradient(135deg, #8b5cf6, #d946ef);
+  --teacher-shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 10px rgba(99, 102, 241, 0.1);
+  --teacher-shadow-md: 0 6px 12px rgba(0, 0, 0, 0.08), 0 0 15px rgba(99, 102, 241, 0.15);
+  --teacher-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.07), 0 0 20px rgba(99, 102, 241, 0.2);
+}
+
+/* ===== Teacher Dashboard Layout ===== */
+
+/* Main dashboard container */
+.teacher-dashboard {
+  background-color: #f8fafc;
+  background-image:
+    radial-gradient(circle at 25px 25px, rgba(99, 102, 241, 0.05) 2px, transparent 0),
+    linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px, 25px 25px, 25px 25px;
+  min-height: 100vh;
+}
+
+/* Sidebar styling */
+.teacher-sidebar {
+  background: var(--teacher-gradient-1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.teacher-sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+/* Navigation links */
+.teacher-nav-link {
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.teacher-nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--teacher-accent);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.teacher-nav-link:hover::before,
+.teacher-nav-link.active::before {
+  transform: scaleY(1);
+}
+
+.teacher-nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.teacher-nav-link.active {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.teacher-nav-icon {
+  transition: all 0.3s ease;
+}
+
+.teacher-nav-link:hover .teacher-nav-icon,
+.teacher-nav-link.active .teacher-nav-icon {
+  animation: teacher-neonGlow 2s infinite;
+}
+
+/* ===== Teacher Cards ===== */
+
+/* Base card styling */
+.teacher-card {
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: var(--teacher-shadow-sm);
+  border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.teacher-card:hover {
+  /* Subtle hover effect without 3D transformation */
+  box-shadow: var(--teacher-shadow-md);
+}
+
+/* Card header */
+.teacher-card-header {
+  background: var(--teacher-gradient-1);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.teacher-card-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+/* ===== Teacher Stats ===== */
+
+.teacher-stat {
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: var(--teacher-shadow-sm);
+  border: 1px solid rgba(99, 102, 241, 0.1);
+  position: relative;
+}
+
+.teacher-stat:hover {
+  /* Subtle hover effect without 3D transformation */
+  box-shadow: var(--teacher-shadow-md);
+}
+
+.teacher-stat-icon {
+  border-radius: 0.375rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.teacher-stat-icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
+/* ===== Teacher Banner ===== */
+
+.teacher-banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  box-shadow: var(--teacher-shadow-md);
+}
+
+.teacher-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* ===== Animations ===== */
+
+@keyframes teacher-pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.animate-teacher-pulse {
+  animation: teacher-pulse 2s infinite;
+}
+
+@keyframes teacher-neonGlow {
+  0% {
+    filter: drop-shadow(0 0 2px var(--teacher-glow-blue));
+  }
+  50% {
+    filter: drop-shadow(0 0 5px var(--teacher-glow-blue));
+  }
+  100% {
+    filter: drop-shadow(0 0 2px var(--teacher-glow-blue));
+  }
+}
+
+/* ===== Utility Classes ===== */
+
+.teacher-glow {
+  box-shadow: 0 0 15px var(--teacher-glow-blue);
+}
+
+.teacher-border {
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.teacher-gradient-text {
+  background: var(--teacher-gradient-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

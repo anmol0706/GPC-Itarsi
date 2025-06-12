@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <title>Principal Placeholder</title>
+  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <rect fill="#F3F4F6" x="0" y="0" width="200" height="200" rx="100"></rect>
+    <g transform="translate(50, 40)">
+      <circle fill="#D1D5DB" cx="50" cy="30" r="30"></circle>
+      <path d="M0,120 C0,90 33.3,70 50,70 C66.7,70 100,90 100,120" fill="#D1D5DB"></path>
+    </g>
+    <text font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#6B7280" text-anchor="middle" x="100" y="160">
+      Principal
+    </text>
+  </g>
+</svg>
